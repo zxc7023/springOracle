@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CustomerMapper2">
+	<insert id="insert" parameterType="Customer">
+		insert into customer values (#{id}, #{password}, #{name},'')
+	</insert>
+
+	<select id="selectById" parameterType="Customer" resultType="Customer">
+		select * from customer where id = #{id}
+	</select>
+
+	<select id="selcetByName" resultType="Customer">
+		select * from customer where name like '%' || #{name} || '%'
+	</select>
+
+	<select id="selectByStatus" resultType="Customer" parameterType="String">
+		select * from customer
+		<where>
+			<choose>
+				<when test="_parameter == null">
+					status is null
+				</when>
+				<otherwise>
+					status = #{status}
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	<update id="update" parameterType="Customer">
+		update customer set password = #{password}, name = #{name} where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Customer">
+		update customer set status='d' WHERE id=#{id}
+	</delete>
+
+	<update id="updateList" parameterType="Customer">
+		update customer set password = #{password}, name = #{name} ,
+		<if test="status==''"> status = ''</if>
+		<if test="status!=''"> status = #{status}</if>
+		where id = #{id}
+	</update>
+
+	<select id="selectByPage" parameterType="hashmap" resultType="Customer">
+
+		select * from
+		(select rownum as rnum, a.*
+		from customer a
+		<where>
+			<if test="id != null">
+				id like '%' || #{id} || '%'
+			</if>
+			<if test="name != null">
+				 name like '%' || #{name} || '%'
+			</if>
+ 		<if test="status != null">
+				status = #{status}
+			</if> 
+		</where>
+		)
+		WHERE rnum between #{startRow} AND #{endRow}
+		order by id desc
+	</select>
+
+	<select id="selectAll"  resultType="Customer">
+		SELECT *
+		from customer 
+		<where>
+			<if test="id != null">
+				id like '%' || #{id} || '%'
+			</if>
+			<if test="name != null">
+				 name like '%' || #{name} || '%'
+			</if>
+ 			<if test=" status != null">
+				status = #{status}
+			</if> 
+			
+		</where>
+		
+	</select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Service, Dao, DB, log등 과 관련된 자원을 위한 설정파일 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
+		<property name="username" value="test2" />
+		<property name="password" value="test2" />
+	</bean>
+
+	<!-- 스프링이관리해줄 트랜잭션 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<context:component-scan base-package="com.my.dao"></context:component-scan>
+	<!-- 매번 <bean>을 생성하면 xml을 읽기가 힘들어진다 그래서 아래의 context탭에서 component-scan을 사용하여 
+		base-pakage를 설정해준다. -->
+	<context:component-scan base-package="com.my.service"></context:component-scan>
+</beans>
