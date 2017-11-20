@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.menu h1{font-size:40px;
+		 width;10%}
+.menu ul{width:90%;
+		text-align:center;}
+.menu ul li{float:left;
+			width:16%;}
+.menu ul li a{font-size:25px;
+			  line-height:40px;}			
