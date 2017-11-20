@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="reset.css"/>
+<link href="<%=request.getContextPath() %>/resources/reset.css" type="text/css" rel="stylesheet"/>
 <title>index</title>
 </head>
 <body>

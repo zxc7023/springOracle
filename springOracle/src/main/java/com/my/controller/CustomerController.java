@@ -1,5 +1,6 @@
 package com.my.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import com.my.vo.Customer;
 
 @Controller
 @SessionAttributes("loginInfo")
-/*@RequestMapping("/member/*")*/
 public class CustomerController {
 	
 	@Autowired
@@ -43,6 +43,14 @@ public class CustomerController {
 		// 응답할 페이지에게 위임하는 foward 부분
 		model.addAttribute("msg", msg);
 		String forwardURL = "result";
+		return forwardURL;
+	}
+	
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpServletRequest request,Model model,HttpSession session,SessionStatus status){
+		status.setComplete();
+		model.addAttribute("msg",request.getContextPath());
+		String forwardURL = "result.jsp";
 		return forwardURL;
 	}
 
