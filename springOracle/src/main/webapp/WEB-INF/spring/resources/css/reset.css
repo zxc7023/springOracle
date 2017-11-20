@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video, input{margin:0;padding:0;border:0;outline:0;background:transparent;word-wrap:break-word;font-size:inherit;font-weight:normal;-webkit-text-size-adjust:none;}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {display:block;}
+html, body {height:100%;}
+html {overflow-y:scroll;overflow-x:hidden;font-size:10px;}
+body {-webkit-font-smoothing: antialiased;padding:0;margin:0;font-family:Montserrat,NotoD,sans-serif;font-size:1.4rem;line-height:1.333;word-wrap:break-word;word-break:break-all;color:#444;-webkit-text-stroke: 0.1px;}
+li {list-style:none;}
+img {display:block;width:100%;vertical-align:top;}
+a {text-decoration:none;box-sizing:border-box;color:#444;}
+table {table-layout:fixed;width:100%;border-collapse:collapse;border-spacing:0;}
+input,
+button,
+select,
+textarea{margin:0;padding:0;background:none;border:0;border-radius:0;font-family:Montserrat,NotoD,sans-serif;font-size:inherit;line-height:inherit;}
+input,select,textarea {-webkit-appearance:none;-moz-appearance:none;-webkit-user-modify:read-write-plaintext-only;-moz-user-modify:read-write-plaintext-only;}
+select {padding-right:2rem;background-size:1.5rem auto;}
+button {-webkit-user-select: none;-moz-user-select: none;-ms-user-select:none; user-select:none;outline:0;border:0;cursor:pointer;}
+fieldset {border:0;}
+legend, caption {height:0;font-size:0;visibility:hidden}
+legend {position:absolute;}
+.hid, .skip{position:absolute;left:-5000px;width:0;height:0;font-size:0;line-height:0;overflow:hidden;}
+::-webkit-input-placeholder {color:#b8b8b8;}
+::-moz-placeholder {color:#b8b8b8;} /* firefox 19+ */
+:-ms-input-placeholder { color:#b8b8b8;} /* ie */
+input:-moz-placeholder { color:#b8b8b8;}
+em {font-style:normal;}
+pre {font-family:inherit;white-space:pre-wrap;}
+.hide{display: none}

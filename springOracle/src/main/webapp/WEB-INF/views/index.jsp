@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="reset.css"/>
 <title>index</title>
 </head>
 <body>
