@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- 
-	<link href="<%=request.getContextPath()%>/resources/reset.css"
-	type="text/css" rel="stylesheet" />
-<link href="<%=request.getContextPath()%>/resources/menu.css"
-	type="text/css" rel="stylesheet" /> --%>
+<link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css"
+	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/menu.css" type="text/css"
+	rel="stylesheet" />
 <title>index</title>
 </head>
 <body>
