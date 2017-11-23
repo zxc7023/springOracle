@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>login Page</title>
+<link href="<%=request.getContextPath()%>/resources/login_form.css" type="text/css"
+	rel="stylesheet" />
+	
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -50,11 +53,13 @@
 </head>
 
 <body>
+<div class="login-wrap">
 	<form>
-		<input type="text" name="id" placeholder="아이디를 입력하세요" required /> <input
-			type="checkbox" name="c" value="save"> <span>아이디저장</span> <input
-			type="password" name="pwd" required placeholder="비밀번호를 입력하세요" /> <input
-			type="submit" value="로그인" class="logoin" />
+		<input type="text" name="id" placeholder="아이디를 입력하세요" required />
+		 <input type="password" name="pwd" required placeholder="비밀번호를 입력하세요" />
+		 <input type="checkbox" name="c" value="save" ><span>아이디저장</span></input>
+		 <input type="submit" value="로그인" class="logoin" />
 	</form>
+	</div>
 </body>
 </html>
