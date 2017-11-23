@@ -19,8 +19,24 @@
 	}); */
 </script>
 
-<div class="header">
-	<h1>준기홈페이지</h1>
+/*상단 메뉴바 start*/
+<script>
+$(document).ready(function() {
+  $('.home-menu').click(function() {
+    $('nav ul').slideToggle(500);
+  });//end slide toggle
+
+  $(window).resize(function() {
+		if (  $(window).width() > 700 ) {
+			$('nav ul').removeAttr('style');
+		 }
+	});//반응형 700사이즈 이하부터 메뉴 바뀜
+});//메뉴바 제이쿼리
+</script>
+/*상단 메뉴바 end*/
+
+<nav class="header">
+    <a href="#" class="home-menu">MENU</a>
 	<ul>
 		<c:choose>
 			<c:when test="${empty sessionScope.loginInfo}">
@@ -37,4 +53,4 @@
 		<li><a href="orderlist.do">주문목록보기</a></li>
 		<li><a href="repboardlist.do">게시판</a></li>
 	</ul>
-</div>
+</nav>
