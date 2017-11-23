@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer login(String id, String pwd) throws Exception {
 		// TODO Auto-generated method stub
 		Customer c = dao.selectById(id);
-		System.out.println(c);
+		//System.out.println(c);
 		if(c==null || !c.getPassword().equals(pwd)||"d".equals(c.getStatus())){
 			throw new Exception("로그인 실패");
 		}

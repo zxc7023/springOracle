@@ -56,7 +56,6 @@
    //dom트리가 구성될때까지 기다림
    $(function() {
 	   
-	   console.log();
       var $idTag = $("input[name=id]");
       var $idchk = $("#idchk");
       $idTag.focus(function(){
@@ -79,9 +78,8 @@
       $button=$("button");
       $button.click(function(){
          var $join = $("input[name=join]");
-         //var $idValue = $("input[name=id]").val();
-         $form.attr("action", "${pageContext.request.contextPath}/dupchkid.do"); //-->jquery함수
-         var $action = $form.attr("action"); //signup.do
+         $form.attr("action", "${pageContext.request.contextPath}/customer/dupchkid"); //-->jquery함수
+         var $action = $form.attr("action"); 
          $.ajax({
             url : $action,
             method : 'POST',
@@ -125,7 +123,7 @@
             return false; //기본이벤트 막기
          }
          //form객체의 action속성을 signup.do값으로 설정한다.
-         $form.attr("action", "${pageContext.request.contextPath}/signup.do"); //-->jquery함수
+         $form.attr("action", "${pageContext.request.contextPath}/customer/signupform"); //-->jquery함수
          var $action = $form.attr("action"); //signup.do
          var $data = $form.serialize();
          
@@ -133,19 +131,13 @@
          $.ajax({
             url : $action,
             method : 'POST',
-            //data : {'id': $id, 'pwd': $pwd, 'name': $name}, //data를 sirialize() 함수를 통해 한꺼번에 받아올 수 있음
             data : $data,
             success : function(responseData) {
                // console.log(responseData);
                var result = responseData.trim();
                if (result == '1') {
                   alert('가입성공');
-                  $.ajax({ url: '${pageContext.request.contextPath}/admin/customerlist.do',
-                	  success: function(responseData){
-                		  $("article").empty(); //객체는 남기고 내용을 지우기
-                          $("article").html(responseData.trim());                   
-                      }         
-                  });
+					location.href = '${pageContext.request.contextPath}';
                } else {
                   alert("가입실패");
                }

@@ -26,7 +26,7 @@
 				localStorage.removeItem("saveId");
 			}
 			$.ajax({
-				url : 'logincheck.do',
+				url : '${pageContext.request.contextPath}/customer/login',
 				method : 'POST',
 				data : $form.serialize(),
 				success : function(responseData) {
