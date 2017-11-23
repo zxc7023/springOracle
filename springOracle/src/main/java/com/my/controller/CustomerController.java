@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.my.service.CustomerService;
 import com.my.vo.Customer;
@@ -51,9 +52,10 @@ public class CustomerController {
 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request, Model model, HttpSession session, SessionStatus status) {
+		ModelAndView mav = new ModelAndView("index");
 		status.setComplete();
-		model.addAttribute("msg", request.getContextPath());
-		String forwardURL = "/";
+		/*model.addAttribute("msg", request.getContextPath());*/
+		String forwardURL = request.getContextPath();
 		return forwardURL;
 	}
 
