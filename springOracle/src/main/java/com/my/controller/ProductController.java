@@ -31,8 +31,8 @@ public class ProductController {
 			if (searchValue.equals("")) { // 전체검색
 				list = service.listAll();
 			} else if ("name".equals(searchItem)) { // 이름으로검색
-/*				list = dao.selectByName(searchValue);
-*/			} else if ("no".equals(searchItem)) { // 번호로검색
+				list = service.listName(searchValue);
+			} else if ("no".equals(searchItem)) { // 번호로검색
 /*				Product p = dao.selectByNo(searchValue);
 				if (p != null) {
 					list.add(p);
