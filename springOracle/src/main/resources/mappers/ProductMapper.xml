@@ -4,40 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
 
-  <select id="selectByNo"  resultType="Product">
-  	select * from product where prod_no= #{prod_no}
-  </select>
- 
+	<select id="selectByNo" resultType="Product">
+		select * from product where prod_no= #{prod_no}
+	</select>
 
-  <select id="selectAll" resultType="Product">
-  	select * from product
-  </select>
+	<select id="selectAll" resultType="Product">
+		select * from product
+	</select>
 
-  <!-- #{}방법 -->
-	<!--   
-  <select id="selectByName"  resultType="Product">
-  	Select * from product where prod_name like #{word}
-  </select>
-  -->
-  
-  <!-- ${}방법 -->
-   <select id="selectByName"  resultType="Product">
-  	Select * from product where prod_name like '%${value}%'
-  </select>
-  
-  <update id="updateList" parameterType="Product">
-		update product set prod_name = #{prod_name} , prod_price = #{prod_price} where prod_no = #{prod_no}
+	<select id="selectByName" resultType="Product">
+		select * from product where prod_name like '%' || #{prod_name] || '%'
+	</select>
+
+	<update id="updateList" parameterType="Product">
+		update product set
+		prod_name = #{prod_name} , prod_price = #{prod_price} where prod_no =
+		#{prod_no}
 	</update>
-	
+
 	<delete id="deleteList" parameterType="String">
-		delete product where prod_no= #{prod_no}
+		delete product where
+		prod_no= #{prod_no}
 	</delete>
-	
+
 	<insert id="insert">
-		insert into product values ( #{prod_no}, #{prod_name},#{prod_price})
+		insert into product values ( #{prod_no},
+		#{prod_name},#{prod_price})
 	</insert>
-	
-		<select id="selectByPage" parameterType="hashmap" resultType="Product">
+
+	<select id="selectByPage" parameterType="hashmap" resultType="Product">
 		select * from
 		(select rownum as rnum, a.*
 		from product a
@@ -46,36 +41,23 @@
 				prod_no like '%' || #{prod_no} || '%'
 			</if>
 			<if test="prod_name != null">
-				 prod_name like '%' || #{prod_name} || '%'
+				prod_name like '%' || #{prod_name} || '%'
 			</if>
- 		<if test="prod_price != null">
+			<if test="prod_price != null">
 				prod_price = #{prod_price}
-			</if> 
+			</if>
 		</where>
 		)
 		WHERE rnum between #{startRow} AND #{endRow}
 		order by prod_no desc
 	</select>
 
-<!-- 	<select id="selectAll"  resultType="Product">
-		SELECT *
-		from product 
-		<where>
-			<if test="prod_no != null">
-				prod_no like '%' || #{prod_no} || '%'
-			</if>
-			<if test="prod_name != null">
-				 prod_name like '%' || #{prod_name} || '%'
-			</if>
- 		<if test="prod_price != null">
-				prod_price = #{prod_price}
-			</if> 
-			
-		</where>
-		
-	</select>
- -->
-	 
+	<!-- <select id="selectAll" resultType="Product"> SELECT * from product 
+		<where> <if test="prod_no != null"> prod_no like '%' || #{prod_no} || '%' 
+		</if> <if test="prod_name != null"> prod_name like '%' || #{prod_name} || 
+		'%' </if> <if test="prod_price != null"> prod_price = #{prod_price} </if> 
+		</where> </select> -->
 
-  
+
+
 </mapper>

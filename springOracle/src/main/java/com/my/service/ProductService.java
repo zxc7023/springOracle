@@ -20,4 +20,13 @@ public interface ProductService {
 	 * @throws Exception
 	 */
 	public List<Product> listAll() throws Exception;
+	
+	
+	/**
+	 * 상품 목록 중에 Name 일치하는 목록만 가져온다.
+	 * @return Product 타입의 컬렉션 List
+	 * @throws Exception
+	 */
+	public List<Product> listName(String word) throws Exception;
+	
 }

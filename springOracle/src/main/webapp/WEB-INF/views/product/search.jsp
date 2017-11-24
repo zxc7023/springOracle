@@ -14,7 +14,7 @@
 		<%-- $("input[name=searchValue]").val('<%=value%>'); --%>
 		$("input[name=searchValue]").val('${param.searchValue}');
 		$("input[type=submit]").click(function(){
-			$.ajax({ url: "productlist.do",
+			$.ajax({ url: "productlist",
 				method: "post",
 				data: $("form").serialize(),
 				success: function(responseData){

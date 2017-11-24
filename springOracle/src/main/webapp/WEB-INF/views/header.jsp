@@ -43,7 +43,7 @@
 				<li><a href="${pageContext.request.contextPath}/customer/customerdetail\">내정보</a></li>
 			</c:otherwise>
 		</c:choose>
-		<li><a href="product/productlist">상품목록</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/productlist">상품목록</a></li>
 		<li><a href="cartlist.do">장바구니</a></li>
 		<li><a href="orderlist.do">주문목록보기</a></li>
 		<li><a href="repboardlist.do">게시판</a></li>
