@@ -5,52 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-  .signupWrapper{width: 500px; 
-                 margin: 50px auto;}
 
-  .signupWrapper form {width: 300px;
-                     height: 230px;
-                     margin: 0 auto;
-                     text-align: center;
-                     position: relative;}  
-
-  .signupWrapper input         {height:25px;
-                width: 250px;
-                margin-top:10px; 
-                border:none;
-                border-bottom: 1px solid #D6D5D1} 
-
-  .signupWrapper input[name="id"]{width: 170px}                
-
-  button[name="dupcheck"] {border-radius: 5px;
-                           border: none;
-                           height: 26px;
-                           padding: 2px 10px;
-                           background-color:#4285f4;
-                           color: #fff;
-                           font-weight: bold}   
-
-  #idchk                   {display: block;
-                           font-size: 12px;
-                           padding-left: 25px;
-                           margin-top: 5px;
-                           color: red;
-                           float: left}
-
-  input[name="join"]    {background-color:#4285f4;
-                           color: #fff;
-                           font-weight: bold;
-                          border-radius: 5px;
-                           border: none;
-                           height: 28px;} 
-
-  .pwd_check            {position: absolute;
-                          bottom:110px;
-                          right:30px;
-                          font-size: 12px;
-                          color: red;}                                                                                 
-</style>
+<link href="<%=request.getContextPath()%>/resources/login_form.css" type="text/css"
+	rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
    //dom트리가 구성될때까지 기다림
