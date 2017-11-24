@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css"
+	rel="stylesheet" />
 <style type="text/css">
 table {
 	width: 300px;

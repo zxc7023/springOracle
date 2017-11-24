@@ -1,7 +1,5 @@
 package com.my.dao;
 
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,8 +29,6 @@ public class CustomerDAOOracle implements CustomerDAO {
 			throw e;
 		}
 	}
-
-
 
 	@Override
 	public Customer selectById(String id) throws Exception {
@@ -82,60 +78,9 @@ public class CustomerDAOOracle implements CustomerDAO {
 
 	@Override
 	public void updateList(List<Customer> list) throws Exception {
-		for(Customer c : list){
-			session.update("CustomerMapper.updateList",c);
+		for (Customer c : list) {
+			session.update("CustomerMapper.updateList", c);
 		}
-		
-	}
 
-	@Override
-	public List<Customer> selectByStatus(String status) {
-		try {
-			System.out.println(status);
-			return session.selectList("CustomerMapper.selectByStatus", status);
-			// 3. SQL구문을 송신
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return null;
 	}
-	
-	public int getPageIndexCount(int totalRowCount) throws SQLException , Exception{
-		int pageIndexCount = (int)Math.ceil(totalRowCount/5.0);
-		return pageIndexCount;
-	}
-	
-	public int getStrartRow(int nowPage, int postCountPerPage){
-		int startRow=0;
-		startRow=(nowPage-1)*postCountPerPage+1;
-		return startRow;
-	}
-	
-	public int getEndRow(int nowPage, int postCountPerPage){
-		int endRow=0;
-		endRow=nowPage*postCountPerPage;
-		return endRow;
-	}
-	
-/*	public List<Customer> selectByPage(int nowPage, String searchItem, String searchValue) throws SQLException{
-		HashMap<String, Object> map = new HashMap<>();
-		map.put(searchItem, searchValue);
-		map.put("startRow", this.getStrartRow(nowPage, 5));
-		map.put("endRow", this.getEndRow(nowPage, 5));
-		System.out.println("searchItem: " + searchItem+ "searchValue" + searchValue+ "startRow: " + getStrartRow(nowPage, 5) + "endRow :"+ getEndRow(nowPage, 5));
-		return session.selectList("CustomerMapper2.selectByPage",map);
-	 }
-	
-	public  List<Customer> selectAll(String searchItem,String searchValue) {
-		try{
-			HashMap<String, String> map = new HashMap<>();
-			map.put(searchItem, searchValue);
-			
-			return session.selectList("CustomerMapper2.selectAll",map);
-		}catch (Exception e) {
-			
-		}
-		return null;
-	}*/
-	
 }

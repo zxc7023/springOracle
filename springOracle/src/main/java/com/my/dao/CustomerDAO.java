@@ -39,7 +39,6 @@ public interface CustomerDAO{
 	 * @param list
 	 */
 	public void updateList(List<Customer> list) throws Exception;
-	public List<Customer> selectByStatus(String searchValue);
 
 
 }
