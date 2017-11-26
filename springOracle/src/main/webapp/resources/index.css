@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+.container-wrap article:first-child{
+	background:url("back.jpg") no-repeat center 0;
+  background-attachment: fixed;
+  background-size:cover;}
+  
+.container-wrap article:last-child{
+	background:url("back.jpg") no-repeat center center;
+  background-attachment: fixed;	
+  background-size:cover;}
+
+.container01{
+	paddin:10% 0;} 
+
+.container01  p{
+	text-align:center;
+	font-size:50px;
+	color:#fff;
+	padding:15% 0;}
+
+.container01  p span{
+	display:block;
+	line-height:70px;
+	font-weight:bold;}
+
+.container02{
+	backgound:none;
+	height:900px;
+	position:relative;}
+	
+.container02 .junki_profile{
+	text-align:center;
+	border-radius:50%;
+	overflow:hidden;
+	width:15%;
+	margin:0 auto;
+	position:absolute;
+	top:-15%;
+	left:0;
+	right:0;}
+
+.container03{
+	height:400px;}
+	
+@media screen and (max-width:700px){
+	.container01  p{
+	font-size:4rem;}
+
+	.container01  p span{
+	line-height:70px;}
+}
