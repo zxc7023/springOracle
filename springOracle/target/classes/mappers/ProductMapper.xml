@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="selectByName" resultType="Product">
-		select * from product where prod_name like '%' || #{prod_name] || '%'
+		select * from product where prod_name like '%' || #{prod_name} || '%'
 	</select>
 
 	<update id="updateList" parameterType="Product">

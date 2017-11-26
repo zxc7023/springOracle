@@ -32,7 +32,7 @@ public class ProductDAOOracle implements ProductDAO {
 	}
 
 	@Override
-	public Product selectByNo(String no) throws SQLException, Exception {
+	public Product selectByNo(String no) throws Exception {
 		try {
 			Product p = session.selectOne("ProductMapper.selectByNo", no);
 			return p;
@@ -42,11 +42,12 @@ public class ProductDAOOracle implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> selectByName(String word) throws SQLException, Exception {
+	public List<Product> selectByName(String word) throws Exception {
 		try {
 			List<Product> list = session.selectList("ProductMapper.selectByName", word);
 			return list;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
