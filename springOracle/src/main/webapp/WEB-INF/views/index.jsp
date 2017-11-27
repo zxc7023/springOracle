@@ -27,10 +27,50 @@
 		</article>
 
 		<article class="container02">
-			<h2 class="hide">container02</h2>
-			<p class="junki_profile">
-			<%-- 	<img src="<%=request.getContextPath()%>/resources/junki.jpg"	alt="junki" /> --%>
-			</p>
+		
+			<h2>
+<%-- 				<img src="<%=request.getContextPath()%>/resources/junki.png"	alt="junki" />
+ --%>			</h2>
+			
+		  <div class="myself">
+		    <div class="myself-in">
+		    </div>
+		        <p>우제는 롱패딩이 없어서 하나랑 데이트할때 오들오들 떨면서 춥다고 해요
+		        이번기회에 커버낫 롱패딩이 나와서 우제는 롱패딩을 사려고하는데
+		        할인 받기 위해서 하나는 게인소브르 후기를 맛깔나게 써서 포인트를 오지게
+		        지리게 받아야 되요. 그래야지 우제가 패딩을 살때 보탬이 되거든요.
+		        빨리 우제가 롱패딩을 사서 훌찌럭 훌찌럭 안했으면 좋겠네요ㅡ,.ㅡ</p>
+		  </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>		  
+<script>
+var $animation_elements = $('.myself-in, .myself p');
+var $window = $(window);
+
+function check_if_in_view() {
+  var window_height = $window.height();
+  var window_top_position = $window.scrollTop();
+  var window_bottom_position = (window_top_position + window_height);
+
+  $.each($animation_elements, function() {
+    var $element = $(this);
+    var element_height = $element.outerHeight();
+    var element_top_position = $element.offset().top;
+    var element_bottom_position = (element_top_position + element_height);
+
+    //check to see if this current container is within viewport
+    if ((element_bottom_position >= window_top_position) &&
+      (element_top_position <= window_bottom_position)) {
+      $element.addClass('in-view');
+    } else {
+      $element.removeClass('in-view');
+    }
+  });
+}
+
+$window.on('scroll resize', check_if_in_view);
+$window.trigger('scroll');
+
+</script>
 		</article>
 
 		<article class="container03">

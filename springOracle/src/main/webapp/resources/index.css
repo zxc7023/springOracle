@@ -26,18 +26,51 @@
 .container02{
 	backgound:none;
 	height:900px;
-	position:relative;}
+	porisiton:relative;}
 	
-.container02 .junki_profile{
-	text-align:center;
-	border-radius:50%;
-	overflow:hidden;
-	width:15%;
+.container02 h2{
+	/* width:20%; */
 	margin:0 auto;
 	position:absolute;
-	top:-15%;
+	top:27%;
 	left:0;
-	right:0;}
+	right:0;
+	background:url("junki.png") no-repeat center center;
+	/* background-size:15%; */
+}	
+	
+.myself  {
+	width: 100%;
+	height: 30rem;
+	padding:20% 0;
+	display: flex;
+	border:2px solid red;
+	align-items: center;
+	justify-content: space-around;}
+	
+
+.myself p {
+	width: 30%;
+    transform: translateX(-50vw);
+	opacity: 0;
+	height:100%;
+	transition: all, 2s;}
+	
+.myself p.in-view {
+    transform: translateX(0vw);
+	opacity: 1;}
+	
+.myself-in {
+	height: 100%;;
+	width: 50%;
+	border:2px solid blue;
+    transform: translateX(-50vw);
+	opacity: 0;
+	transition: all, 2s;}
+	
+.myself-in.in-view {
+	opacity: 1;
+	transform: translateX(0vw);}
 
 .container03{
 	height:400px;}
