@@ -24,13 +24,13 @@
 			<p>
 				<span>DEVELOPER</span> <span>준비된 인재는 다릅니다!</span>
 			</p>
+			
+			<h2 class="profile-img">
+ 				<img src="<%=request.getContextPath()%>/resources/junki.png"	alt="junki" />
+ 			</h2>
 		</article>
 
 		<article class="container02">
-		
-			<h2>
-<%-- 				<img src="<%=request.getContextPath()%>/resources/junki.png"	alt="junki" />
- --%>			</h2>
 			
 		  <div class="myself">
 		    <div class="myself-in">

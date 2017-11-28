@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="<%=request.getContextPath()%>/resources/product.css" type="text/css" rel="stylesheet" />
 
 <c:set var="item" value="${param.searchItem}" />
 <c:if test="${item == null}">
@@ -35,7 +36,7 @@
 </script>
 
 
-<div>
+<div class="product-search-wrap">
 	<form style="border-collapse: collapse; border: 1px solid; padding: 10px;">
 		<select name="searchItem">
 			<option value="no" selected>번호로검색</option>

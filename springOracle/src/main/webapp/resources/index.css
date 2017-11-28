@@ -2,7 +2,8 @@
 .container-wrap article:first-child{
 	background:url("back.jpg") no-repeat center 0;
   background-attachment: fixed;
-  background-size:cover;}
+  background-size:cover;
+  position:relative;}
   
 .container-wrap article:last-child{
 	background:url("back.jpg") no-repeat center center;
@@ -22,29 +23,26 @@
 	display:block;
 	line-height:70px;
 	font-weight:bold;}
+		
+.profile-img{
+	width:20%;
+	margin:0 auto;
+	position:absolute;
+	bottom:-20%;
+	left:0;
+	right:0;
+}
 
 .container02{
 	backgound:none;
-	height:900px;
-	porisiton:relative;}
-	
-.container02 h2{
-	/* width:20%; */
-	margin:0 auto;
-	position:absolute;
-	top:27%;
-	left:0;
-	right:0;
-	background:url("junki.png") no-repeat center center;
-	/* background-size:15%; */
-}	
+	height:50rem;
+	padding:10% 0;}	
 	
 .myself  {
 	width: 100%;
 	height: 30rem;
-	padding:20% 0;
+	padding:10% 0;
 	display: flex;
-	border:2px solid red;
 	align-items: center;
 	justify-content: space-around;}
 	
