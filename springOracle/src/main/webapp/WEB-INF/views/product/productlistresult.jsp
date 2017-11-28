@@ -4,6 +4,7 @@
 <%@ page import="com.my.vo.Product"%>
 <%@ page import="com.my.dao.ProductDAOOracle"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="list" value="${requestScope.list}" />
 
 <!DOCTYPE html>
 <html>
@@ -28,19 +29,19 @@
 				success : function(responseData) {
 					alert("장바구니에 넣었습니다.");
 					$parentObj.empty();
-					//location.href='productlist.do';
 				}
 			});
-			console.log(no + ":" + name + ":" + price + ":" + quantity + " 가 장바구니에 담았습니다."); 
+			console.log(no + ":" + name + ":" + price + ":" + quantity + " 가 장바구니에 담았습니다.");
 			$parentObj.off();
 			return false;
 		});
 		$("table td>a").click(function() {
 			$.ajax({
-				url : 'productdetail',
+				url : "productdetail",
 				method : 'get',
 				data : 'no=' + $(this).html().trim(),
 				success : function(responseData) {
+					console.log(responseData.trim());
 					$parentObj.empty();
 					$parentObj.html(responseData)
 
@@ -55,32 +56,33 @@
 </script>
 </head>
 <body>
-	<article>
-		<section>
-			<jsp:include page="../header.jsp"></jsp:include>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
+	<section>
+		<article>
 			<jsp:include page="productsearch.jsp"></jsp:include>
-
-			<c:set var="list" value="${requestScope.list}" />
-
-			<table class="tb_product">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<td>이름</td>
-						<td>가격</td>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="p" items="${list}">
+			<form>
+				<table class="tb_product">
+					<thead>
 						<tr>
-							<td><a href="#">${p.prod_no}</a></td>
-							<td>${p.prod_name}</td>
-							<td>${p.prod_price}</td>
+							<th>번호</th>
+							<td>이름</td>
+							<td>가격</td>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</section>
-	</article>
+					</thead>
+					<tbody>
+						<c:forEach var="p" items="${list}">
+							<tr>
+								<td><a href="#">${p.prod_no}</a></td>
+								<td>${p.prod_name}</td>
+								<td>${p.prod_price}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</form>
+		</article>
+	</section>
 </body>
 </html>

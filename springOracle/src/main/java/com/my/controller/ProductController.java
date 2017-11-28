@@ -23,9 +23,10 @@ public class ProductController {
 	@Autowired
 	ProductService service =null;
 	
-	@RequestMapping(value="/productlist" ,method=RequestMethod.GET)
+	@RequestMapping(value="/productlist", method=RequestMethod.GET)
 	public String list(@RequestParam(required=false,defaultValue="no")String searchItem,
 					   @RequestParam(required=false,defaultValue="")String searchValue, Model model){
+		System.out.println("list출력 " + "item=" + searchItem + "value=" + searchValue );
 		List<Product> list = new ArrayList<>();
 		try {
 			if (searchValue.equals("")) { // 전체검색
@@ -48,6 +49,7 @@ public class ProductController {
 	}
 	@RequestMapping(value= "/productdetail", method=RequestMethod.GET)
 	public String productdetail(String no, Model model) {
+		System.out.println("디테일 출력");
 		Product p = null;
 		try {
 			p = service.listNo(no);

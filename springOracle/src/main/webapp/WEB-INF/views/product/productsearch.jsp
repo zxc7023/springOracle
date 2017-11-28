@@ -10,15 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
-/* 		select 값과 input의 searchValue가 있다면 냎두기 위하여 사용 */
 		$("option[value='${item}']").attr("selected", "true");
 		$("input[name=searchValue]").val('${param.searchValue}');
 
-		$("input[type=submit]").click(function() {
-			var jobForm = $("form");
-			jobForm.attr("action", "productlist").attr("method", "get");
-			 jobForm.submit();
-/* 			$.ajax({
+/* 		$("input[type=submit]").click(function() {
+  			$.ajax({
 				url : "productlist",
 				method : "get",
 				data : $("form").serialize(),
@@ -32,9 +28,9 @@
 					$parentObj.empty(); //객체는 있지만 기존내용 clear하고
 					$parentObj.html(responseData.trim()); //검색결과 출력
 				}
-			}); */
+			});
 			return false;
-		});
+		}); */
 	});
 </script>
 

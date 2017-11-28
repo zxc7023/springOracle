@@ -1,18 +1,17 @@
 <%@page import="com.my.vo.Customer"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="<%=request.getContextPath()%>/resources/menu.css" type="text/css"
-	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/menu.css" type="text/css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$("a[href$='/logout']").click(function() {
 			var $url = $(this).attr('href');
- 			$.ajax({
+			$.ajax({
 				url : $url,
 				success : function(responseData) {
 					console.log(responseData);
-		            location.href=responseData.trim();
+					location.href = responseData.trim();
 				}
 			});
 			return false;
@@ -37,7 +36,7 @@
 			<c:when test="${empty sessionScope.loginInfo}">
 				<li><a href="${pageContext.request.contextPath}/customer/signupform">가입</a></li>
 				<li><a href="${pageContext.request.contextPath}/customer/login">로그인</a></li>
-			</c:when>  
+			</c:when>
 			<c:otherwise>
 				<li><a href="${pageContext.request.contextPath}/customer/logout">로그아웃</a></li>
 				<li><a href="${pageContext.request.contextPath}/customer/customerdetail\">내정보</a></li>
