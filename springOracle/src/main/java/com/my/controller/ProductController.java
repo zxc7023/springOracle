@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,10 +23,9 @@ public class ProductController {
 	@Autowired
 	ProductService service =null;
 	
-	@RequestMapping("/productlist")
+	@RequestMapping(value="/productlist" ,method=RequestMethod.GET)
 	public String list(@RequestParam(required=false,defaultValue="no")String searchItem,
 					   @RequestParam(required=false,defaultValue="")String searchValue, Model model){
-
 		List<Product> list = new ArrayList<>();
 		try {
 			if (searchValue.equals("")) { // 전체검색
@@ -33,10 +33,10 @@ public class ProductController {
 			} else if ("name".equals(searchItem)) { // 이름으로검색
 				list = service.listName(searchValue);
 			} else if ("no".equals(searchItem)) { // 번호로검색
-/*				Product p = dao.selectByNo(searchValue);
+				Product p = service.listNo(searchValue);
 				if (p != null) {
 					list.add(p);
-				}*/
+				}
 			}
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -46,24 +46,17 @@ public class ProductController {
 		String forwardURL = "product/productlistresult";
 		return forwardURL;
 	}
-/*	@RequestMapping("/productdetail.do")
-	@ResponseBody
-	public Product productdetail(String no) {
-	     ModelAndView mnv = new ModelAndView();
-
+	@RequestMapping(value= "/productdetail", method=RequestMethod.GET)
+	public String productdetail(String no, Model model) {
+		Product p = null;
 		try {
-			Product p = dao.selectByNo(no);
-			return p;
+			p = service.listNo(no);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Product pError = new Product();
-		pError.setProd_no("-1");
-		return pError;
-
 		model.addAttribute("productDetail", p);
-		String forwardURL = "/productdetailresult.jsp";
+		String forwardURL = "product/productdetailresult";
 		return forwardURL;
-	}*/
+	}
 }

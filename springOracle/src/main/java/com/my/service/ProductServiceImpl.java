@@ -29,4 +29,9 @@ public class ProductServiceImpl implements ProductService{
 		return dao.selectByName(word);
 	}
 
+	@Override
+	public Product listNo(String no) throws Exception {
+		return dao.selectByNo(no);
+	}
+
 }

@@ -29,4 +29,13 @@ public interface ProductService {
 	 */
 	public List<Product> listName(String word) throws Exception;
 	
+	
+	/**
+	 * 상품 목록중 no가 일치하는 한개의 목록만 가져온다
+	 * @param no 상품번호
+	 * @return Product 타입
+	 * @throws Exception
+	 */
+	public Product listNo(String no) throws Exception;
+	
 }

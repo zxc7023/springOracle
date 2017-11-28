@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가입 페이지</title>
 
 <link href="<%=request.getContextPath()%>/resources/login_form.css" type="text/css"
 	rel="stylesheet" />
