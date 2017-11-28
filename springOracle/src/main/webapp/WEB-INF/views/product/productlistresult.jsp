@@ -16,10 +16,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		var $parentObj = $("article");
-		if ($parentObj.length == 0) {
-			$parentObj = $("body");
-		}
+		var $parentObj = $("body");
+
 		$parentObj.on("click", "#btCart", function() {
 			//지금존재하는 객체의 하위 객체의 아이디가 btCart인것의 click 이벤트처리
 			$.ajax({
@@ -29,9 +27,9 @@
 				success : function(responseData) {
 					alert("장바구니에 넣었습니다.");
 					$parentObj.empty();
+					$parentObj.html(responseData);
 				}
 			});
-			console.log(no + ":" + name + ":" + price + ":" + quantity + " 가 장바구니에 담았습니다.");
 			$parentObj.off();
 			return false;
 		});
@@ -39,7 +37,7 @@
 			$.ajax({
 				url : "productdetail",
 				method : 'get',
-				data : 'no=' + $(this).html().trim(),
+				data : 'prod_no=' + $(this).html().trim(),
 				success : function(responseData) {
 					console.log(responseData.trim());
 					$parentObj.empty();

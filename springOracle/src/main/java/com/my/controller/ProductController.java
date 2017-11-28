@@ -48,11 +48,11 @@ public class ProductController {
 		return forwardURL;
 	}
 	@RequestMapping(value= "/productdetail", method=RequestMethod.GET)
-	public String productdetail(String no, Model model) {
-		System.out.println("디테일 출력");
+	public String productdetail(String prod_no, Model model) {
+		System.out.println("디테일 출력 prod_no :" + prod_no);
 		Product p = null;
 		try {
-			p = service.listNo(no);
+			p = service.listNo(prod_no);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
