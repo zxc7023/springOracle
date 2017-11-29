@@ -19,6 +19,7 @@ import com.my.vo.OrderLine;
 import com.my.vo.Product;
 
 @Controller
+@RequestMapping("/order/*")
 public class OrderController {
 	
 	@Autowired
@@ -30,7 +31,7 @@ public class OrderController {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {
-			forwardURL = "loginform.jsp";
+			forwardURL = "customer/loginform";
 
 		} else {
 			// cart정보가져오고
@@ -53,26 +54,26 @@ public class OrderController {
 				e.printStackTrace();
 			}
 			session.removeAttribute("cart");
-			forwardURL = "orderlist.do";
+			forwardURL = "forward:/order/orderlist";
 
 		}
 		return forwardURL;
 	}
 
 	
-	@RequestMapping("/orderlist.do")
+	@RequestMapping("/orderlist")
 	public String orderList(HttpSession session,Model model) {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {
-			forwardURL = "loginform.jsp";
+			forwardURL = "customer/loginform";
 			return forwardURL;
 		}
 		try {
-			List<OrderInfo> customerInfoList= dao.selectById(c.getId());
+			List<OrderInfo> orderInfoList= dao.selectById(c.getId());
 			
-			forwardURL = "orderlistresult.jsp";
-			model.addAttribute("customerInfoList", customerInfoList);
+			forwardURL = "order/orderlistresult";
+			model.addAttribute("orderInfoList", orderInfoList);
 			return forwardURL;
 
 		}catch (Exception e) {

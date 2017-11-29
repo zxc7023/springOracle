@@ -8,6 +8,32 @@
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(function() {
+		var $parentObj = $("body");
+
+		$parentObj.on("click", "#btCart", function() {
+			//지금존재하는 객체의 하위 객체의 아이디가 btCart인것의 click 이벤트처리
+			$.ajax({
+				url : '${pageContext.request.contextPath}/cart/addcart',
+				method : 'post',
+				data : $(this).parents("form").serialize(),
+				success : function(responseData) {
+					var twoWay= confirm("장바구니를 확인 하시겠습니까?");
+					if(twoWay){
+						$parentObj.empty();
+						$parentObj.html(responseData);
+					}else{
+						
+					}
+				}
+			});
+			$parentObj.off();
+			return false;
+		});
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -22,7 +48,7 @@
 			<tbody>
 				<tr>
 					<td>상품번호</td>
-					<td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly" ></td>
+					<td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td>상품명</td>

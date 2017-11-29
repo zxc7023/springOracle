@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderMapper">
+
+	<resultMap id="OrderInfoMap" type="OrderInfo">
+		<id column="info_no" property="info_no" />
+		<result column="info_date" property="info_date" />
+		<association property="info_c" javaType="Customer">
+			<id column="id" property="id" />
+			<result column="password" property="password" />
+			<result column="name" property="name" />
+		</association>
+		<collection property="lines" ofType="OrderLine">
+			<id column="line_info_no" property="info_no" />
+			<id column="line_prod_no" property="line_p.prod_no" />
+			<result column="line_quantity" property="line_quantity" />
+			<association property="line_p" javaType="Product">
+				<id column="line_prod_no" property="prod_no" />
+				<result column="prod_name" property="prod_name" />
+				<result column="prod_price" property="prod_price" />
+			</association>
+		</collection>
+	</resultMap>
+
+	<select id="selectById" parameterType="string" resultMap="OrderInfoMap">
+		select info_no, info_date, line_prod_no, prod_name, prod_price,
+		line_quantity
+		from order_info info join order_line line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on p.prod_no = line.line_prod_no
+		where info_id = #{id}
+		order by info_no desc
+	</select>
+
+	<insert id="insertInfo" parameterType="OrderInfo">
+		Insert Into order_info
+		(info_no, info_date, info_id) Values (order_seq.NEXTVAL,SYSDATE,
+		#{info_c.id})
+	</insert>
+
+
+	<insert id="insertLine" parameterType="OrderLine">
+		<selectKey keyProperty="line_info_no" resultType="int"
+			order="BEFORE">
+			select NVL(max(info_no),0) from order_info
+		</selectKey>
+		Insert into order_line (line_info_no, line_prod_no, line_quantity)
+		values (#{line_info_no}, #{line_p.prod_no}, ${line_quantity})
+	</insert>
+
+	<select id="selectAll" resultMap="OrderInfoMap">
+		select info_no, info_id, c.id ,
+		info_date, line_prod_no, p.prod_name , prod_price, line_quantity
+		from
+		order_info info join order_line line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on p.prod_no = line.line_prod_no
+		order by info_no
+	</select>
+
+	<select id="selectByProdNo" resultMap="OrderInfoMap">
+		select info_no,info_id,
+		c.id, info_date, line_prod_no, p.prod_name, prod_price, line_quantity
+		from order_info info join order_line line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on p.prod_no = line.line_prod_no
+		where line_prod_no = #{line_p.prod_no}
+		order by info_no
+	</select>
+
+	<select id="selectByNo" resultMap="OrderInfoMap">
+		select info_no,info_id, c.id,
+		info_date, line_prod_no, p.prod_name, prod_price, line_quantity
+		from
+		order_info info join order_line line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on p.prod_no = line.line_prod_no
+		where info_no = #{info_no}
+	</select>
+
+	<select id="selectByDate" parameterType="hashmap" resultMap="OrderInfoMap">
+		select info_no,info_id, c.name , info_date, line_prod_no, p.prod_name
+		, prod_price, line_quantity
+		from order_info info
+		join order_line line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on p.prod_no =
+		line.line_prod_no
+		where info_date between to_date(#{frDate},'yy/mm/dd')
+		and to_date(#{toDate},'yy/mm/dd')+1 order by info_no
+	</select>
+
+</mapper>

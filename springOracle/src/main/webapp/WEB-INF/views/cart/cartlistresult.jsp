@@ -15,43 +15,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
-table {
-	width: 500px;
-	border: 1px solid;
-	border-collapse: collapse;
-	margin: auto;
-}
-
-th {
-	border: 1px solid;
-	text-align: center;
-}
-
-td {
-	border: 1px solid;
-	text-align: center;
-}
-
-h1 {
-	text-align: center;
-}
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		$("input[type=submit]").click(function() {
 			$.ajax({
-				url : 'addorder',
+				url : '${pageContext.request.contextPath}/order/addorder',
 				method : 'post',
 				success : function(responseData) {
 					<c:if test="${sessionScope.loginInfo==null}">
 					alert("로그인 페이지로 이동합니다.");
 					</c:if>
-
-					var $parentObj = $("article");
+					alert(responseData);
+					var $parentObj = $("body");
 					var data = responseData.trim();
 					$parentObj.empty(); //객체는 남기고 내용을 지우기
 					$parentObj.html(data);

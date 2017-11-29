@@ -1,7 +1,7 @@
 <%@page import="com.my.vo.Customer"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <link href="<%=request.getContextPath()%>/resources/menu.css" type="text/css" rel="stylesheet" /> --%>
+<link href="<%=request.getContextPath()%>/resources/menu.css" type="text/css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -44,7 +44,7 @@
 		</c:choose>
 		<li><a href="${pageContext.request.contextPath}/product/productlist">상품목록</a></li>
 		<li><a href="${pageContext.request.contextPath}/cart/cartlist">장바구니</a></li>
-		<li><a href="orderlist.do">주문목록보기</a></li>
+		<li><a href="${pageContext.request.contextPath}/order/orderlist">주문목록보기</a></li>
 		<li><a href="repboardlist.do">게시판</a></li>
 	</ul>
 </nav>

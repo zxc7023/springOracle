@@ -33,7 +33,7 @@
 			$parentObj.off();
 			return false;
 		});
-		$("table td>a").click(function() {
+	/* 	$("table td>a").click(function() {
 			$.ajax({
 				url : "productdetail",
 				method : 'get',
@@ -49,7 +49,7 @@
 				}
 			});
 			return false;
-		});
+		}); */
 	});
 </script>
 </head>
@@ -72,7 +72,7 @@
 					<tbody>
 						<c:forEach var="p" items="${list}">
 							<tr>
-								<td><a href="#">${p.prod_no}</a></td>
+								<td><a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_no}</a></td>
 								<td>${p.prod_name}</td>
 								<td>${p.prod_price}</td>
 							</tr>
