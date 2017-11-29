@@ -41,7 +41,11 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
+
+
 	<c:choose>
 		<c:when test="${ empty sessionScope.cart}">
 			<h3>장바구니가 비었습니다.</h3>
