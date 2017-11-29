@@ -60,7 +60,7 @@
 	<section>
 		<article>
 			<jsp:include page="productsearch.jsp"></jsp:include>
-			<form>
+			<form class="tb_product_wrap">
 				<table class="tb_product">
 					<thead>
 						<tr>

@@ -1,4 +1,52 @@
 @charset "UTF-8";
-.product-search-wrap{
-	border:2px solid red;
+.product-search-wrap form{
+	border-collapse: collapse;
+	padding:5% 0;
+	width:80%;
+	margin:0 auto;}
+
+.product-search-wrap form select{
+	padding-right:0;
+	width:20%;
+	text-align:center;
+	text-align-last:center;
+}
+.product-search-wrap form select option{
+	display:inline-block;
+	text-align:left;
+	
+}
+
+.product-search-wrap [name=searchValue]{
+	border-bottom:1px solid gray;
+	width:65%;
+}
+
+.product-search-wrap [value="검색"]{
+	margin-left:2%;
+	width:10%;
+}
+section{
+	background:url("background.jpg")no-repeat center top;
+	background-size:cover;
+	height:100%
+}
+.tb_product_wrap{
+	padding-bottom:7%;
+}
+.tb_product_wrap table{
+	width:80%;
+	margin:0 auto;
+	background:rgba(255,255,255,0.7);
+	text-align:center;
+}
+.tb_product_wrap table thead{
+	font-size:1.5rem;
+	line-height:4rem;
+	border-bottom:1px solid rgba(0,0,0,0.4)
+}
+
+.tb_product_wrap table tbody{
+	font-size:1.5rem;
+	line-height:4rem;
 }
