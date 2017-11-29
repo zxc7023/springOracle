@@ -15,6 +15,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<%=request.getContextPath()%>/resources/reset.css"
+	type="text/css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
@@ -62,7 +64,11 @@ h1 {
 </script>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
+
+
 	<c:choose>
 		<c:when test="${ empty sessionScope.cart}">
 			<h3>장바구니가 비었습니다.</h3>
