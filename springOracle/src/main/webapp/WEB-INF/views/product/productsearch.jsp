@@ -37,10 +37,12 @@
 
 
 <div class="product-search-wrap">
-	<form style="border-collapse: collapse; border: 1px solid; padding: 10px;">
+	<form>
 		<select name="searchItem">
 			<option value="no" selected>번호로검색</option>
 			<option value="name">이름으로검색</option>
-		</select> <input type="search" name="searchValue"> <input type="submit" value="검색">
+		</select>
+		 <input type="search" name="searchValue"/> 
+		 <input type="submit" value="검색"/>
 	</form>
 </div>

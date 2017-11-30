@@ -2,12 +2,14 @@
 
 header{
 	height:60px;
+	z-index:99;
 }
 
 nav {
 	width: 100%;
 	background-color:#000;
 	position:fixed;
+	z-index:99;
 }
 
 nav ul{
@@ -18,9 +20,11 @@ nav ul{
 
 nav ul li {
 	display:inline-block;
-	width:16%;
 	text-align:center;
-}
+	width:14%;}
+	
+nav ul li:first-child{width:5%}
+nav ul li:nth-child(6){width:20%}
 
 nav a {
 	color:#fff;
@@ -53,6 +57,8 @@ nav a:hover {
 		border-top:1px #fff solid;
 		width:100%;
 	}
+	nav ul li:first-child,
+	nav ul li:nth-child(6){width:100%}
 	nav ul {
 		display:none;
 	}
