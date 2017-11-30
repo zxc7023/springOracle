@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.my.dao.OrderDAOOracle;
 import com.my.vo.Customer;
@@ -62,7 +63,7 @@ public class OrderController {
 
 	
 	@RequestMapping("/orderlist")
-	public String orderList(HttpSession session, Model model) {
+	public String orderList(HttpSession session, Model model/*@RequestParam(required=false,defaultValue="3")String term*/) {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {

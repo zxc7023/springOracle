@@ -32,9 +32,9 @@
 <nav class="header">
 	<a href="#" class="home-menu">MENU</a>
 	<ul>
+		<li><a href="#">홈 </a></li>
 		<c:choose>
 			<c:when test="${empty sessionScope.loginInfo}">
-				<li><a href="#">홈 </a></li>
 				<li><a href="${pageContext.request.contextPath}/customer/signupform">가입</a></li>
 				<li><a href="${pageContext.request.contextPath}/customer/login">로그인</a></li>
 			</c:when>

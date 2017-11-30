@@ -47,7 +47,7 @@
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
-	
+
 	<div class="term-select">
 		<input type="submit" name="btnTerm1D" value="오늘" id="btnTerm1D" class="button" />
 		<input type="submit" name="btnTerm1W" value="1주일" id="btnTerm1W" class="button" />

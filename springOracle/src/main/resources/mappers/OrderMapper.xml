@@ -32,8 +32,9 @@
 		on info.info_id = c.id
 		join product p
 		on p.prod_no = line.line_prod_no
-		where info_id = #{id}
+		where info_id = #{id} and info_date between add_months(sysdate,-1) and sysdate
 		order by info_no desc
+
 	</select>
 
 	<insert id="insertInfo" parameterType="OrderInfo">
