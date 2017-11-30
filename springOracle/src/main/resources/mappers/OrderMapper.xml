@@ -23,7 +23,7 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectById" parameterType="string" resultMap="OrderInfoMap">
+	<select id="selectById" resultMap="OrderInfoMap">
 		select info_no, info_date, line_prod_no, prod_name, prod_price,
 		line_quantity
 		from order_info info join order_line line

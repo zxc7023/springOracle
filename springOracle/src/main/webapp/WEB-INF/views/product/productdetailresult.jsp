@@ -20,12 +20,12 @@
 				method : 'post',
 				data : $(this).parents("form").serialize(),
 				success : function(responseData) {
-					var twoWay= confirm("장바구니를 확인 하시겠습니까?");
-					if(twoWay){
+					var twoWay = confirm("장바구니를 확인 하시겠습니까?");
+					if (twoWay) {
 						$parentObj.empty();
 						$parentObj.html(responseData);
-					}else{
-						
+					} else {
+
 					}
 				}
 			});
@@ -36,7 +36,9 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
 	<form id=cartform>
 		<table>
 			<thead>

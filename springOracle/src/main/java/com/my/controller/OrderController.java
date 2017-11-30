@@ -62,7 +62,7 @@ public class OrderController {
 
 	
 	@RequestMapping("/orderlist")
-	public String orderList(HttpSession session,Model model) {
+	public String orderList(HttpSession session, Model model) {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {
