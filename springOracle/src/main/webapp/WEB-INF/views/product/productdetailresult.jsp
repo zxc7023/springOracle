@@ -7,7 +7,7 @@
 <!DOCTYPE html">
 <html>
 <head>
-<link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/product.css" type="text/css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -40,36 +40,38 @@
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
-	<form id=cartform>
-		<table>
-			<thead>
-				<tr>
-					<th colspan="2">상품상세정보</th>
-					<td></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>상품번호</td>
-					<td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<td>상품명</td>
-					<td id="name"><input type="text" name="prod_name" value="${p.prod_name}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<td>상품가격</td>
-					<td id="price"><input type="text" name="prod_price" value="${p.prod_price}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<td>수량</td>
-					<td><input type=number style="width: 100px" min="1" value="1" name="quantity"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="button" value="장바구니담기" id="btCart"></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+	<section>
+		<form id=cartform>
+			<table>
+				<thead>
+					<tr>
+						<th colspan="2">상품상세정보</th>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>상품번호</td>
+						<td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td>상품명</td>
+						<td id="name"><input type="text" name="prod_name" value="${p.prod_name}" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td>상품가격</td>
+						<td id="price"><input type="text" name="prod_price" value="${p.prod_price}" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td>수량</td>
+						<td><input type=number style="width: 100px" min="1" value="1" name="quantity"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="button" value="장바구니담기" id="btCart"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</section>
 </body>
 </html>

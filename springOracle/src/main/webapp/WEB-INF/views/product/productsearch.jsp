@@ -42,7 +42,7 @@
 			<option value="no" selected>번호로검색</option>
 			<option value="name">이름으로검색</option>
 		</select>
-		 <input type="search" name="searchValue"/> 
+		 <input type="search" name="searchValue" placeholder="검색어를 입력하세요."/> 
 		 <input type="submit" value="검색"/>
 	</form>
 </div>
