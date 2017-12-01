@@ -33,14 +33,14 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	$(function() {
+/* 	$(function() {
 		var termButton = $(".term-select").find("input");
 		termButton.click(function() {
 			alert("눌림")
 			return false;
 		});
 
-	});
+	}); */
 </script>
 </head>
 <body>
@@ -49,11 +49,14 @@
 	</header>
 
 	<div class="term-select">
-		<input type="submit" name="btnTerm1D" value="오늘" id="btnTerm1D" class="button" />
-		<input type="submit" name="btnTerm1W" value="1주일" id="btnTerm1W" class="button" />
-		<input type="submit" name="btnTerm1M" value="1개월" id="btnTerm1M" class="button" />
-		<input type="submit" name="btnTerm3M" value="3개월" id="btnTerm3M" class="button-on" />
-		<input type="submit" name="btnTerm6M" value="6개월" id="btnTerm6M" class="button" />
+		<form action="/orderlist">
+			<input type="submit" name="info_date" value="오늘" id="btnTerm1D" class="button" />
+			<input type="submit" name="1week" value="1주일" id="btnTerm1W" class="button" />
+			<input type="submit" name="1month" value="1개월" id="btnTerm1M" class="button" />
+			<input type="submit" name="3month" value="3개월" id="btnTerm3M" class="button-on" />
+			<input type="submit" name="6month" value="6개월" id="btnTerm6M" class="button" />
+			<input type="submit" name="previous" value="이전" id="btnTerm6M" class="button" />
+		</form>
 	</div>
 
 	<table class="type05">

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,15 @@ public class OrderDAOOracle {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public List<OrderInfo> selectById(String id)
+	public List<OrderInfo> selectById(String id,String info_date)
 	{
 		try{
-			return session.selectList("OrderMapper.selectById",id);
+			HashMap<String, String> map = new HashMap<>();
+			map.put("info_id", id);
+			map.put("info_date", info_date);
+			System.out.println(id + info_date);
+			return session.selectList("OrderMapper.selectById",map);
+			//return session.selectList("OrderMapper.selectById",id);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}finally {

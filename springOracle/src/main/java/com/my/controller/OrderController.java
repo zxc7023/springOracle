@@ -63,7 +63,7 @@ public class OrderController {
 
 	
 	@RequestMapping("/orderlist")
-	public String orderList(HttpSession session, Model model/*@RequestParam(required=false,defaultValue="3")String term*/) {
+	public String orderList(HttpSession session, Model model, @RequestParam(required=false, defaultValue="1day")String info_date) {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {
@@ -71,8 +71,10 @@ public class OrderController {
 			return forwardURL;
 		}
 		try {
-			List<OrderInfo> orderInfoList= dao.selectById(c.getId());
-			
+			System.out.println("진입전");
+			List<OrderInfo> orderInfoList= dao.selectById(c.getId(),info_date);
+			System.out.println("진입후");
+			System.out.println(orderInfoList);
 			forwardURL = "order/orderlistresult";
 			model.addAttribute("orderInfoList", orderInfoList);
 			return forwardURL;

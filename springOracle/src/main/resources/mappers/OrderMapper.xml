@@ -23,88 +23,126 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectById" resultMap="OrderInfoMap">
-		select info_no, info_date, line_prod_no, prod_name, prod_price,
-		line_quantity
-		from order_info info join order_line line
+	<select id="selectById" parameterType="hashmap" resultMap="OrderInfoMap">
+		select info_no, info_date, line_prod_no, prod_name, prod_price, line_quantity
+		from order_info info
+		join order_line line
 		on info.info_no = line.line_info_no
 		join customer c
 		on info.info_id = c.id
-		join product p
+		join
+		product p
 		on p.prod_no = line.line_prod_no
-		where info_id = #{id} and info_date between add_months(sysdate,-1) and sysdate
+		<where>
+			info_id = #{info_id}
+			<choose>
+				<when test="_parameter.info_date == '1day'">
+					and to_char(SYSDATE,'dd') = to_char(info_date,'dd')
+				</when>
+				<when test="_parameter.info_date == '1week'">
+					and info_date between sysdate-7 and sysdate
+				</when>
+				<when test="_parameter.info_date == '1month'">
+					info_date between add_months(SYSDATE,-1) and sysdate
+				</when>
+				<when test="_parameter.info_date == '3month'">
+					info_date between add_months(SYSDATE,-1) and sysdate
+				</when>
+				<when test="_parameter.info_date == '6month'">
+					info_date between add_months(SYSDATE,-1) and sysdate
+				</when>
+				<when test="_parameter.info_date == 'previous'">
+					info_date add_months(SYSDATE,-6) 
+				</when>
+			</choose>
+		</where>
 		order by info_no desc
 
 	</select>
 
 	<insert id="insertInfo" parameterType="OrderInfo">
 		Insert Into order_info
-		(info_no, info_date, info_id) Values (order_seq.NEXTVAL,SYSDATE,
+		(info_no, info_date, info_id)
+		Values (order_seq.NEXTVAL,SYSDATE,
 		#{info_c.id})
 	</insert>
 
 
 	<insert id="insertLine" parameterType="OrderLine">
-		<selectKey keyProperty="line_info_no" resultType="int"
-			order="BEFORE">
-			select NVL(max(info_no),0) from order_info
+		<selectKey keyProperty="line_info_no" resultType="int" order="BEFORE">
+			select NVL(max(info_no),0)
+			from order_info
 		</selectKey>
 		Insert into order_line (line_info_no, line_prod_no, line_quantity)
-		values (#{line_info_no}, #{line_p.prod_no}, ${line_quantity})
+		values (#{line_info_no},
+		#{line_p.prod_no}, ${line_quantity})
 	</insert>
 
 	<select id="selectAll" resultMap="OrderInfoMap">
 		select info_no, info_id, c.id ,
-		info_date, line_prod_no, p.prod_name , prod_price, line_quantity
+		info_date, line_prod_no,
+		p.prod_name , prod_price, line_quantity
 		from
 		order_info info join order_line line
-		on info.info_no = line.line_info_no
+		on info.info_no =
+		line.line_info_no
 		join customer c
 		on info.info_id = c.id
 		join product p
-		on p.prod_no = line.line_prod_no
+		on p.prod_no =
+		line.line_prod_no
 		order by info_no
 	</select>
 
 	<select id="selectByProdNo" resultMap="OrderInfoMap">
 		select info_no,info_id,
-		c.id, info_date, line_prod_no, p.prod_name, prod_price, line_quantity
+		c.id, info_date, line_prod_no,
+		p.prod_name, prod_price, line_quantity
 		from order_info info join order_line line
-		on info.info_no = line.line_info_no
+		on info.info_no =
+		line.line_info_no
 		join customer c
 		on info.info_id = c.id
 		join product p
-		on p.prod_no = line.line_prod_no
+		on p.prod_no =
+		line.line_prod_no
 		where line_prod_no = #{line_p.prod_no}
 		order by info_no
 	</select>
 
 	<select id="selectByNo" resultMap="OrderInfoMap">
 		select info_no,info_id, c.id,
-		info_date, line_prod_no, p.prod_name, prod_price, line_quantity
+		info_date, line_prod_no,
+		p.prod_name, prod_price, line_quantity
 		from
 		order_info info join order_line line
-		on info.info_no = line.line_info_no
-		join customer c
-		on info.info_id = c.id
-		join product p
-		on p.prod_no = line.line_prod_no
-		where info_no = #{info_no}
-	</select>
-
-	<select id="selectByDate" parameterType="hashmap" resultMap="OrderInfoMap">
-		select info_no,info_id, c.name , info_date, line_prod_no, p.prod_name
-		, prod_price, line_quantity
-		from order_info info
-		join order_line line
-		on info.info_no = line.line_info_no
+		on info.info_no =
+		line.line_info_no
 		join customer c
 		on info.info_id = c.id
 		join product p
 		on p.prod_no =
 		line.line_prod_no
+		where info_no = #{info_no}
+	</select>
+
+	<select id="selectByDate" parameterType="hashmap" resultMap="OrderInfoMap">
+		select info_no,info_id, c.name ,
+		info_date, line_prod_no, p.prod_name
+		, prod_price, line_quantity
+		from order_info info
+		join order_line
+		line
+		on info.info_no = line.line_info_no
+		join customer c
+		on info.info_id = c.id
+		join product p
+		on
+		p.prod_no =
+		line.line_prod_no
 		where info_date between to_date(#{frDate},'yy/mm/dd')
-		and to_date(#{toDate},'yy/mm/dd')+1 order by info_no
+		and
+		to_date(#{toDate},'yy/mm/dd')+1 order by info_no
 	</select>
 
 </mapper>
