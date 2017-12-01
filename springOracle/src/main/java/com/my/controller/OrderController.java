@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.my.dao.OrderDAOOracle;
@@ -62,8 +63,8 @@ public class OrderController {
 	}
 
 	
-	@RequestMapping("/orderlist")
-	public String orderList(HttpSession session, Model model, @RequestParam(required=false, defaultValue="1day")String info_date) {
+	@RequestMapping(value="/orderlist", method=RequestMethod.GET)
+	public String orderList(HttpSession session, Model model, @RequestParam(required=false, defaultValue="오늘")String info_date) {
 		Customer c = (Customer) session.getAttribute("loginInfo");
 		String forwardURL;
 		if (c == null) {
@@ -71,10 +72,7 @@ public class OrderController {
 			return forwardURL;
 		}
 		try {
-			System.out.println("진입전");
 			List<OrderInfo> orderInfoList= dao.selectById(c.getId(),info_date);
-			System.out.println("진입후");
-			System.out.println(orderInfoList);
 			forwardURL = "order/orderlistresult";
 			model.addAttribute("orderInfoList", orderInfoList);
 			return forwardURL;

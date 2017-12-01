@@ -36,23 +36,23 @@
 		<where>
 			info_id = #{info_id}
 			<choose>
-				<when test="_parameter.info_date == '1day'">
+				<when test="_parameter.info_date == '오늘'">
 					and to_char(SYSDATE,'dd') = to_char(info_date,'dd')
 				</when>
-				<when test="_parameter.info_date == '1week'">
+				<when test="_parameter.info_date == '1주일'">
 					and info_date between sysdate-7 and sysdate
 				</when>
-				<when test="_parameter.info_date == '1month'">
-					info_date between add_months(SYSDATE,-1) and sysdate
+				<when test="_parameter.info_date == '1개월'">
+					and info_date between add_months(SYSDATE,-1) and sysdate
 				</when>
-				<when test="_parameter.info_date == '3month'">
-					info_date between add_months(SYSDATE,-1) and sysdate
+				<when test="_parameter.info_date == '3개월'">
+					and info_date between add_months(SYSDATE,-3) and sysdate
 				</when>
-				<when test="_parameter.info_date == '6month'">
-					info_date between add_months(SYSDATE,-1) and sysdate
+				<when test="_parameter.info_date == '6개월'">
+					and info_date between add_months(SYSDATE,-6) and sysdate
 				</when>
-				<when test="_parameter.info_date == 'previous'">
-					info_date add_months(SYSDATE,-6) 
+				<when test="_parameter.info_date == '이전'">
+					and info_date  &lt; add_months(SYSDATE,-6) 
 				</when>
 			</choose>
 		</where>

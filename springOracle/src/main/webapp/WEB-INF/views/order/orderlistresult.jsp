@@ -33,14 +33,23 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-/* 	$(function() {
-		var termButton = $(".term-select").find("input");
+	$(function() {
+		var termButton = $("div.term-select").find("input");
 		termButton.click(function() {
-			alert("눌림")
+			$.ajax({
+				url : "${pageContext.request.contextPath}/order/orderlist",
+				data : { "info_date" : $(this).val() },
+				method : "get",
+				success : function(responseData) {
+					$("body").empty();
+					$("body").html(responseData.trim());
+				},
+
+			})
 			return false;
 		});
 
-	}); */
+	});
 </script>
 </head>
 <body>
@@ -48,61 +57,61 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 
-	<div class="term-select">
-		<form action="/orderlist">
-			<input type="submit" name="info_date" value="오늘" id="btnTerm1D" class="button" />
-			<input type="submit" name="1week" value="1주일" id="btnTerm1W" class="button" />
-			<input type="submit" name="1month" value="1개월" id="btnTerm1M" class="button" />
-			<input type="submit" name="3month" value="3개월" id="btnTerm3M" class="button-on" />
-			<input type="submit" name="6month" value="6개월" id="btnTerm6M" class="button" />
-			<input type="submit" name="previous" value="이전" id="btnTerm6M" class="button" />
-		</form>
-	</div>
+	<article>
 
-	<table class="type05">
-		<colgroup>
-			<col width="10%" />
-			<col width="30%" />
-			<col width="10%" />
-			<col width="*" />
-			<col width="10%" />
-			<col width="5%" />
-			<col width="10%" />
-		</colgroup>
-		<tr class="title">
-			<td>주문번호</td>
-			<td>주문일자</td>
-			<td>상품번호</td>
-			<td>상품명</td>
-			<td>가격</td>
-			<td>수량</td>
-			<td>금액</td>
-		</tr>
-		<c:set var="cList" value="${requestScope.orderInfoList}" />
-		<c:forEach var="orderInfo" items="${cList}" varStatus="status">
-			<tr>
-				<td rowspan="${fn:length(orderInfo.lines)}">${orderInfo.info_no }</td>
-				<td rowspan="${fn:length(orderInfo.lines)}"><fmt:formatDate value="${orderInfo.info_date}"
-						type="date" pattern="yyyy년 MM월 dd일 kk시 mm분" /></td>
-				<c:forEach var="orderLine" items="${orderInfo.lines}" end="0">
-					<td>${orderLine.line_p.prod_no }</td>
-					<td>${orderLine.line_p.prod_name }</td>
-					<td>${orderLine.line_p.prod_price }</td>
-					<td>${orderLine.line_quantity}</td>
-					<td>${orderLine.line_p.prod_price * orderLine.line_quantity}</td>
-				</c:forEach>
+		<div class="term-select" align="center">
+				<input type="submit" name="info_date" value="오늘" id="1day" class="button" />
+				<input type="submit" name="info_date" value="1주일" id="1week" class="button" />
+				<input type="submit" name="info_date" value="1개월" id="1month" class="button" />
+				<input type="submit" name="info_date" value="3개월" id="3month" class="button-on" />
+				<input type="submit" name="info_date" value="6개월" id="6month" class="button" />
+				<input type="submit" name="info_date" value="이전" id="previous" class="button" />
+		</div>
+
+		<table class="type05">
+			<colgroup>
+				<col width="10%" />
+				<col width="30%" />
+				<col width="10%" />
+				<col width="*" />
+				<col width="10%" />
+				<col width="5%" />
+				<col width="10%" />
+			</colgroup>
+			<tr class="title">
+				<td>주문번호</td>
+				<td>주문일자</td>
+				<td>상품번호</td>
+				<td>상품명</td>
+				<td>가격</td>
+				<td>수량</td>
+				<td>금액</td>
 			</tr>
-			<c:forEach var="orderLine2" items="${orderInfo.lines}" begin="1">
+			<c:set var="cList" value="${requestScope.orderInfoList}" />
+			<c:forEach var="orderInfo" items="${cList}" varStatus="status">
 				<tr>
-					<td>${orderLine2.line_p.prod_no }</td>
-					<td>${orderLine2.line_p.prod_name }</td>
-					<td>${orderLine2.line_p.prod_price }</td>
-					<td>${orderLine2.line_quantity}</td>
-					<td>${orderLine2.line_p.prod_price * orderLine2.line_quantity}</td>
+					<td rowspan="${fn:length(orderInfo.lines)}">${orderInfo.info_no }</td>
+					<td rowspan="${fn:length(orderInfo.lines)}"><fmt:formatDate value="${orderInfo.info_date}"
+							type="date" pattern="yyyy년 MM월 dd일 kk시 mm분" /></td>
+					<c:forEach var="orderLine" items="${orderInfo.lines}" end="0">
+						<td>${orderLine.line_p.prod_no }</td>
+						<td>${orderLine.line_p.prod_name }</td>
+						<td>${orderLine.line_p.prod_price }</td>
+						<td>${orderLine.line_quantity}</td>
+						<td>${orderLine.line_p.prod_price * orderLine.line_quantity}</td>
+					</c:forEach>
 				</tr>
+				<c:forEach var="orderLine2" items="${orderInfo.lines}" begin="1">
+					<tr>
+						<td>${orderLine2.line_p.prod_no }</td>
+						<td>${orderLine2.line_p.prod_name }</td>
+						<td>${orderLine2.line_p.prod_price }</td>
+						<td>${orderLine2.line_quantity}</td>
+						<td>${orderLine2.line_p.prod_price * orderLine2.line_quantity}</td>
+					</tr>
+				</c:forEach>
 			</c:forEach>
-		</c:forEach>
-	</table>
-
+		</table>
+	</article>
 </body>
 </html>
