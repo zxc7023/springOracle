@@ -41,37 +41,37 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<section>
-		<form id=cartform>
+		<div class="page-selection">
+			<ol>
+				<li><a href="${pageContext.request.contextPath}">홈</a></li>
+				<li><a href="${pageContext.request.contextPath}/product/productlist">상품목록</a></li>
+				<li><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly" style="width:50px"></li>
+			</ol>
+		</div>
+		
+	<div class="product-detail">
+	<p class="product-img">🐈</p>
+	
+	<form id=cartform>
 			<table>
-				<thead>
-					<tr>
-						<th colspan="2">상품상세정보</th>
-						<td></td>
-					</tr>
-				</thead>
 				<tbody>
-					<tr>
-						<td>상품번호</td>
-						<td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly"></td>
+					<tr><td id="no"><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td>상품명</td>
 						<td id="name"><input type="text" name="prod_name" value="${p.prod_name}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td>상품가격</td>
-						<td id="price"><input type="text" name="prod_price" value="${p.prod_price}" readonly="readonly"></td>
+						<td id="price"><input type="text" name="prod_price" value="${p.prod_price}" readonly="readonly"><span>원 </span> </td>
 					</tr>
 					<tr>
-						<td>수량</td>
-						<td><input type=number style="width: 100px" min="1" value="1" name="quantity"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="button" value="장바구니담기" id="btCart"></td>
+						<td class="quantity-title">수량선택 </td>
+						<td class="quantity-input"><input type=number style="width: 100px" min="1" value="1" name="quantity"></td>
 					</tr>
 				</tbody>
 			</table>
+		<input type="button" value="장바구니담기" id="btCart">
 		</form>
+	</div>
 	</section>
 </body>
 </html>
