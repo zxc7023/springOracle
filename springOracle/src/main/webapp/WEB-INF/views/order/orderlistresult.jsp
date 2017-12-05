@@ -12,25 +12,9 @@
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/orderlist.css" type="text/css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-.type05 {
-	width: 800px;
-	text-align: center;
-	margin: 50px auto;
-}
-
-.title {
-	font-size: 17px;
-	font-weight: bold;
-	color: #fff;
-	background: #4285f4;
-}
-
-.content {
-	font-size: 15px;
-}
+<title>Insert title here</title>s
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -60,15 +44,17 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 
-	<article>
+	<article class=orderlist_wrap>
 
 		<div class="term-select" align="center">
-			<input type="submit" name="info_date" value="오늘" id="1day" class="button" />
-			<input type="submit" name="info_date" value="1주일" id="1week" class="button" />
-			<input type="submit" name="info_date" value="1개월" id="1month" class="button" />
-			<input type="submit" name="info_date" value="3개월" id="3month" class="button-on" />
-			<input type="submit" name="info_date" value="6개월" id="6month" class="button" />
-			<input type="submit" name="info_date" value="이전" id="previous" class="button" />
+			<ul>
+			<li><input type="submit" name="info_date" value="오늘" id="1day" class="button" /></li>
+			<li><input type="submit" name="info_date" value="1주일" id="1week" class="button" /></li>
+			<li><input type="submit" name="info_date" value="1개월" id="1month" class="button" /></li>
+			<li><input type="submit" name="info_date" value="3개월" id="3month" class="button-on" /></li>
+			<li><input type="submit" name="info_date" value="6개월" id="6month" class="button" /></li>
+			<li><input type="submit" name="info_date" value="이전" id="previous" class="button" /></li>
+			</ul>
 		</div>
 
 		<table class="type05">
