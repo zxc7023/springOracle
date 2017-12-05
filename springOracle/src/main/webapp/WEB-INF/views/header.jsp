@@ -46,6 +46,6 @@
 		<li><a href="${pageContext.request.contextPath}/product/productlist">상품목록</a></li>
 		<li><a href="${pageContext.request.contextPath}/cart/cartlist">장바구니</a></li>
 		<li><a href="${pageContext.request.contextPath}/order/orderlist">주문목록보기</a></li>
-		<li><a href="repboardlist.do">게시판</a></li>
+		<li><a href="${pageContext.request.contextPath}/repboard/repboardlist">게시판</a></li>
 	</ul>
 </nav>

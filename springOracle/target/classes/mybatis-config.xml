@@ -8,6 +8,7 @@
 		<typeAlias alias="Product" type="com.my.vo.Product" />
 		<typeAlias alias="OrderInfo" type="com.my.vo.OrderInfo" />
 		<typeAlias alias="OrderLine" type="com.my.vo.OrderLine" />
+		<typeAlias alias="RepBoard" type="com.my.vo.RepBoard" />
 	</typeAliases>
 
 
