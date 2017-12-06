@@ -27,7 +27,7 @@ public class OrderController {
 	@Autowired
 	private OrderDAOOracle dao=null;
 	
-	@RequestMapping("/addorder")
+	@RequestMapping(value = "/addorder")
 	public String addOrder(HttpSession session) {
 		
 		Customer c = (Customer) session.getAttribute("loginInfo");

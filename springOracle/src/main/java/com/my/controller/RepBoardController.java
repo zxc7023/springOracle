@@ -29,7 +29,7 @@ public class RepBoardController {
 	public String boardList(@RequestParam(required = false, defaultValue = "") String searchItem,
 			@RequestParam(required = false, defaultValue = "") String searchValue, Model model,
 			SearchCriteria cri,String page) {
-		System.out.println(cri.getPage() + cri.toString());
+		System.out.println("/repboardlist"+"\t"+cri.getPage() + cri.toString());
 		List<RepBoard> list = new ArrayList<>();
 		try {
 			list = dao.selectList(cri);
@@ -50,12 +50,13 @@ public class RepBoardController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert() {
+		System.out.println("/insert"+ "/get");
 		return "repboard/repboard_insert";
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@ModelAttribute RepBoard repboard, Model model) {
-		System.out.println(repboard);
+		System.out.println("/insert"+ "/post");
 		String msg = "-1";
 		try {
 			dao.insert(repboard);

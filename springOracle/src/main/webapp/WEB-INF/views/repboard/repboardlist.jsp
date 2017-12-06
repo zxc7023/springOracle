@@ -1,12 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@page import="com.my.vo.RepBoard"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="boardList" value="${requestScope.boardList}"></c:set>
 <c:set var="item" value="${param.searchItem}" />
 <c:set var="cri" value="${requestScope.cri}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,38 +22,7 @@ a:hover {
 	text-decoration: underline;
 	color: #333
 }
-</style>
-<meta http-equiv="Content-Type" content="text/html;   charset=UTF-8">
-<title>게시판</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-	$(function() {
-		$("ul.pagination li a").click(function() {
-			var $data = "page=" + $(this).attr("href");
-			$.ajax({
-				url : '${pageContext.request.contextPath}/repboard/repboardlist',
-				method : 'get',
-				data : $data,
-				success : function(responseData) {
-					var $parentObj = $("body");
-					/* 					var $parentObj = $("article");
-					 if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
-					 $parentObj = $("body");
-					 } */
-					//$parentObj.remove(); //객체 자체를 지워버리기 
-					$parentObj.empty(); //객체는 있지만 기존내용 clear하고
-					$parentObj.html(responseData.trim()); //검색결과 출력
-				},
-				error : function(xhr, status, error) {
-					console.log(xhr.status);
-				}
-			});
-			return false;
-		});
-	});
-</script>
-<style type="text/css">
 ul.pagination {
 	width: 500px;
 	margin: 0 auto;
@@ -68,6 +38,37 @@ li.active a {
 	color: blue;
 }
 </style>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>게시판</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(function() {
+
+		$("ul.pagination li a").click(function() {
+			var $data = "page=" + $(this).attr("href");
+			$.ajax({
+				url : '${pageContext.request.contextPath}/repboard/repboardlist',
+				method : 'get',
+				data : $data,
+				success : function(responseData) {
+					var $parentObj = $("section");
+					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
+						$parentObj = $("body");
+					}
+					$parentObj.empty();
+					var tmp = $parentObj.html(responseData).find("article")
+					$parentObj.html(tmp);
+
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr.status);
+				}
+			});
+			return false;
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -128,6 +129,5 @@ li.active a {
 
 		</article>
 	</section>
-
 </body>
 </html>

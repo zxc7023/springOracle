@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="item" value="${param.searchItem}" />
+<c:set var="item" value="${param.searchType}" />
 <c:if test="${item == null}">
    ${item=subject}
 </c:if>
@@ -10,15 +10,15 @@
 <script>
 	$(function() {
 
-		$("input[name=searchValue]").val('${param.searchValue}');
+		$("input[name=keyword]").val('${param.keyword}');
 		$("option[value='${item}']").attr("selected", "true");
 
 		$("div.searchDiv").find("input[type=button]").click(function() {
 			$.ajax({
-				url : "insert",
+				url : "${pageContext.request.contextPath}/repboard/insert",
 				success : function(responseData) {
 					//console.log(responseData);
-					var $parentObj = $("article");
+					var $parentObj = $("section");
 					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
 						$parentObj = $("body");
 					}
@@ -33,7 +33,7 @@
 		$("form").submit(function() {
 			console.log($("form").serialize());
 			$.ajax({
-				url : "repboardlist",
+				url : "${pageContext.request.contextPath}/repboard/repboardlist",
 				method : "get",
 				data : $("form").serialize(),
 				success : function(responseData) {
@@ -41,7 +41,7 @@
 					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
 						$parentObj = $("body");
 					} */
-					var $parentObj = $("body");
+					var $parentObj = $("section");
 					$parentObj.empty();
 					$parentObj.html(responseData.trim());
 				}
