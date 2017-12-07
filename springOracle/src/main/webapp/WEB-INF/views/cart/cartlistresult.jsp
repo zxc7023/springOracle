@@ -22,14 +22,10 @@
 <script>
 	$(function() {
 		$("input[type=submit]").click(function() {
+			alert("클릭되었습니다.");
 			$.ajax({
 				url : '${pageContext.request.contextPath}/order/addorder',
-				method : 'post',
 				success : function(responseData) {
-					<c:if test="${sessionScope.loginInfo==null}">
-					alert("로그인 페이지로 이동합니다.");
-					</c:if>
-					alert(responseData);
 					var $parentObj = $("body");
 					var data = responseData.trim();
 					$parentObj.empty(); //객체는 남기고 내용을 지우기

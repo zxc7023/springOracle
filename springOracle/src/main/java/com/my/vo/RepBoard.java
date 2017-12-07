@@ -2,21 +2,13 @@ package com.my.vo;
 
 import java.util.Date;
 
-/**
- * @author Junki
- *
- */
-/**
- * @author Junki
- *
- */
+
 public class RepBoard {
 	private int no;
 	private int parent_no;
 	private String subject;
 	private String content;
 	private String password;
-	private int level;
 	private Date registerDate;
 	private int viewCount;
 
@@ -24,14 +16,13 @@ public class RepBoard {
 
 	}
 
-	public RepBoard(int no, int parent_no, String subject, String content, String password, int level,
-			Date registerDate, int viewCount) {
+	public RepBoard(int no, int parent_no, String subject, String content, String password, Date registerDate,
+			int viewCount) {
 		this.no = no;
 		this.parent_no = parent_no;
 		this.subject = subject;
 		this.content = content;
 		this.password = password;
-		this.level = level;
 		this.registerDate = registerDate;
 		this.viewCount = viewCount;
 	}
@@ -92,19 +83,12 @@ public class RepBoard {
 		this.password = password;
 	}
 
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
 	@Override
 	public String toString() {
 		return "RepBoard [no=" + no + ", parent_no=" + parent_no + ", subject=" + subject + ", content=" + content
-				+ ", password=" + password + ", level=" + level + ", registerDate=" + registerDate + ", viewCount="
-				+ viewCount + "]";
+				+ ", password=" + password + ", registerDate=" + registerDate + ", viewCount=" + viewCount + "]";
 	}
+
+
 
 }

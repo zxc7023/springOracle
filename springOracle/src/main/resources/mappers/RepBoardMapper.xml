@@ -4,74 +4,38 @@
 <mapper namespace="RepBoardMapper">
 
 	<select id="selectList" resultType="RepBoard">
-		select * from (	select * 
-						from (
-							select rownum rnum,level,repboard.*
-							from repboard
-							start with parent_no = 0
-							connect by prior no = parent_no
-							order siblings by no desc
-						) replist
-						where rnum &lt;= (#{pageStart} + #{perPageNum})
+		select * from ( select *
+		from (
+		select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD(' ',level*3,' '), CONCAT('└ ',SUBJECT))) SUBJECT
+		, content, password, registerdate, viewcount
+		from repboard
+		<include refid="repboard_search"></include>
+		start with parent_no = 0
+		connect by prior no = parent_no
+		order siblings by no desc
+		) replist
+		where rnum &lt;= (#{pageStart} + #{perPageNum})
 		)
 		where rnum &gt;= #{pageStart}
 	</select>
-	
+
 	<select id="countPaging" resultType="int">
 		select count(no) from repboard
+		<include refid="repboard_search"></include>
 	</select>
-	
+
+	<sql id="repboard_search">
+		<where>
+			<if test=" keyword != null and keyword !=''">
+				${searchType} like '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</sql>
+
 	<insert id="insert" parameterType="RepBoard">
 		insert into repboard values (repboard_seq.NEXTVAL,
 		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0)
 	</insert>
-
-
-
-	<select id="selectAll" resultType="RepBoard">
-		select * from
-		( SELECT rownum,level, a.*
-		from repboard a
-		<where>
-			level =1
-			<if test="subject != null">
-				and subject like '%' || #{subject} || '%'
-			</if>
-		</where>
-		<if test="subject != null">
-			start with parent_no=0
-		</if>
-		<if test="no != null">
-			start with no=#{no}
-		</if>
-		connect by prior no=parent_no
-		order siblings by no desc
-		)
-	</select>
-
-	<select id="selectByPage" parameterType="hashmap" resultType="RepBoard">
-		SELECT b.*,(SELECT count(*) from repboard start with parent_no=b.no connect by prior no=parent_no)
-		replyCount
-		FROM (
-		select rownum as rnum,level, a.*
-		from repboard a
-		<where>
-			level=1
-			<if test="subject != null and subject !=''">
-				and subject like '%' || #{subject} || '%'
-			</if>
-		</where>
-		<if test="subject != null and subject !=''">
-			start with parent_no=0
-		</if>
-		<if test="no != null and no !=''">
-			start with no= #{no}
-		</if>
-		connect by prior no = parent_no
-		order siblings by no desc ) b
-		WHERE rnum between #{startRow} AND
-		#{endRow}
-	</select>
 
 	<select id="selectByNo" resultType="RepBoard">
 		SELECT level, a.*

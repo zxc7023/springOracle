@@ -11,6 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/product.css" type="text/css" rel="stylesheet" />
 <title>상품목록</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -33,23 +34,23 @@
 			$parentObj.off();
 			return false;
 		});
-	/* 	$("table td>a").click(function() {
-			$.ajax({
-				url : "productdetail",
-				method : 'get',
-				data : 'prod_no=' + $(this).html().trim(),
-				success : function(responseData) {
-					console.log(responseData.trim());
-					$parentObj.empty();
-					$parentObj.html(responseData)
+		/* 	$("table td>a").click(function() {
+				$.ajax({
+					url : "productdetail",
+					method : 'get',
+					data : 'prod_no=' + $(this).html().trim(),
+					success : function(responseData) {
+						console.log(responseData.trim());
+						$parentObj.empty();
+						$parentObj.html(responseData)
 
-				},
-				error : function(xhr, status, error) {
-					console.log(xhr.status);
-				}
-			});
-			return false;
-		}); */
+					},
+					error : function(xhr, status, error) {
+						console.log(xhr.status);
+					}
+				});
+				return false;
+			}); */
 	});
 </script>
 </head>
@@ -72,7 +73,9 @@
 					<tbody>
 						<c:forEach var="p" items="${list}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_no}</a></td>
+								<td>
+									<a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_no}</a>
+								</td>
 								<td>${p.prod_name}</td>
 								<td>${p.prod_price}</td>
 							</tr>
