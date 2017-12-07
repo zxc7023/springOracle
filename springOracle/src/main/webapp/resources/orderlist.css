@@ -1,9 +1,20 @@
 @charset "UTF-8";
 
+body section{
+	background:url("background.jpg")no-repeat center top;
+	background-size:cover;
+	height:100%;
+	width:100%;
+	position:fixed;}
+	
 .orderlist_wrap{
-	border:2px solid red;
 }
 
 .term-select{
-	
+	width:90%;
+	margin:5% auto;
+}
+
+.term-select ul li{
+	float:left;
 }

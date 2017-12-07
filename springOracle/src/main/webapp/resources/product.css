@@ -130,8 +130,47 @@ right:25%;}
 .product-detail form table td.quantity-input{width:50%}
 product-detail form table td.quantity-input input{
 	width:100%;
-	padding-right:25%}
+	padding-right:25%;}
+	
+.cartlist-title{
+	font-size: 30px;
+    display: block;
+    line-height: 35px;
+    margin-top:5%;
+    text-align: center;
+    width: 100%;	
+}
 
+.cart-wrap .cart-table{
+	width:90%;
+	margin: 5% auto 0 auto;
+	font-size:20px;
+	font-height:25px;
+	text-align:center;
+	background:rgba(255,255,255,0.7);
+	border-radius:20px}
+
+.cart-table thead{
+	line-height:50px;
+	border-bottom:1px solid gray;
+}
+.cart-table tbody{
+    letter-spacing: -1px;
+    font-size: 17px;
+    line-height: 60px;
+}
+.cart-table tbody .cart-btn{
+    line-height: 60px;
+}
+.cart-btn{
+	width:70%;
+	display:block;
+	height:5%;
+	margin: 5% auto;
+	color:#fff;
+	border-radius:20px;
+    background: #343434;
+}
 
 
 @media screen and (max-width:700px){
@@ -149,7 +188,22 @@ product-detail form table td.quantity-input input{
 	margin-top:5%}
 	
 	#cartform table tbody tr{
-	height:1rem}}
+	height:1rem}
+	
+	.cart-wrap .cart-table{
+	font-size:1.5rem;
+	font-height:2rem;}
+	
+	.cart-table thead{
+	line-height:5rem;}
+	
+	.cart-table tbody{
+	font-size:1.3rem;
+    line-height: 4rem;}
+	
+	.cart-table tbody .cart-btn{
+    line-height: 6rem;
+}
 	
 }
 
