@@ -30,7 +30,6 @@
 					}
 				}
 			});
-			$parentObj.off();
 			return false;
 		});
 	});

@@ -26,17 +26,15 @@ public class RepBoardController {
 	private RepBoardDAOOracle dao = null;
 
 	@RequestMapping(value = "/repboardlist", method = RequestMethod.GET)
-	public String boardList(@RequestParam(required = false, defaultValue = "") String searchItem,
-			@RequestParam(required = false, defaultValue = "") String searchValue, Model model,
-			SearchCriteria cri,String page) {
-		System.out.println("/repboardlist"+"\t"+cri.getPage() + cri.toString());
+	public String boardList(Model model, SearchCriteria cri) {
+		System.out.println("/repboardlist" + "\t" + cri.getPage() + cri.toString());
 		List<RepBoard> list = new ArrayList<>();
 		try {
 			list = dao.selectList(cri);
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalConunt(dao.countPaging(cri));
-			model.addAttribute("pageMaker",pageMaker);
+			model.addAttribute("pageMaker", pageMaker);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,19 +42,20 @@ public class RepBoardController {
 		model.addAttribute("boardList", list);
 		// model.addAttribute("searchItem", searchItem);
 		// model.addAttribute("searchValue", searchValue);
+		System.out.println(list);
 		String forwardURL = "/repboard/repboardlist";
 		return forwardURL;
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert() {
-		System.out.println("/insert"+ "/get");
+		System.out.println("/insert" + "/get");
 		return "repboard/repboard_insert";
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@ModelAttribute RepBoard repboard, Model model) {
-		System.out.println("/insert"+ "/post");
+		System.out.println("/insert" + "/post");
 		String msg = "-1";
 		try {
 			dao.insert(repboard);
@@ -69,8 +68,9 @@ public class RepBoardController {
 		return forwardURL;
 	}
 
-	@RequestMapping("/repboarddetail.do")
+	@RequestMapping("/repboarddetail")
 	public String repboardDetail(String no, Model model) {
+		System.out.println("/repboarddetail" + no);
 		List<RepBoard> list = new ArrayList<>();
 		String searchNo = no;
 		int sNo = Integer.parseInt(searchNo);
@@ -82,7 +82,7 @@ public class RepBoardController {
 		}
 
 		model.addAttribute("boardList", list);
-		String forwardURL = "/repboard_detail.jsp";
+		String forwardURL = "repboard/repboard_detail";
 		return forwardURL;
 	}
 

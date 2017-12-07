@@ -20,13 +20,12 @@
 							method : "get",
 							success : function(responseData) {
 								var $parentObj = $("section");
-								/* 								var $parentObj = $("article");
-								 if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
-								 $parentObj = $("body");
-								 } */
-								//$parentObj.remove(); //객체 자체를 지워버리기
-								$parentObj.empty(); //객체는 있지만 기존내용 clear하고
-								$parentObj.html(responseData.trim()); //검색결과 출력
+								if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
+									$parentObj = $("body");
+								}
+								$parentObj.empty();
+								var tmp = $parentObj.html(responseData).find("article")
+								$parentObj.html(tmp);
 							}
 						});
 					} else if (data == '-1') {
@@ -44,13 +43,13 @@
 				url : "${pageContext.request.contextPath}/repboard/repboardlist",
 				method : "get",
 				success : function(responseData) {
-					/* var $parentObj = $("article");
+					var $parentObj = $("section");
 					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
 						$parentObj = $("body");
-					} */
-					var $parentObj = $("section");
-					$parentObj.empty(); //객체는 있지만 기존내용 clear하고
-					$parentObj.html(responseData.trim()); //검색결과 출력
+					}
+					$parentObj.empty();
+					var tmp = $parentObj.html(responseData).find("article")
+					$parentObj.html(tmp);
 				}
 			});
 			return false;

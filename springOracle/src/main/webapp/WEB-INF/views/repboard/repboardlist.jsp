@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@page import="com.my.vo.RepBoard"%>
-<%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="boardList" value="${requestScope.boardList}"></c:set>
-<c:set var="item" value="${param.searchItem}" />
-<c:set var="cri" value="${requestScope.cri}"></c:set>
+<c:set var="pageMaker" value="${requestScope.pageMaker}"></c:set>
 
 <!DOCTYPE html>
 <html>
@@ -44,13 +42,13 @@ li.active a {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
-
+		
 		$("ul.pagination li a").click(function() {
 			var $data = "page=" + $(this).attr("href");
 			$.ajax({
 				url : '${pageContext.request.contextPath}/repboard/repboardlist',
 				method : 'get',
-				data : $data,
+				data : $(this).attr("href"),
 				success : function(responseData) {
 					var $parentObj = $("section");
 					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
@@ -67,6 +65,29 @@ li.active a {
 			});
 			return false;
 		});
+		$("tbody a").click(function() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/repboard/repboarddetail',
+				method : 'get',
+				data : $(this).attr("href"),
+				success : function(responseData) {
+					var $parentObj = $("section");
+					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
+						$parentObj = $("body");
+					}
+					$parentObj.empty();
+					var tmp = $parentObj.html(responseData).find("article")
+					$parentObj.html(tmp);
+					/* 					document.location.hash = "#" + ${pageMaker.cri.page} */
+
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr.status);
+				}
+			});
+			return false;
+		});
+
 	});
 </script>
 </head>
@@ -82,14 +103,12 @@ li.active a {
 
 			<table style="margin: auto; border-collapse: collapse; border: 1px solid; width: 1000px">
 				<colgroup>
-					<col width="10%" />
-					<col width="30%" />
 					<col width="40%" />
-					<col width="10%" />
+					<col width="40%" />
+					<col width="20%" />
 				</colgroup>
 				<thead>
 					<tr>
-						<th>글번호</th>
 						<td>제목</td>
 						<td>등록일</td>
 						<td>조회수</td>
@@ -99,8 +118,10 @@ li.active a {
 				<tbody>
 					<c:forEach var="repBoard" items="${boardList}" varStatus="status">
 						<tr>
-							<td>${repBoard.no}</td>
-							<td>${repBoard.subject}</td>
+							<td>
+								<a href="no=${repBoard.no}"><input type="text" value="${repBoard.subject}"
+										readonly="readonly" /></a>
+							</td>
 							<td>
 								<fmt:formatDate value="${repBoard.registerDate}" type="date" pattern="yyyy-MM-dd kk:mm:ss" />
 							</td>
@@ -113,20 +134,19 @@ li.active a {
 			<ul class="pagination">
 
 				<c:if test="${pageMaker.prev}">
-					<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+					<li><a
+						href="page=${pageMaker.startPage - 1}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">&laquo;</a></li>
 				</c:if>
-
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a href="${idx}">${idx}</a>
+					<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a
+						href="page=${idx}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${idx}</a>
 					</li>
 				</c:forEach>
-
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
+					<li><a
+						href="page=${pageMaker.endPage +1}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">&raquo;</a></li>
 				</c:if>
-
 			</ul>
-
 		</article>
 	</section>
 </body>
