@@ -84,8 +84,8 @@
 								<td>
 									<a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_no}</a>
 								</td>
-								<td>${p.prod_name}</td>
-								<td>${p.prod_price}</td>
+								<td><a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_name}</a></td>
+								<td><a href="${pageContext.request.contextPath}/product/productdetail?prod_no=${p.prod_no}">${p.prod_price}</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

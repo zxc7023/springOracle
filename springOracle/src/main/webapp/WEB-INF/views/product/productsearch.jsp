@@ -47,7 +47,7 @@
 <div class="product-search-wrap">
 	<form>
 		<select name="searchItem">
-		<option selected>검색 선택</option>
+		<option selected>선택</option>
 			<option value="no">번호로검색</option>
 			<option value="name">이름으로검색</option>
 		</select>

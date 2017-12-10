@@ -17,53 +17,8 @@
 <meta name="twitter:title" content="">
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css"
 	rel="stylesheet" />
-<style type="text/css">
-table {
-	width: 300px;
-	height: 230px;
-	margin: 50px auto;
-	position: relative;
-}
-
-thead tr th {
-	height: 40px;
-}
-
-tbody tr .title {
-	width: 70px;
-	text-align: center;
-	height: 45px;
-}
-
-input[name="pwd"], input[name="name"], input[name="id"] {
-	width: 180px;
-	border: none;
-	border-bottom: 1px solid #D6D5D1;
-}
-
-tbody input[type="submit"] {
-	border: none;
-	background: #4285f4;
-	width: 110px;
-	height: 30px;
-	border-radius: 5px;
-	color: #fff;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-input[name="modify"] {
-	position: absolute;
-	bottom: 10px;
-	left: 30px;
-}
-
-input[name="delete"] {
-	position: absolute;
-	bottom: 10px;
-	right: 30px;
-}
-</style>
+<link href="<%=request.getContextPath()%>/resources/login_form.css" type="text/css"
+	rel="stylesheet" />
 <title>고객정보수정</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -120,7 +75,7 @@ input[name="delete"] {
 	</header>
 	<article>
 		<form action="post">
-			<table>
+			<table class="customerdetail-wrap">
 				<thead>
 					<tr>
 						<th colspan="2">고객상세정보</th>
@@ -128,15 +83,15 @@ input[name="delete"] {
 				</thead>
 				<tbody>
 					<tr>
-						<td class="title">ID</td>
+						<td>ID</td>
 						<td><input type="text" name="id" value="${c.id}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td class="title">비밀번호</td>
+						<td>비밀번호</td>
 						<td><input type="password" name="password" value="${c.password}" required /></td>
 					</tr>
 					<tr>
-						<td class="title">이름</td>
+						<td>이름</td>
 						<td><input type="text" name="name" value="${c.name}" required /></td>
 					</tr>
 					<tr>

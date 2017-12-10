@@ -1,6 +1,7 @@
 @charset "UTF-8";
+/* 상품목록  */
 .product-search-wrap form{
-	border-collapse: collapse;
+	border-collapse: collapse;/* 테이블 세로선 없애기  */
 	padding:1% 0;
 	width:50%;
 	margin:4% auto;
@@ -10,16 +11,15 @@
 
 .product-search-wrap form select{
 	padding-right:0;
-	width:25%;
+	width:30%;
 	text-align:center;
 	text-align-last:center;}
 	
 .product-search-wrap form select option{
 	display:inline-block;
 	text-align:left;}
-
 .product-search-wrap [name=searchValue]{
-	width:60%;}
+	width:50%;}
 
 .product-search-wrap [value="검색"]{
 	margin-left:2%;
@@ -30,8 +30,10 @@ body section{
 	background-size:cover;
 	height:100%;
 	width:100%;
-	position:fixed;}
+	position:fixed;
+	overflow:scroll;/* y축에 해당하는 스크롤이 생겼을때 스크롤 on */}
 	
+	/*  상품 상세페이*/
 .tb_product_wrap{
 	padding-bottom:7%;}
 	
@@ -54,6 +56,45 @@ body section{
 	font-size:1.5rem;
 	line-height:4rem;}
 	
+.product-detail{
+    width: 40%;
+    height: 30%;
+    margin: 4% auto 8% auto;
+    overflow: hidden;}
+	
+.product-img{
+	width:40%;
+	height:30%;
+	float:left;
+	font-size: 150px;
+    text-align: center;
+    margin: 4% auto 8% 10%;}
+	
+.product-detail form{
+	float: left;
+    width: 80%;
+    height: 82%;}
+	
+.product-detail form table{
+	height:100%;}
+	
+.product-detail form table td{
+	width:100%;
+	float:left;
+	line-height:80px}
+	
+.product-detail form table td input{
+	text-align:center;}
+#btCart{
+    background: #343434;
+    border-radius: 20px;
+	color:#fff;
+	font-weight:bold;
+	width:80%;
+	margin-left:10%;
+	margin-top:15px;
+	padding:20px 0}
+/*  장바구니  페이지 */
 .page-selection{
 	width:80%;
 	margin:0 auto;
@@ -81,48 +122,12 @@ body section{
 	
 .page-selection ol li:last-child a::after{content:"";}
 	
-.page-selection ol li:nth-child(1){width:40px}
-.page-selection ol li:nth-child(2){width:80px}
-.page-selection ol li:nth-child(3){width:80px}
-
-.product-detail{
-	width:80%;
-	height:400px;
-	margin:4% auto 0 auto;
-	overflow:hidden;}
+.page-selection ol li:nth-child(1){width:40px}/* 첫번째 li의 너비값을 지정   */
+.page-selection ol li:nth-child(2){width:80px}/* 두번째 li의 너비값을 지정   */
+.page-selection ol li:nth-child(3){width:80px}/* 세번째 li의 너비값을 지정   */
 	
-.product-detail .product-img{
-	width:60%;
-	height:100%;
-	background:#fff;
-	float:left;}
-	
-.product-detail form{
-	float:right;
-	width:40%;
-	height:100%;}
-	
-.product-detail form table{
-	height:80%;}
-.product-detail form table td{
-	width:100%;
-	float:left;
-	line-height:80px}
-	
-.product-detail form table td input{
-	text-align:center;}
-#btCart{
-    background: #343434;
-    border-radius: 20px;
-	color:#fff;
-	font-weight:bold;
-	width:80%;
-	margin-left:10%;
-	margin-top:15px;
-	padding:20px 0}
-	
-#price{position:relative}
-#price span{position:absolute;
+#price{position:relative}/* 위치상 부모  */
+#price span{position:absolute;/* 부모의 자식으로 위치값 설정  */
 top:0;
 bottom:0;
 right:25%;}
@@ -155,7 +160,7 @@ product-detail form table td.quantity-input input{
 	border-bottom:1px solid gray;
 }
 .cart-table tbody{
-    letter-spacing: -1px;
+    letter-spacing: -1px;/* 자간 설정  */
     font-size: 17px;
     line-height: 60px;
 }
@@ -172,21 +177,38 @@ product-detail form table td.quantity-input input{
     background: #343434;
 }
 
+/*주문목록 페이지   */
 
-@media screen and (max-width:700px){
+
+@media screen and (max-width:700px){/*모바일 기기 사이즈가 700px이하 일떄 사이즈가 달라진다.  */
 	.product-search-wrap form{
-	width:70%;
+	width:80%;
 	padding:1.5% 0;}
 	
-	.product-detail{height:100%;}
-	.product-detail .product-img{
-	height:30%;
+	.product-detail{   
+	 width: 80%;
+    height: 80%;
+    margin: 4% auto 8% auto;
+    overflow: hidden;}
+    
+    #cartform table{
 	width:100%;}
-	.product-detail form,
-	#cartform table{width:100%}
-	#cartform table{
-	margin-top:5%}
 	
+	.product-detail{
+	width:80%}
+    
+	.product-img{
+	width:100%;
+	height:20%;
+    font-size: 10rem;
+    text-align: center;
+    margin:0;}
+    
+	.product-detail form{
+	float: right;
+    width: 100%;
+    height: 70%;}
+    
 	#cartform table tbody tr{
 	height:1rem}
 	

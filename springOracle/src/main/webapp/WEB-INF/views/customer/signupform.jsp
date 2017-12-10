@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>가입 페이지</title>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Referrer" content="origin">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
