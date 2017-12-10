@@ -12,26 +12,16 @@
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/orderlist.css" type="text/css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Referrer" content="origin">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
 <title>Insert title here</title>
-<style type="text/css">
-.type05 {
-	width: 800px;
-	text-align: center;
-	margin: 50px auto;
-}
-
-.title {
-	font-size: 17px;
-	font-weight: bold;
-	color: #fff;
-	background: #4285f4;
-}
-
-.content {
-	font-size: 15px;
-}
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
@@ -59,16 +49,18 @@
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
+<section>
+	<article class=orderlist_wrap>
 
-	<article>
-
-		<div class="term-select" align="center">
-			<input type="submit" name="info_date" value="오늘" id="1day" class="button" />
-			<input type="submit" name="info_date" value="1주일" id="1week" class="button" />
-			<input type="submit" name="info_date" value="1개월" id="1month" class="button" />
-			<input type="submit" name="info_date" value="3개월" id="3month" class="button-on" />
-			<input type="submit" name="info_date" value="6개월" id="6month" class="button" />
-			<input type="submit" name="info_date" value="이전" id="previous" class="button" />
+		<div class="term-select">
+			<ul>
+				<li><input type="submit" name="info_date" value="오늘" id="1day" class="button" /></li>
+				<li><input type="submit" name="info_date" value="1주일" id="1week" class="button" /></li>
+				<li><input type="submit" name="info_date" value="1개월" id="1month" class="button" /></li>
+				<li><input type="submit" name="info_date" value="3개월" id="3month" class="button-on" /></li>
+				<li><input type="submit" name="info_date" value="6개월" id="6month" class="button" /></li>
+				<li><input type="submit" name="info_date" value="이전" id="previous" class="button" /></li>
+			</ul>
 		</div>
 
 		<table class="type05">
@@ -120,5 +112,7 @@
 
 		</table>
 	</article>
+	</section>
+	
 </body>
 </html>
