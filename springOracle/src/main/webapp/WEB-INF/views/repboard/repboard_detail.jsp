@@ -1,8 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.my.vo.RepBoard"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="boardList" value="${requestScope.boardList}"></c:set>
+
 <!DOCTYPE html>
 <head>
+<link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
 <style>
 .board {
 	width: 500px;
@@ -33,17 +38,7 @@ tr {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<%
-	List<RepBoard> list = (List) request.getAttribute("boardList");
-%>
 <script>
-
-	$(window).bind("pageshow", function(event) {
-		if (event.originalEvent.persisted) {
-			document.location.reload();
-		}
-	});
-
 	$(function() {
 		var $parentObj = $("article");
 		if ($parentObj.length == 0) {
@@ -84,47 +79,39 @@ tr {
 </script>
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
+
 	<section>
 		<article>
 			<table style="border-collapse: collapse; border: 1px solid;" class="board">
-				<%
-					for (RepBoard rb : list) {
-				%>
-				<thead>
-					<tr>
-						<th class="num">번호</th>
-						<th class="title" colspan=2>제목</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="tr_line">
-						<td class="tdData">
-							<span><%=rb.getNo()%></span>
-						</td>
-						<td colspan=2><%=rb.getSubject()%></td>
-					</tr>
-
-					<tr>
-						<td colspan=3 class="content">
-							<%=rb.getContent()%>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=3>
-							<input type='submit' name='reply' value='답글달기' />
-							<input type='submit' name='modify' value='수정' />
-							<%
-								if (list.size() < 2) {
-							%><input type='submit' name='delete' value='삭제' />
-							<%
-								}
-							%>
-						</td>
-					</tr>
-					<%
-						}
-					%>
-				</tbody>
+				<c:forEach var="parentBoard" items="${boardList}" end="0">
+					<thead>
+						<tr>
+							<th class="title" colspan="2">${parentBoard.subject}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tr_line">
+							<td>
+								<fmt:formatDate value="${parentBoard.registerDate}" type="date"
+									pattern="yyyy-MM-dd kk:mm:ss" />
+							</td>
+							<td>${parentBoard.viewCount}</td>
+						</tr>
+						<tr>
+							<td colspan="2">${parentBoard.content}</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type='submit' name='reply' value='답글달기' />
+								<input type='submit' name='modify' value='수정' />
+								<input type='submit' name='delete' value='삭제' />
+							</td>
+						</tr>
+					</tbody>
+				</c:forEach>
 			</table>
 		</article>
 	</section>

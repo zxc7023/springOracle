@@ -5,6 +5,10 @@
 
 <c:set var="boardList" value="${requestScope.boardList}"></c:set>
 <c:set var="pageMaker" value="${requestScope.pageMaker}"></c:set>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -65,7 +69,7 @@ li.active a {
 			});
 			return false;
 		});
-		$("tbody a").click(function() {
+/* 		$("tbody a").click(function() {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/repboard/repboarddetail',
 				method : 'get',
@@ -78,7 +82,6 @@ li.active a {
 					$parentObj.empty();
 					var tmp = $parentObj.html(responseData).find("article")
 					$parentObj.html(tmp);
-					/* 					document.location.hash = "#" + ${pageMaker.cri.page} */
 
 				},
 				error : function(xhr, status, error) {
@@ -86,7 +89,7 @@ li.active a {
 				}
 			});
 			return false;
-		});
+		}); */
 
 	});
 </script>
@@ -110,7 +113,7 @@ li.active a {
 				<thead>
 					<tr>
 						<td>제목</td>
-						<td>등록일</td>
+						<td>작성일</td>
 						<td>조회수</td>
 					</tr>
 				</thead>
@@ -119,12 +122,14 @@ li.active a {
 					<c:forEach var="repBoard" items="${boardList}" varStatus="status">
 						<tr>
 							<td>
-								<a href="no=${repBoard.no}"><input type="text" value="${repBoard.subject}"
+								<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${repBoard.no}"><input type="text" value="${repBoard.subject}"
 										readonly="readonly" /></a>
 							</td>
 							<td>
-								<fmt:formatDate value="${repBoard.registerDate}" type="date" pattern="yyyy-MM-dd kk:mm:ss" />
+								<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="HH:mm" />
+								<c:if test=""></c:if>
 							</td>
+							<td>${toDay}</td>
 							<td>${repBoard.viewCount}</td>
 						</tr>
 					</c:forEach>

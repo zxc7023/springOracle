@@ -3,18 +3,19 @@
 
 <mapper namespace="RepBoardMapper">
 
+	<!-- 계층형 쿼리 repboard테이블의 전체자료를 검색하는 쿼리, 검색어가 있다면 동적SQL where문을 통하여 검색   -->
 	<select id="selectList" resultType="RepBoard">
-		select * from ( select *
-		from (
-		select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD(' ',level*3,' '), CONCAT('└ ',SUBJECT))) SUBJECT
-		, content, password, registerdate, viewcount
-		from repboard
-		<include refid="repboard_search"></include>
-		start with parent_no = 0
-		connect by prior no = parent_no
-		order siblings by no desc
-		) replist
-		where rnum &lt;= (#{pageStart} + #{perPageNum})
+		select * from ( 
+			select * from ( 
+				select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD('',level*3,' '), CONCAT('└ ',SUBJECT))) SUBJECT, 
+				content, password, registerdate, viewcount
+				from repboard
+				<include refid="repboard_search"></include>
+				start with parent_no = 0
+				connect by prior no = parent_no
+				order siblings by no desc
+				) replist
+			where rnum &lt;= (#{pageStart} + #{perPageNum})
 		)
 		where rnum &gt;= #{pageStart}
 	</select>
