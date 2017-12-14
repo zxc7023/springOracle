@@ -1,20 +1,35 @@
 @charset "UTF-8";
 
+/* 주문목록 페이지  */
+
 body section{
 	background:url("background.jpg")no-repeat center top;
-	background-size:cover;
+	background-size:cover;/*  배경을 포함한 인터넷 창의 해당하는 크기를 포함한*/
 	height:100%;
 	width:100%;
-	position:fixed;}
+	position:fixed;/*  위치를 고정한다 */}
 	
 .orderlist_wrap{
 }
 
 .term-select{
 	width:90%;
+    overflow: hidden;/* 하위의 것들을 포함 및 */
 	margin:5% auto;
 }
 
 .term-select ul li{
 	float:left;
+	margin-right:7%;
+}
+.term-select ul li:last-child{
+	margin:0;
+}
+
+.type05{
+	width:90%;
+	margin: 0 auto;
+}
+.type05{
+	
 }
