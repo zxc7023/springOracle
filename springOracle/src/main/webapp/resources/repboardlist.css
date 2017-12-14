@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+table.repboardlist{
+	margin : auto;
+	border-collapse : collapse;
+	border : 1px solid;
+	width :1000px;
+}
+
+ul.pagenavigation {
+	width: 500px;
+	margin: 0 auto;
+}
+
+ul.pagenavigation li {
+	float: left;
+	margin-right: 3px;
+}
+
+li.active a {
+	text-decoration: underline;
+	color: blue;
+}
+
+ul.pagenavigation li a:hover {
+	text-decoration: underline;
+	color: #333
+}
+

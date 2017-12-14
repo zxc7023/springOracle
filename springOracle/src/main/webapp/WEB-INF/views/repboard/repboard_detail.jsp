@@ -1,73 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.my.vo.RepBoard"%>
-<%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="boardList" value="${requestScope.boardList}"></c:set>
+<c:set var="prevNextList" value="${requestScope.prevNextList}"></c:set>
 
 <!DOCTYPE html>
 <head>
 <link href="<%=request.getContextPath()%>/resources/reset.css" type="text/css" rel="stylesheet" />
-<style>
-.board {
-	width: 500px;
-	margin: 10px auto;
-	text-align: center;
-	border-collapse: collapse;
-	height: auto;
-}
-
-thead, .tr_line {
-	border-bottom: 1px solid #c3c3c3
-}
-
-tr {
-	height: 30px;
-}
-
-.num {
-	width: 20%;
-}
-
-.title {
-	width: 80%;
-}
-
-.content {
-	height: 100px;
-}
-</style>
+<link href="<%=request.getContextPath()%>/resources/repboarddetail.css" type="text/css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		var $parentObj = $("article");
+		var $parentObj = $("section");
 		if ($parentObj.length == 0) {
 			$parentObj = $("body");
 		}
 		$("input[type=submit]").click(function() {
-			//var $boardno = $(this).parent().siblings(".tdData").text();
-			var $boardno = $(this).parents("tbody").find("span").text()
-			var $responseName = $(this).attr('name');
-			console.log($boardno);
-			alert($responseName);
-			var url = 'isauthorization.do';
-			if ($responseName == 'reply') {
-				url = 'insert.jsp';
-			}
-			console.log($boardno);
+			var $parent_no = $("th.no").text();
 			$.ajax({
-				url : url,
-				method : 'post',
-				data : 'check=' + $responseName + '&boardno=' + $boardno,
+				url : "${pageContext.request.contextPath}/repboard/insert",
+				method : 'get',
+				data : "parent_no=" + $parent_no,
 				success : function(responseData) {
 					//console.log(responseData);
-					var $parentObj = $("article");
-					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
-						$parentObj = $("body");
-					}
-					//$parentObj.remove(); //객체 자체를 지워버리기
 					$parentObj.empty(); //객체는 있지만 기존내용 clear하고
-					$parentObj.html(responseData.trim()); //검색결과 출력
+					var tmp = $parentObj.html(responseData).find("article")
+					$parentObj.html(tmp);
 				},
 				error : function(xhr, status, error) {
 					console.log(xhr.status);
@@ -85,22 +44,22 @@ tr {
 
 	<section>
 		<article>
-			<table style="border-collapse: collapse; border: 1px solid;" class="board">
+			<table class="board">
 				<c:forEach var="parentBoard" items="${boardList}" end="0">
 					<thead>
 						<tr>
-							<th class="title" colspan="2">${parentBoard.subject}</th>
+							<th class="no" style="display: none;">${parentBoard.no}</th>
+							<td class="title" colspan="2">${parentBoard.subject}</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="tr_line">
 							<td>
-								<fmt:formatDate value="${parentBoard.registerDate}" type="date"
-									pattern="yyyy-MM-dd kk:mm:ss" />
+								<fmt:formatDate value="${parentBoard.registerDate}" type="date" pattern="yyyy-MM-dd kk:mm:ss" />
 							</td>
 							<td>${parentBoard.viewCount}</td>
 						</tr>
-						<tr>
+						<tr class="tr_line">
 							<td colspan="2">${parentBoard.content}</td>
 						</tr>
 						<tr>
@@ -108,10 +67,87 @@ tr {
 								<input type='submit' name='reply' value='답글달기' />
 								<input type='submit' name='modify' value='수정' />
 								<input type='submit' name='delete' value='삭제' />
+								<input type="submit" name="back" value="돌아가기" />
 							</td>
 						</tr>
 					</tbody>
 				</c:forEach>
+			</table>
+			<table class="board">
+				<tbody>
+					<tr class="tr_line">
+						<td>이전글</td>
+						<c:forEach var="prev" items="${prevNextList}" end="0">
+							<c:if test="${prev==null}">
+								<td></td>
+								<td></td>
+							</c:if>
+							<c:if test="${prev!=null}">
+								<td>
+									<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${prev.no}"><input type="text" value="${prev.subject}"
+											readonly="readonly" /></a>
+								</td>
+								<td>
+									<fmt:formatDate value="${prev.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />
+									<c:choose>
+										<c:when test="${today == prev.registerDate}">
+											<fmt:formatDate value="${prev.registerDate}" type="both" pattern="HH:mm" />
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate value="${prev.registerDate}" type="both" pattern="yyyy-MM-dd" />
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</c:if>
+						</c:forEach>
+					</tr>
+					<c:forEach var="repBoard" items="${boardList}" varStatus="status" begin="1">
+						<tr class="tr_line">
+							<td></td>
+							<td>
+								<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${repBoard.no}"> <input type="text" value="${repBoard.subject}"
+										readonly="readonly" /></a>
+							</td>
+							<td>
+								<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />
+								<c:choose>
+									<c:when test="${today == registerDate}">
+										<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="HH:mm" />
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" />
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+					<tr>
+						<td>다음글</td>
+						<c:forEach var="next" items="${prevNextList}" begin="1">
+							<c:if test="${next==null}">
+								<td></td>
+								<td></td>
+							</c:if>
+							<c:if test="${next!=null}">
+								<td>
+									<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${next.no}"><input type="text" value="${next.subject}"
+											readonly="readonly" /></a>
+								</td>
+								<td>
+									<fmt:formatDate value="${next.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />
+									<c:choose>
+										<c:when test="${today == next.registerDate}">
+											<fmt:formatDate value="${next.registerDate}" type="both" pattern="HH:mm" />
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate value="${next.registerDate}" type="both" pattern="yyyy-MM-dd" />
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</c:if>
+						</c:forEach>
+					</tr>
+				</tbody>
 			</table>
 		</article>
 	</section>

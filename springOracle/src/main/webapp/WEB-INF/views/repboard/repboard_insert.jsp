@@ -1,20 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="parent_no" value="${requestScope.parent_no}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<%=request.getContextPath()%>/resources/repboard_insert.css" type="text/css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글쓰기</title>
 <script>
 	$(function() {
+		console.log('${parent_no}');
 		$("form#insertForm").submit(function() {
+			var $data = "parent_no="+${parent_no}+"&"+ $("form").serialize();
 			$.ajax({
 				url : "${pageContext.request.contextPath}/repboard/insert",
 				method : "post",
-				data : $("form").serialize(),
+				data : $data,
 				success : function(responseData) {
 					var data = responseData.trim();
 					if (data == '1') {
-						alert('게시글 작성이 완료 되었습니다.');
 						$.ajax({
 							url : "${pageContext.request.contextPath}/repboard/repboardlist",
 							method : "get",
@@ -61,7 +66,7 @@
 <body>
 	<article>
 		<form id="insertForm">
-			<table style="border: 1px solid red">
+			<table>
 				<tbody>
 					<tr>
 						<td>제목</td>

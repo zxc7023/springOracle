@@ -7,7 +7,7 @@
 	<select id="selectList" resultType="RepBoard">
 		select * from ( 
 			select * from ( 
-				select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD('',level*3,' '), CONCAT('└ ',SUBJECT))) SUBJECT, 
+				select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD(' ', (level-1)*2,' '), CONCAT('└',SUBJECT))) SUBJECT, 
 				content, password, registerdate, viewcount
 				from repboard
 				<include refid="repboard_search"></include>
@@ -19,12 +19,14 @@
 		)
 		where rnum &gt;= #{pageStart}
 	</select>
-
+	
+	<!-- 해당하는 조건의 전체 게시물의 갯수를 구한다. -->
 	<select id="countPaging" resultType="int">
 		select count(no) from repboard
 		<include refid="repboard_search"></include>
 	</select>
-
+	
+	<!-- 검색조건에 해당하는 where을 동적으로 불러오기 위하여 만든 mybatis sql문  -->
 	<sql id="repboard_search">
 		<where>
 			<if test=" keyword != null and keyword !=''">
@@ -32,19 +34,49 @@
 			</if>
 		</where>
 	</sql>
-
+	
+	<!-- 부모글이 없으면 0, 있으면 해당하는 글 번호로 데이터를 넣는다. -->
 	<insert id="insert" parameterType="RepBoard">
 		insert into repboard values (repboard_seq.NEXTVAL,
 		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0)
 	</insert>
-
+	
+	<!-- 해당하는 번호를 부모글으로, 자식에 해당하는 글까지 모두 가져온다. -->
 	<select id="selectByNo" resultType="RepBoard">
-		SELECT level, a.*
+		SELECT no,parent_no,DECODE(level,1,SUBJECT,CONCAT( LPAD(' ', (level-1)*2,' '), CONCAT('└',SUBJECT))) SUBJECT,content,password,registerdate,viewcount
 		from repboard a
 		start with no=#{no}
 		connect by prior no=parent_no
 		order siblings by no desc
 	</select>
+
+	<select id="selectPreBoardByNo" resultType="Repboard">
+		select a.pre_no no, a.subject, a.registerdate
+		from (
+				SELECT no ,lag(no,1) over (order by no desc) pre_no, lag(subject,1) over (order by no desc) subject, lag(registerdate,1) over (order by no desc) registerdate
+				from repboard
+				where level=1
+				start with parent_no = 0
+				connect by prior no = parent_no
+		) a
+		where a.no = #{no}
+	</select>
+	
+	<select id="selectNextBoardByNo" resultType="Repboard">
+		select a.pre_no no, a.subject, a.registerdate
+		from (
+				SELECT no ,lead(no,1) over (order by no desc) pre_no, lead(subject,1) over (order by no desc) subject, lead(registerdate,1) over (order by no desc) registerdate
+				from repboard
+				where level=1
+				start with parent_no = 0
+				connect by prior no = parent_no
+		) a
+		where a.no = #{no}
+	</select>
+
+
+
+
 
 	<delete id="delete">
 		DELETE repboard WHERE no=#{no}

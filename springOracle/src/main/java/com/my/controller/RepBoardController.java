@@ -2,6 +2,7 @@ package com.my.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.my.dao.RepBoardDAOOracle;
-import com.my.vo.Criteria;
 import com.my.vo.PageMaker;
 import com.my.vo.RepBoard;
 import com.my.vo.SearchCriteria;
@@ -48,14 +48,15 @@ public class RepBoardController {
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert() {
-		System.out.println("/insert" + "/get");
+	public String insert(@RequestParam(defaultValue="0")String parent_no,Model model) {
+		System.out.println("/insert" + " /get  no=" + parent_no);
+		model.addAttribute("parent_no",parent_no);
 		return "repboard/repboard_insert";
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@ModelAttribute RepBoard repboard, Model model) {
-		System.out.println("/insert" + "/post");
+		System.out.println("/insert" + " /post no=" + repboard.getParent_no());
 		String msg = "-1";
 		try {
 			dao.insert(repboard);
@@ -69,19 +70,24 @@ public class RepBoardController {
 	}
 
 	@RequestMapping("/repboarddetail")
-	public String repboardDetail(String no, Model model) {
-		System.out.println("/repboarddetail" + no);
+	public String repboardDetail(String no, Model model,SearchCriteria criteria) {
+		System.out.println("/repboarddetail" + no + "\t"+ criteria);
 		List<RepBoard> list = new ArrayList<>();
+		List<RepBoard> prevNextList = new ArrayList<>();
 		String searchNo = no;
 		int sNo = Integer.parseInt(searchNo);
+		
 		try {
 			list = dao.selectByNo(sNo);
+			prevNextList = dao.selectPrevNextBoard(sNo);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		model.addAttribute("boardList", list);
+		model.addAttribute("prevNextList",prevNextList);
 		String forwardURL = "repboard/repboard_detail";
 		return forwardURL;
 	}

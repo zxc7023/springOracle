@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
@@ -9,10 +8,10 @@
 	<!-- Service, Dao, DB, log등 과 관련된 자원을 위한 설정파일 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.36:1521:XE" />
+		<!-- <property name="url" value="jdbc:oracle:thin:@192.168.0.36:1521:XE" /> -->
 		<!-- <property name="url" value="jdbc:oracle:thin:@39.120.183.194:1521:XE" /> -->
 		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.7:1521:XE" /> -->
-		<!-- <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" /> -->
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
 		<property name="username" value="test2" />
 		<property name="password" value="test2" />
 	</bean>

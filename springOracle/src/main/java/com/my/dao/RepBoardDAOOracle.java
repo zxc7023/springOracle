@@ -1,10 +1,13 @@
 package com.my.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +19,22 @@ public class RepBoardDAOOracle {
 
 	@Autowired
 	private SqlSession session;
-
+	
+	/**
+	 * 글 번호로 게시글을 검색한다.
+	 * @param no
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RepBoard> selectByNo(int no) throws Exception {
+		return session.selectList("RepBoardMapper.selectByNo", no);
+	}
+	
+	/**
+	 * 검색 조건에 해당하는 전체 게시글을 가져온다.
+	 * @param cri
+	 * @return
+	 */
 	public List<RepBoard> selectList(Criteria cri) {
 		try {
 			return session.selectList("RepBoardMapper.selectList", cri);
@@ -25,11 +43,31 @@ public class RepBoardDAOOracle {
 		}
 		return null;
 	}
-
+	/**
+	 * 검색 조건에 해당하는 전체 게시글의 갯수를 구한다.
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 */
 	public int countPaging(Criteria cri) throws Exception {
 		return session.selectOne("RepBoardMapper.countPaging", cri);
 	}
-
+	
+	public List<RepBoard> selectPrevNextBoard(int no) throws Exception{
+		List<RepBoard> list = new ArrayList<>();
+		list.add(selectPrevBoard(no));
+		list.add(selectNextBoard(no));
+		return list;
+	}
+	public RepBoard selectPrevBoard(int no) throws Exception{
+		return session.selectOne("RepBoardMapper.selectPreBoardByNo",no);
+	}
+	
+	public RepBoard selectNextBoard(int no) throws Exception{
+		return session.selectOne("RepBoardMapper.selectNextBoardByNo",no);
+	}
+	
+	
 	public boolean chkPassword(int no, String password) throws SQLException, Exception {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("no", no);
@@ -102,24 +140,6 @@ public class RepBoardDAOOracle {
 		return null;
 	}
 
-	public List<RepBoard> selectByNo(int no) throws SQLException, Exception {
-		return session.selectList("RepBoardMapper.selectByNo", no);
-		/*
-		 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-		 * String selectByNoSQL ="SELECT level, rownum, a.*" +" from repboard a"
-		 * +" where level<=2" +" start with no=?" +" connect by prior no=parent_no"
-		 * +" order siblings by no desc"; ArrayList<RepBoard> list = new ArrayList<>();
-		 * try { con = MyConnection.getConnection(); pstmt =
-		 * con.prepareStatement(selectByNoSQL); pstmt.setInt(1, no); rs =
-		 * pstmt.executeQuery(); while(rs.next()){//글번호에 해당하는 상세내용 int board_no =
-		 * rs.getInt("no"); //글번호 int parentNo = rs.getInt("PARENT_NO"); String subject
-		 * = rs.getString("SUBJECT"); String content = rs.getString("CONTENT"); String
-		 * password = rs.getString("PASSWORD"); int level = rs.getInt("level");
-		 * list.add(new RepBoard(board_no, parentNo, subject, content, password,level));
-		 * } } catch (SQLException e) { e.printStackTrace(); }finally{
-		 * MyConnection.close(con, pstmt, rs); } return list;
-		 */
-	}
 
 	/*
 	 * public List<RepBoard> selectBySubject(String searchSubject,int selectedPage)
@@ -152,48 +172,4 @@ public class RepBoardDAOOracle {
 	 * session.update("RepBoardMapper.update", rb); } catch (Exception e) { // TODO:
 	 * handle exception } }
 	 */
-	public int getPageIndexCount(int totalRowCount) throws SQLException, Exception {
-		int pageIndexCount = (int) Math.ceil(totalRowCount / 5.0);
-		return pageIndexCount;
-	}
-
-	public int getStrartRow(int nowPage, int postCountPerPage) {
-		int startRow = 0;
-		startRow = (nowPage - 1) * postCountPerPage + 1;
-		return startRow;
-	}
-
-	public int getEndRow(int nowPage, int postCountPerPage) {
-		int endRow = 0;
-		endRow = nowPage * postCountPerPage;
-		return endRow;
-	}
-
-	public List<RepBoard> selectByPage(int nowPage, String searchItem, String searchValue) throws SQLException {
-		HashMap<String, Object> map = new HashMap<>();
-		if (searchItem.equals("no")) {
-			map.put("no", searchValue);
-		} else {
-			map.put("subject", searchValue);
-		}
-		map.put("startRow", this.getStrartRow(nowPage, 5));
-		map.put("endRow", this.getEndRow(nowPage, 5));
-
-		return session.selectList("RepBoardMapper.selectByPage", map);
-	}
-
-	public List<RepBoard> selectAll(String searchItem, String searchValue) {
-		try {
-			HashMap<String, String> map = new HashMap<>();
-			if (searchItem.equals("no")) {
-				map.put("no", searchValue);
-			} else {
-				map.put("subject", searchValue);
-			}
-			return session.selectList("RepBoardMapper.selectAll", map);
-		} catch (Exception e) {
-
-		}
-		return null;
-	}
 }

@@ -50,25 +50,25 @@
 	});
 </script>
 <style type="text/css">
-form {
+div.searchDiv form {
 	width: 500px;
 	margin: 0 auto;
 }
 
-select {
+div.searchDiv select {
 	height: 27px;
 	vertical-align: middle;
 }
 
-input[type="search"] {
+div.searchDiv input[type="search"] {
 	height: 27px
 }
 
-input[type="submit"] {
+div.searchDiv input[type="submit"] {
 	height: 27px
 }
 
-input[type="button"] {
+div.searchDiv input[type="button"] {
 	height: 27px
 }
 </style>
