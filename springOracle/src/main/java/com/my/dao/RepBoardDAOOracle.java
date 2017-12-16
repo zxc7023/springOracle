@@ -1,13 +1,10 @@
 package com.my.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,16 +16,6 @@ public class RepBoardDAOOracle {
 
 	@Autowired
 	private SqlSession session;
-	
-	/**
-	 * 글 번호로 게시글을 검색한다.
-	 * @param no
-	 * @return
-	 * @throws Exception
-	 */
-	public List<RepBoard> selectByNo(int no) throws Exception {
-		return session.selectList("RepBoardMapper.selectByNo", no);
-	}
 	
 	/**
 	 * 검색 조건에 해당하는 전체 게시글을 가져온다.
@@ -43,6 +30,7 @@ public class RepBoardDAOOracle {
 		}
 		return null;
 	}
+	
 	/**
 	 * 검색 조건에 해당하는 전체 게시글의 갯수를 구한다.
 	 * @param cri
@@ -53,19 +41,59 @@ public class RepBoardDAOOracle {
 		return session.selectOne("RepBoardMapper.countPaging", cri);
 	}
 	
-	public List<RepBoard> selectPrevNextBoard(int no) throws Exception{
-		List<RepBoard> list = new ArrayList<>();
-		list.add(selectPrevBoard(no));
-		list.add(selectNextBoard(no));
-		return list;
-	}
-	public RepBoard selectPrevBoard(int no) throws Exception{
-		return session.selectOne("RepBoardMapper.selectPreBoardByNo",no);
+	
+	/**
+	 * 글 번호로 게시글을 검색한다.
+	 * @param no
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RepBoard> selectByNo(int no) throws Exception {
+		return session.selectList("RepBoardMapper.selectByNo", no);
 	}
 	
-	public RepBoard selectNextBoard(int no) throws Exception{
-		return session.selectOne("RepBoardMapper.selectNextBoardByNo",no);
+	/**
+	 * 현재 게시글번호 no를 받아 no의 루트에 해당하는 no를 찾아 no의 이전글을 가져온다
+	 * @param no
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RepBoard> selectPreBoard(int no) throws Exception{
+		return session.selectList("RepBoardMapper.selectPreBoardByNo",no);
 	}
+	
+	/**
+	 * 현재 게시글번호 no를 받아 no의 루트에 해당하는 no를 찾아 no의 다음글을 가져온다
+	 * @param no
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RepBoard> selectNextBoard(int no) throws Exception{
+		return session.selectList("RepBoardMapper.selectNextBoardByNo",no);
+	}
+	
+	/**
+	 * 1. 해당 글 번호의 루트 게시글 번호를 찾고, 하위의 모든 게시글 데이터를 가져온다.
+	 * 2. 루트번호에 해당하는 이전글과 다음글을 가져온다.
+	 * 3. HashMap<String, List<Repboard>> 타입으로 리턴
+	 */
+	public HashMap<String, List<RepBoard>> selectDetailData(int no) throws Exception{
+		HashMap<String, List<RepBoard>> map = new HashMap<String, List<RepBoard>>();
+		
+		List<RepBoard> boardList = selectByNo(no);
+		List<RepBoard> preBoard = selectPreBoard(no);
+		List<RepBoard> nextBoard = selectNextBoard(no);
+		
+		map.put("boardList", boardList);
+		map.put("preBoard",preBoard);
+		map.put("nextBoard",nextBoard);
+		
+		return map;
+	}
+	
+	
+	
+
 	
 	
 	public boolean chkPassword(int no, String password) throws SQLException, Exception {

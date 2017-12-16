@@ -44,7 +44,12 @@
 		});
 
 		$("input[name=cancel]").click(function() {
-			$.ajax({
+			if('${parent_no}'!=0){
+				location.href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${parent_no}"
+			}else{
+				location.href="${pageContext.request.contextPath}/repboard/repboardlist";
+			}
+			/* $.ajax({
 				url : "${pageContext.request.contextPath}/repboard/repboardlist",
 				method : "get",
 				success : function(responseData) {
@@ -56,7 +61,7 @@
 					var tmp = $parentObj.html(responseData).find("article")
 					$parentObj.html(tmp);
 				}
-			});
+			}); */
 			return false;
 		});
 	});

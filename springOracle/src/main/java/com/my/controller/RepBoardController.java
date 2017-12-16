@@ -72,22 +72,23 @@ public class RepBoardController {
 	@RequestMapping("/repboarddetail")
 	public String repboardDetail(String no, Model model,SearchCriteria criteria) {
 		System.out.println("/repboarddetail" + no + "\t"+ criteria);
-		List<RepBoard> list = new ArrayList<>();
-		List<RepBoard> prevNextList = new ArrayList<>();
+
 		String searchNo = no;
 		int sNo = Integer.parseInt(searchNo);
-		
+		HashMap<String, List<RepBoard>> map = null;
 		try {
-			list = dao.selectByNo(sNo);
-			prevNextList = dao.selectPrevNextBoard(sNo);
+			map = dao.selectDetailData(sNo);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		model.addAttribute("boardList", list);
-		model.addAttribute("prevNextList",prevNextList);
+		System.out.println(map);
+		model.addAttribute("no",no);
+		model.addAttribute("boardList", map.get("boardList"));
+		model.addAttribute("preBoard",map.get("preBoard"));
+		model.addAttribute("nextBoard",map.get("nextBoard"));
+		
 		String forwardURL = "repboard/repboard_detail";
 		return forwardURL;
 	}

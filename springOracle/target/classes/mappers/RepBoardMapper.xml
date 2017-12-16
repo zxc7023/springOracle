@@ -41,15 +41,22 @@
 		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0)
 	</insert>
 	
-	<!-- 해당하는 번호를 부모글으로, 자식에 해당하는 글까지 모두 가져온다. -->
+	<!-- 해당하는 번호의 부모(루트)를 찾아 부모 아래 모든 게시글 데이터를 가져온다. -->
 	<select id="selectByNo" resultType="RepBoard">
-		SELECT no,parent_no,DECODE(level,1,SUBJECT,CONCAT( LPAD(' ', (level-1)*2,' '), CONCAT('└',SUBJECT))) SUBJECT,content,password,registerdate,viewcount
-		from repboard a
-		start with no=#{no}
+		SELECT no,parent_no, subject , content, password, registerdate, viewcount, level
+		from repboard
+		start with no = (
+							select no 
+							from repboard
+							where parent_no=0
+							start with no = #{no}
+							connect by prior parent_no = no
+						)
 		connect by prior no=parent_no
 		order siblings by no desc
 	</select>
-
+	
+	<!-- 해당하는 번호의 부모(루트)글 번호를 찾아, 그 부모의 이전에 있는 게시글 데이터를 가져온다 -->
 	<select id="selectPreBoardByNo" resultType="Repboard">
 		select a.pre_no no, a.subject, a.registerdate
 		from (
@@ -59,9 +66,15 @@
 				start with parent_no = 0
 				connect by prior no = parent_no
 		) a
-		where a.no = #{no}
+		where a.no = (
+							select no 
+							from repboard
+							where parent_no=0
+							start with no = #{no}
+							connect by prior parent_no = no)
 	</select>
 	
+	<!-- 해당하는 번호의 부모(루트)글 번호를 찾아, 그 부모의 다음에 있는 게시글 데이터를 가져온다 -->
 	<select id="selectNextBoardByNo" resultType="Repboard">
 		select a.pre_no no, a.subject, a.registerdate
 		from (
@@ -71,8 +84,14 @@
 				start with parent_no = 0
 				connect by prior no = parent_no
 		) a
-		where a.no = #{no}
+		where a.no = (
+							select no 
+							from repboard
+							where parent_no=0
+							start with no = #{no}
+							connect by prior parent_no = no)
 	</select>
+
 
 
 
