@@ -46,9 +46,9 @@
 /* 회원가입 css */
 
 .signupWrapper{    width: 80%;
-    				margin: 50% auto;}
+    				margin: 20% auto;}
 
-.signupWrapper form {width: 100%;
+.signupWrapper form {width: 40%;
                      height: 230px;
                      margin: 0 auto;
                      text-align: center;
@@ -114,6 +114,13 @@ background: #486bcd;
 }
                                                                                
 @media screen and (max-width:700px) {
+	
+	.signupWrapper{
+	widdth:70%;
+	}
 	.login-wrap  form{
+	width:80%;}
+	
+	.signupWrapper form{
 	width:80%;}
 }
