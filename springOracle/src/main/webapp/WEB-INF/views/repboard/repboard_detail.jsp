@@ -108,15 +108,14 @@
 						<c:if test="${repBoard.no != no}">
 							<tr class="tr_line">
 								<td></td>
-								<td>
+								<td style="text-align: left;">
 									<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${repBoard.no}"> 
-										<c:forEach begin="1" end="${repBoard.level-1}">
-											&nbsp;&nbsp;
-										</c:forEach> 
+										<c:forEach begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> 
 										<c:if test="${repBoard.level != 1 }">
-											<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px;"/>
+											<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;"/>
 										</c:if> 
-										<input type="text" value="${repBoard.subject}" readonly="readonly" /></a>
+										<span>${repBoard.subject}</span>
+										<%-- <input type="text" value="${repBoard.subject}" readonly="readonly"/>--%></a> 
 								</td>
 								<td>
 									<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />
