@@ -19,8 +19,26 @@ body section{
 }
 
 .term-select ul li{
-	float:left;
-	margin-right:7%;
+	overflow: hidden;
+    float: left;
+    margin-right: 7%;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    border-radius: 13px;
+    height: 25px;
+    width: 45px;
+}
+
+.term-select ul li input{
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    display: block;
+    color: #fff;
+}
+
+.term-select ul li.active{
+	background: #486bcd;
 }
 .term-select ul li:last-child{
 	margin:0;
@@ -45,4 +63,16 @@ body section{
 }
 .type05 tbody tr.order-line-end{
 	border-bottom:1px solid rgba(0,0,0,0.3);
+}
+
+@media screen and (max-width:700px){
+	
+	.orderlist_wrap{
+	font-size:1rem}
+	
+	.term-select ul li{
+    height: 2rem;
+    width: 3.5rem;
+    margin-right:5%;
+	}
 }

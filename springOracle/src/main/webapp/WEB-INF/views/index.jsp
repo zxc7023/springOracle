@@ -25,7 +25,7 @@
 		<article class="container01">
 			<h2 class="hide">container01</h2>
 			<p>
-				<span>DEVELOPER</span> <span>준비된 인재는 다릅니다!</span>
+				<span>DEVELOPER</span> <span>준비된 인재는</span>  <span>다릅니다!</span>
 			</p>
 
 			<h2 class="profile-img">
