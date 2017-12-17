@@ -69,9 +69,9 @@
 				<col width="30%" />
 				<col width="10%" />
 				<col width="*" />
-				<col width="10%" />
+				<col width="15%" />
 				<col width="5%" />
-				<col width="10%" />
+				<col width="15%" />
 			</colgroup>
 			<thead>
 				<tr class="title">
@@ -86,7 +86,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="orderInfo" items="${cList}" varStatus="status">
-					<tr>
+					<tr class="order-line-end">
 						<td rowspan="${fn:length(orderInfo.lines)}">${orderInfo.info_no }</td>
 						<td rowspan="${fn:length(orderInfo.lines)}"><fmt:formatDate
 								value="${orderInfo.info_date}" type="date" pattern="yyyy년 MM월 dd일 kk시 mm분" /></td>

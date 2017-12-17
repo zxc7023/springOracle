@@ -74,7 +74,7 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<article>
-		<form action="post">
+		<form action="post" class="customer-wrap">
 			<table class="customerdetail-wrap">
 				<thead>
 					<tr>

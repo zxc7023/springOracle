@@ -55,8 +55,6 @@
 				<li><input type="text" name="prod_no" value="${p.prod_no}" readonly="readonly" style="width:50px"></li>
 			</ol>
 		</div>
-		<p class="product-img">🐈</p>
-	
 	<div class="product-detail">
 	<form id=cartform>
 			<table>

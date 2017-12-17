@@ -56,27 +56,20 @@ body section{
 	font-size:1.5rem;
 	line-height:4rem;}
 	
+	/* 상품 상세페이지  */
+	
 .product-detail{
-    width: 40%;
-    height: 30%;
+    width: 700px;
     margin: 4% auto 8% auto;
     overflow: hidden;}
-	
-.product-img{
-	width:40%;
-	height:30%;
-	float:left;
-	font-size: 150px;
-    text-align: center;
-    margin: 4% auto 8% 10%;}
+
 	
 .product-detail form{
-	float: left;
-    width: 80%;
-    height: 82%;}
+	margin:0 auto;
+    width: 80%;}
 	
-.product-detail form table{
-	height:100%;}
+.product-detail form table tr{
+	height:80px;}
 	
 .product-detail form table td{
 	width:100%;
@@ -130,7 +123,7 @@ body section{
 #price span{position:absolute;/* 부모의 자식으로 위치값 설정  */
 top:0;
 bottom:0;
-right:25%;}
+right:180px;;}
 .product-detail form table td.quantity-title{width:50%;text-align:right;}
 .product-detail form table td.quantity-input{width:50%}
 product-detail form table td.quantity-input input{
@@ -196,14 +189,7 @@ product-detail form table td.quantity-input input{
 	
 	.product-detail{
 	width:80%}
-    
-	.product-img{
-	width:100%;
-	height:20%;
-    font-size: 10rem;
-    text-align: center;
-    margin:0;}
-    
+
 	.product-detail form{
 	float: right;
     width: 100%;
@@ -224,8 +210,14 @@ product-detail form table td.quantity-input input{
     line-height: 4rem;}
 	
 	.cart-table tbody .cart-btn{
-    line-height: 6rem;
-}
+    line-height: 6rem;}
+    
+    #price span{
+    right:33%}
+    
+    #btCart{
+    width:100%;
+    margin-left:0;}
 	
 }
 
