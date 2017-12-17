@@ -27,6 +27,7 @@
 	$(function() {
 		var termButton = $("div.term-select").find("input");
 		termButton.click(function() {
+			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/order/orderlist",
 				data : {
@@ -40,6 +41,9 @@
 
 			})
 			return false;
+			
+/* 			$(this).parent().find("li").addClass(active);/* 주문목록 날짜 클릭 이벤트  */ s
+ 
 		});
 
 	});
@@ -65,12 +69,12 @@
 
 		<table class="type05">
 			<colgroup>
-				<col width="10%" />
-				<col width="30%" />
-				<col width="10%" />
+				<col width="12.5%" />
+				<col width="27%" />
+				<col width="12.5%" />
 				<col width="*" />
 				<col width="15%" />
-				<col width="5%" />
+				<col width="7.5%" />
 				<col width="15%" />
 			</colgroup>
 			<thead>

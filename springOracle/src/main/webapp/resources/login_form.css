@@ -68,7 +68,7 @@
 button[name="dupcheck"] {border-radius: 5px;
                            border: none;
                            float:right;
-                           width:27%;
+                           width:28%;
                            height: 35px;
                            padding: 2px 10px;
                            background-color:#486bcd;
@@ -124,16 +124,17 @@ background: #486bcd;
 	.login-wrap form{
 	width:100%;
 	margin:50% auto;}
-	
-	.signupWrapper{
-	widdth:70%;
-	}
+
 	.login-wrap  form{
 	width:80%;}
 	
 	.signupWrapper form{
-	width:80%;}
+	
+    width: 100%;
+    height: 100%;
+    margin-top: 55%;}
 	
 	.customerdetail-wrap{
-	width: 85%;}
+	width: 85%;
+	margin-top:30%;}
 }
