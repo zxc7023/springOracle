@@ -127,8 +127,9 @@ public class RepBoardDAOOracle {
 		 */
 	}
 
-	public void insert(RepBoard board) throws Exception {
+	public RepBoard insert(RepBoard board) throws Exception {
 		session.insert("RepBoardMapper.insert", board);
+		return board;
 	}
 
 	public List<RepBoard> selectParentAll() throws SQLException, Exception {

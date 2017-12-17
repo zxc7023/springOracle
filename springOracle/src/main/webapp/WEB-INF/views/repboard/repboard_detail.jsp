@@ -105,7 +105,7 @@
 						</c:forEach>
 					</tr>
 					<c:forEach var="repBoard" items="${boardList}">
-						<c:if test="${repBoard.no != no}">
+						<c:if test="${repBoard.level != 1}">
 							<tr class="tr_line">
 								<td></td>
 								<td style="text-align: left;">
@@ -113,9 +113,10 @@
 										<c:forEach begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> 
 										<c:if test="${repBoard.level != 1 }">
 											<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;"/>
-										</c:if> 
-										<span>${repBoard.subject}</span>
-										<%-- <input type="text" value="${repBoard.subject}" readonly="readonly"/>--%></a> 
+										</c:if>
+										<span <c:out value="${repBoard.no == no ? 'class = articleActive' : '' }"/>>
+											${repBoard.subject}
+										</span></a>
 								</td>
 								<td>
 									<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />

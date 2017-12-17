@@ -27,3 +27,7 @@ ul.pagenavigation li a:hover {
 	color: #333
 }
 
+.tr_line {
+	border-bottom: 1px solid #c3c3c3
+}
+

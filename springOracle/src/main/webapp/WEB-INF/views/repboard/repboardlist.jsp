@@ -89,7 +89,7 @@
 					<col width="20%" />
 				</colgroup>
 				<thead>
-					<tr>
+					<tr class="tr_line">
 						<td>제목</td>
 						<td>작성일</td>
 						<td>조회수</td>
@@ -98,10 +98,16 @@
 
 				<tbody>
 					<c:forEach var="repBoard" items="${boardList}" varStatus="status">
-						<tr>
+						<tr class="tr_line">
 							<td>
 								<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${repBoard.no}">
-								<input type="text" value="${repBoard.subject}" readonly="readonly" /></a>
+								<c:forEach begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> 
+								<c:if test="${repBoard.level != 1 }">
+									<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;"/>
+								</c:if>
+								<span <c:out value="${repBoard.no == no ? 'class = articleActive' : '' }"/>>
+											${repBoard.subject}
+								</span></a>
 							</td>
 							<td>
 								<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />

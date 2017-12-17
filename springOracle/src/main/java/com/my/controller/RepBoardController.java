@@ -27,7 +27,6 @@ public class RepBoardController {
 
 	@RequestMapping(value = "/repboardlist", method = RequestMethod.GET)
 	public String boardList(Model model, SearchCriteria cri) {
-		System.out.println("/repboardlist" + "\t" + cri.getPage() + cri.toString());
 		List<RepBoard> list = new ArrayList<>();
 		try {
 			list = dao.selectList(cri);
@@ -49,18 +48,17 @@ public class RepBoardController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert(@RequestParam(defaultValue="0")String parent_no,Model model) {
-		System.out.println("/insert" + " /get  no=" + parent_no);
 		model.addAttribute("parent_no",parent_no);
 		return "repboard/repboard_insert";
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(@ModelAttribute RepBoard repboard, Model model) {
-		System.out.println("/insert" + " /post no=" + repboard.getParent_no());
 		String msg = "-1";
 		try {
-			dao.insert(repboard);
-			msg = "1";
+			RepBoard rb = dao.insert(repboard);
+			System.out.println("작성한답글은 : "+ rb);
+			msg = String.valueOf(rb.getNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
