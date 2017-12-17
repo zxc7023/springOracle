@@ -7,7 +7,7 @@
 	<select id="selectList" resultType="RepBoard">
 		select * from ( 
 			select * from ( 
-				select rownum rnum, level, no, parent_no, DECODE(level,1,SUBJECT,CONCAT( LPAD(' ', (level-1)*2,' '), CONCAT('└',SUBJECT))) SUBJECT, 
+				select rownum rnum, level, no, parent_no, subject, 
 				content, password, registerdate, viewcount
 				from repboard
 				<include refid="repboard_search"></include>
@@ -39,6 +39,9 @@
 	<insert id="insert" parameterType="RepBoard">
 		insert into repboard values (repboard_seq.NEXTVAL,
 		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0)
+		<selectKey resultType="int" order="AFTER" keyProperty="no">
+			SELECT repboard_seq.currval FROM dual
+		</selectKey>
 	</insert>
 	
 	<!-- 해당하는 번호의 부모(루트)를 찾아 부모 아래 모든 게시글 데이터를 가져온다. -->

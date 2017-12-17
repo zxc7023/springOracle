@@ -19,10 +19,14 @@
 				data : $data,
 				success : function(responseData) {
 					var data = responseData.trim();
-					if (data == '1') {
-						$.ajax({
-							url : "${pageContext.request.contextPath}/repboard/repboardlist",
+					if (data == '-1') {
+						alert('게시글 작성에 실패 하였습니다.');
+					} else {
+						location.href="${pageContext.request.contextPath}/repboard/repboarddetail?no=" + data;
+						/* $.ajax({
+							url : "${pageContext.request.contextPath}/repboard/repboarddetail",
 							method : "get",
+							data : { "no" : data },
 							success : function(responseData) {
 								var $parentObj = $("section");
 								if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
@@ -32,11 +36,7 @@
 								var tmp = $parentObj.html(responseData).find("article")
 								$parentObj.html(tmp);
 							}
-						});
-					} else if (data == '-1') {
-						alert('게시글 작성에 실패 하였습니다.');
-					} else {
-						alert(data);
+						}); */
 					}
 				}
 			});
