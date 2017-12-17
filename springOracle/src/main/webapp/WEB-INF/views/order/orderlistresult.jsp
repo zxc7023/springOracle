@@ -86,10 +86,10 @@
 			</thead>
 			<tbody>
 				<c:forEach var="orderInfo" items="${cList}" varStatus="status">
-					<tr class="order-line-end">
-						<td rowspan="${fn:length(orderInfo.lines)}">${orderInfo.info_no }</td>
-						<td rowspan="${fn:length(orderInfo.lines)}"><fmt:formatDate
-								value="${orderInfo.info_date}" type="date" pattern="yyyy년 MM월 dd일 kk시 mm분" /></td>
+					<tr <c:out value="${fn:length(orderInfo.lines) == 1 and !(status.last)? 'class=order-line-end' : ''}"/> >
+						<td rowspan="${fn:length(orderInfo.lines)}" <c:out value="${ fn:length(orderInfo.lines) != 1 and !(status.last) ? 'class=order-line-end' : ''}"/> >${orderInfo.info_no }</td> 
+						<td rowspan="${fn:length(orderInfo.lines)}" <c:out value="${ fn:length(orderInfo.lines) != 1 and !(status.last) ? 'class=order-line-end' : ''}"/> >
+						<fmt:formatDate value="${orderInfo.info_date}" type="date" pattern="yyyy년 MM월 dd일 kk시 mm분" /></td>
 						<c:forEach var="orderLine" items="${orderInfo.lines}" end="0">
 							<td>${orderLine.line_p.prod_no }</td>
 							<td>${orderLine.line_p.prod_name }</td>
@@ -98,8 +98,8 @@
 							<td>${orderLine.line_p.prod_price * orderLine.line_quantity}</td>
 						</c:forEach>
 					</tr>
-					<c:forEach var="orderLine2" items="${orderInfo.lines}" begin="1">
-						<tr>
+					<c:forEach var="orderLine2" items="${orderInfo.lines}" begin="1" varStatus="line2">
+						<tr <c:out value="${ line2.last and !(status.last) ? 'class=order-line-end' : ''}"/>>
 							<td>${orderLine2.line_p.prod_no }</td>
 							<td>${orderLine2.line_p.prod_name }</td>
 							<td>${orderLine2.line_p.prod_price }</td>

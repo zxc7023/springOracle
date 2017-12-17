@@ -46,3 +46,6 @@ body section{
 .type05 tbody tr.order-line-end{
 	border-bottom:1px solid rgba(0,0,0,0.3);
 }
+.type05 tbody tr td.order-line-end {
+	border-bottom:1px solid rgba(0,0,0,0.3);
+}
