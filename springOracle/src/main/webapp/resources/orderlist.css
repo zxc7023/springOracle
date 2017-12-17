@@ -29,7 +29,20 @@ body section{
 .type05{
 	width:90%;
 	margin: 0 auto;
+	text-align:center;
+	background:rgba(255,255,255,0.5);
+	border-radius:15px;
 }
-.type05{
-	
+.type05 .title{
+	height: 50px;
+    line-height: 50px;
+}
+.type05 tbody{
+    border-top: 1px solid rgba(0,0,0,0.3);
+}
+.type05 tbody tr{
+	height:40px;
+}
+.type05 tbody tr.order-line-end{
+	border-bottom:1px solid rgba(0,0,0,0.3);
 }
