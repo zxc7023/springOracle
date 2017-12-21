@@ -22,12 +22,13 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		var termButton = $("div.term-select").find("input");
 		termButton.click(function() {
-			
+			$(this).parent().addClass("active");/* 주문목록 날짜 클릭 이벤트  */ 
 			$.ajax({
 				url : "${pageContext.request.contextPath}/order/orderlist",
 				data : {
@@ -38,12 +39,8 @@
 					$("body").empty();
 					$("body").html(responseData.trim());
 				},
-
 			})
 			return false;
-			
-/* 			$(this).parent().find("li").addClass(active);/* 주문목록 날짜 클릭 이벤트  */ s
- 
 		});
 
 	});

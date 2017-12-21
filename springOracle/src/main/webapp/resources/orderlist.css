@@ -7,10 +7,9 @@ body section{
 	background-size:cover;/*  배경을 포함한 인터넷 창의 해당하는 크기를 포함한*/
 	height:100%;
 	width:100%;
+	overflow-y : scroll;
 	position:fixed;/*  위치를 고정한다 */}
-	
-.orderlist_wrap{
-}
+
 
 .term-select{
 	width:90%;
@@ -21,7 +20,7 @@ body section{
 .term-select ul li{
 	overflow: hidden;
     float: left;
-    margin-right: 7%;
+    margin-right: 3%;
     background: rgba(0,0,0,0.8);
     color: #fff;
     border-radius: 13px;
@@ -46,7 +45,7 @@ body section{
 
 .type05{
 	width:90%;
-	margin: 0 auto;
+	margin: 0 auto 30% auto;
 	text-align:center;
 	background:rgba(255,255,255,0.5);
 	border-radius:15px;
@@ -67,11 +66,12 @@ body section{
 
 .type05 tbody tr td.order-line-end {
 	border-bottom:1px solid rgba(0,0,0,0.3);
-	
+}
+
 @media screen and (max-width:700px){
 	
 	.orderlist_wrap{
-	font-size:1rem}
+	font-size:1rem;}
 	
 	.term-select ul li{
     height: 2rem;
