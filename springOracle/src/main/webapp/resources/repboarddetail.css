@@ -14,5 +14,14 @@
 }
 
 span.articleActive {
-	font-weight : bold;
+	font-weight: bold;
+}
+
+.repboard {
+	width: 500px;
+	margin: 10px auto;
+	border-collapse: collapse;
+	border: 1px solid;
+	height: auto;
+	text-align: center;
 }

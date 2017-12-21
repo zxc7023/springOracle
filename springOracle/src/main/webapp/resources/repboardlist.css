@@ -2,8 +2,8 @@
 
 table.repboardlist{
 	margin : auto;
-	border-collapse : collapse;
-	border : 1px solid;
+/* 	border-collapse : collapse;
+	border : 1px solid; */
 	width :1000px;
 }
 

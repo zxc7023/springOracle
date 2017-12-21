@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.my.dao.RepBoardDAOOracle;
 import com.my.vo.PageMaker;
@@ -41,19 +42,20 @@ public class RepBoardController {
 		model.addAttribute("boardList", list);
 		// model.addAttribute("searchItem", searchItem);
 		// model.addAttribute("searchValue", searchValue);
-		System.out.println(list);
+		System.out.println("/repboardlist" + "게시글 리스트 : " + list +"\n" + "페이지 및 검색정보 : " + cri.toString() );
 		String forwardURL = "/repboard/repboardlist";
 		return forwardURL;
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert(@RequestParam(defaultValue="0")String parent_no,Model model) {
+	public String insert(@RequestParam(defaultValue="0")String parent_no,Model model,@ModelAttribute("cri") SearchCriteria criteria) {
+		System.out.println("/insert" + "답글 or 게시글 작성 호출" + "\n 부모글 : " +parent_no );
 		model.addAttribute("parent_no",parent_no);
 		return "repboard/repboard_insert";
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(@ModelAttribute RepBoard repboard, Model model) {
+	public String insert(RepBoard repboard, Model model) {
 		String msg = "-1";
 		try {
 			RepBoard rb = dao.insert(repboard);
@@ -68,8 +70,8 @@ public class RepBoardController {
 	}
 
 	@RequestMapping("/repboarddetail")
-	public String repboardDetail(String no, Model model,SearchCriteria criteria) {
-		System.out.println("/repboarddetail" + no + "\t"+ criteria);
+	public String repboardDetail(String no, Model model) {
+		System.out.println("/repboarddetail" + no);
 
 		String searchNo = no;
 		int sNo = Integer.parseInt(searchNo);
@@ -81,13 +83,20 @@ public class RepBoardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(map);
 		model.addAttribute("no",no);
 		model.addAttribute("boardList", map.get("boardList"));
 		model.addAttribute("preBoard",map.get("preBoard"));
 		model.addAttribute("nextBoard",map.get("nextBoard"));
-		
 		String forwardURL = "repboard/repboard_detail";
+		return forwardURL;
+	}
+	
+	@RequestMapping("/detail")
+	public String detail(RedirectAttributes rttr,SearchCriteria cri,String no) {
+		System.out.println("detail 전" + "\n" + cri);
+		rttr.addFlashAttribute("cri",cri);
+		rttr.addAttribute("no",no);
+		String forwardURL = "redirect:/repboard/repboarddetail";
 		return forwardURL;
 	}
 

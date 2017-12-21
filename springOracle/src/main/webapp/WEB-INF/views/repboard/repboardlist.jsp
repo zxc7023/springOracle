@@ -44,31 +44,31 @@
 			return false;
 		});
 		 */
-/* 		$("table.repboardlist a").click(function(){
-			var $url = $(this).attr("href");
-			
-			$.ajax({
-				url : $url,
-				method : 'get',
-				success : function(responseData) {
-					var $parentObj = $("section");
-					if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
-						$parentObj = $("body");
-					}
-					$parentObj.empty();
-					var article = $parentObj.html(responseData).find("article");
-					$parentObj.html(article);
-
-				},
-				error : function(xhr, status, error) {
-					console.log(xhr.status);
-				}
-			}); 
-			
-			return false;
-		});
+		/* 		$("table.repboardlist a").click(function(){
+		 var $url = $(this).attr("href");
 		
-		*/
+		 $.ajax({
+		 url : $url,
+		 method : 'get',
+		 success : function(responseData) {
+		 var $parentObj = $("section");
+		 if ($parentObj.length == 0) { //article영역의 유무에 따라 출력
+		 $parentObj = $("body");
+		 }
+		 $parentObj.empty();
+		 var article = $parentObj.html(responseData).find("article");
+		 $parentObj.html(article);
+
+		 },
+		 error : function(xhr, status, error) {
+		 console.log(xhr.status);
+		 }
+		 }); 
+		
+		 return false;
+		 });
+		
+		 */
 	});
 </script>
 </head>
@@ -100,14 +100,11 @@
 					<c:forEach var="repBoard" items="${boardList}" varStatus="status">
 						<tr class="tr_line">
 							<td>
-								<a href="${pageContext.request.contextPath}/repboard/repboarddetail?no=${repBoard.no}">
-								<c:forEach begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> 
-								<c:if test="${repBoard.level != 1 }">
-									<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;"/>
-								</c:if>
-								<span <c:out value="${repBoard.no == no ? 'class = articleActive' : '' }"/>>
-											${repBoard.subject}
-								</span></a>
+								<a href="${pageContext.request.contextPath}/repboard/detail${pageMaker.makeQuery(pageMaker.cri.page)}&no=${repBoard.no}"> <c:forEach
+										begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> <c:if test="${repBoard.level != 1 }">
+										<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;" />
+									</c:if> <span <c:out value="${repBoard.no == no ? 'class = articleActive' : '' }"/>> ${repBoard.subject} </span>
+								</a>
 							</td>
 							<td>
 								<fmt:formatDate value="${repBoard.registerDate}" type="both" pattern="yyyy-MM-dd" var="registerDate" />
@@ -131,15 +128,13 @@
 					<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a
-						href="repboardlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a href="repboardlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 					<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.endPage+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
-			
-			
+
 		</article>
 	</section>
 </body>

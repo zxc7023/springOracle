@@ -13,8 +13,9 @@
 		$("input[name=keyword]").val('${param.keyword}');
 		$("option[value='${item}']").attr("selected", "true");
 
-		$("div.searchDiv").find("input[type=button]").click(function() {
-			$.ajax({
+ 		$("div.searchDiv").find("input[type=button]").click(function() {
+ 			location.href="${pageContext.request.contextPath}/repboard/insert";
+			/* $.ajax({
 				url : "${pageContext.request.contextPath}/repboard/insert",
 				success : function(responseData) {
 					var $parentObj = $("section");
@@ -22,12 +23,11 @@
 						$parentObj = $("body");
 					}
 					$parentObj.empty();
-					var tmp = $parentObj.html(responseData).find("article")
-					$parentObj.html(tmp);
+					$parentObj.html(responseData);
 				}
-			});
+			}); */
 			return false;
-		});
+		}); 
 
 		$("form").submit(function() {
 			$.ajax({
@@ -83,6 +83,6 @@ div.searchDiv input[type="button"] {
 		</select>
 		<input type="search" name="keyword" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
-		<input type="button" name="insert" value="게시글 쓰기" id="insert">
+		<input type="button" name="insert" value="글작성" id="insert">
 	</form>
 </div>

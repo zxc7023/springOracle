@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-form {
-	border: 1px solid blue;
+form.insertForm {
+	margin: auto;
+	border-collapse: collapse;
+	border: 1px solid;
+	width: 1000px;
+	height: 5%;
 }
