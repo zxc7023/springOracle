@@ -48,6 +48,7 @@ span.articleActive {
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	width : 35px;
 	height: 35px;
 	margin-top: -75px; /* 이미지크기  */
 	margin-left: -75px; /* 이미지크기  */

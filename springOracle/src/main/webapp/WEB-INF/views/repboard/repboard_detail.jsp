@@ -18,12 +18,12 @@
 <script>
 	$(function() {
 
-		var loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="<%=request.getContextPath()%>/resources/viewLoading.gif" />').appendTo(document.body).hide();
+		var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="<%=request.getContextPath()%>/resources/viewLoading.gif" /> </div>').appendTo(document.body).hide();
 
 		$(window).ajaxStart(function() {
-			loading.fadeIn(500);
+			loading.fadeIn(100);
 		}).ajaxStop(function() {
-			loading.fadeOut(500);
+			loading.fadeOut(5000);
 		});
 
 		var $parentObj = $("section");
