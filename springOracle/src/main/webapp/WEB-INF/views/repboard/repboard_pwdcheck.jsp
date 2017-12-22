@@ -1,19 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<% String checkOther = (String)request.getAttribute("check"); %>
-<% String BoardNumber = (String)request.getAttribute("boardno"); %>
-<% String contextPath = request.getContextPath(); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%
+	String checkOther = (String) request.getAttribute("check");
+%>
+<%
+	String BoardNumber = (String) request.getAttribute("boardno");
+%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
  $(function(){
     var $parentObj = $("article");
     var $boardno = <%=BoardNumber%>;
-    var $checkOther = '<%= checkOther %>';
+    var $checkOther = '<%=checkOther%>';
     
     if($parentObj.length==0){
         $parentObj=$("body");
@@ -113,23 +118,36 @@
 </script>
 </head>
 <body>
-<table>
-    <tr>
-        <td>패스워드를 입력하세요</td>
-    </tr>
-    <tr>
-        <td>
-            <input type="text" name="pwd">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="submit" name="confirm" value="확인">
-        </td>
-                <td>
-            <input type="submit" name="cancel" value ="취소">
-        </td>
-    </tr>
-</table>
+
+
+	<section>
+		<article>
+			<table>
+				<tbody>
+
+					<tr>
+						<td>패스워드를 입력하세요</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="pwd">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" name="confirm" value="확인">
+						</td>
+						<td>
+							<input type="submit" name="cancel" value="취소">
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</article>
+	</section>
+
+
+
 </body>
 </html>

@@ -100,7 +100,7 @@
 					<c:forEach var="repBoard" items="${boardList}" varStatus="status">
 						<tr class="tr_line">
 							<td>
-								<a href="${pageContext.request.contextPath}/repboard/detail${pageMaker.makeQuery(pageMaker.cri.page)}&no=${repBoard.no}"> <c:forEach
+								<a href="${pageContext.request.contextPath}/repboard/repboarddetail${pageMaker.makeQuery(pageMaker.cri.page)}&no=${repBoard.no}"> <c:forEach
 										begin="1" end="${repBoard.level-1}">&nbsp;&nbsp;</c:forEach> <c:if test="${repBoard.level != 1 }">
 										<img src="<%=request.getContextPath()%>/resources/reply_icon.gif" style="width: 40px; height: 15px; display: inline;" />
 									</c:if> <span <c:out value="${repBoard.no == no ? 'class = articleActive' : '' }"/>> ${repBoard.subject} </span>

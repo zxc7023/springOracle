@@ -23,7 +23,7 @@
 					if (data == '-1') {
 						alert('게시글 작성에 실패 하였습니다.');
 					} else {
-						location.href = "${pageContext.request.contextPath}/repboard/detail?no=" + data;	
+						location.href = "${pageContext.request.contextPath}/repboard/repboarddetail?no=" + data;	
 					}
 				}
 			});

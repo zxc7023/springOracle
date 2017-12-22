@@ -70,7 +70,7 @@ public class RepBoardController {
 	}
 
 	@RequestMapping("/repboarddetail")
-	public String repboardDetail(String no, Model model) {
+	public String repboardDetail(String no, Model model,@ModelAttribute("cri") SearchCriteria cri) {
 		System.out.println("/repboarddetail" + no);
 
 		String searchNo = no;
@@ -91,16 +91,23 @@ public class RepBoardController {
 		return forwardURL;
 	}
 	
-	@RequestMapping("/detail")
+/*	@RequestMapping("/detail")
 	public String detail(RedirectAttributes rttr,SearchCriteria cri,String no) {
 		System.out.println("detail 전" + "\n" + cri);
 		rttr.addFlashAttribute("cri",cri);
 		rttr.addAttribute("no",no);
 		String forwardURL = "redirect:/repboard/repboarddetail";
 		return forwardURL;
-	}
+	}*/
 
-	@RequestMapping("/isauthorization.do")
+	
+	@RequestMapping(value = "/checkpassword" , method=RequestMethod.GET)
+	public String checkpassword(String type, Model model) {
+		model.addAttribute("type",type);
+		String forwardURL = "repboard/repboard_pwdcheck";
+		return forwardURL;
+	}
+/*	@RequestMapping("/isauthorization")
 	public String isauthorization(String check, String boardno, Model model) {
 		if (check != null) {
 			model.addAttribute("check", check);
@@ -110,7 +117,7 @@ public class RepBoardController {
 		}
 		String forwardURL = "/pwdcheck.jsp";
 		return forwardURL;
-	}
+	}*/
 
 	@RequestMapping("/checkpassword.do")
 	public String checkpassword(String pwd, String boardno, Model model) {
@@ -159,12 +166,11 @@ public class RepBoardController {
 		return forwardURL;
 	}
 
-	@RequestMapping("/selectdata.do")
-	public String selectdata(String boardno, Model model) {
-		String boardNumber = boardno;
+	@RequestMapping(value = "/modify", method=RequestMethod.GET )
+	public String selectdata(String no, Model model) {
 		List<RepBoard> list = null;
 		try {
-			list = dao.selectByNo(Integer.parseInt(boardNumber));
+			list = dao.selectByNo(Integer.parseInt(no));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

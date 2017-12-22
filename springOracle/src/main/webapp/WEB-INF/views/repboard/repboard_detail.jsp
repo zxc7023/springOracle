@@ -17,11 +17,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
+
+		var loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="<%=request.getContextPath()%>/resources/viewLoading.gif" />').appendTo(document.body).hide();
+
+		$(window).ajaxStart(function() {
+			loading.fadeIn(500);
+		}).ajaxStop(function() {
+			loading.fadeOut(500);
+		});
+
 		var $parentObj = $("section");
 		if ($parentObj.length == 0) {
 			$parentObj = $("body");
 		}
 
+		//hidden태그 폼
 		var formObj = $("form[role=form]");
 
 		$("input[name=reply]").click(function() {
@@ -30,7 +40,7 @@
 			$.ajax({
 				url : "${pageContext.request.contextPath}/repboard/insert",
 				method : 'post',
-				data : "parent_no=" + $parent_no + "&" +  $("form#replyboard").serialize(),
+				data : "parent_no=" + $parent_no + "&" + $("form#replyboard").serialize(),
 				success : function(responseData) {
 					var data = responseData.trim();
 					console.log(data);
@@ -39,9 +49,9 @@
 					} else {
 						formObj.find("input[name=no]").val(data);
 						$.ajax({
-							url : "${pageContext.request.contextPath}/repboard/detail",
+							url : "${pageContext.request.contextPath}/repboard/repboarddetail",
 							method : 'get',
-							data :  formObj.serialize(),
+							data : formObj.serialize(),
 							success : function(responseData2) {
 								$parentObj.empty();
 								var tmp = $parentObj.html(responseData2).find("article")
@@ -50,14 +60,34 @@
 							error : function(xhr, status, error) {
 								console.log(xhr.status);
 							}
-						});	
+						});
 					}
 
 				},
 				error : function(xhr, status, error) {
 					console.log(xhr.status);
 				}
-			}); 
+			});
+			return false;
+		});
+
+		$("input[name=modify]").click(function() {
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/repboard/checkpassword",
+				method : 'get',
+				data : {
+					type : $(this).attr(name)
+				},
+				success : function(responseData) {
+					$parentObj.empty();
+					var tmp = $parentObj.html(responseData).find("article");
+					$parentObj.html(tmp);
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr.status);
+				}
+			});
 			return false;
 		});
 
@@ -70,7 +100,7 @@
 
 		$(".board a").click(function() {
 			formObj.attr("method", "get");
-			formObj.attr("action", "${pageContext.request.contextPath}/repboard/detail");
+			formObj.attr("action", "${pageContext.request.contextPath}/repboard/repboarddetail");
 			formObj.find("input[name=no]").val($(this).attr("href"));
 			formObj.submit();
 			return false;
@@ -83,16 +113,16 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 
+	<form role="form">
+		<input type="hidden" name="no" value="${no}">
+		<input type="hidden" name="page" value="${cri.page == null ? '1' : cri.page}">
+		<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
+		<input type="hidden" name="searchType" value="${cri.searchType}">
+		<input type="hidden" name="keyword" value="${cri.keyword}">
+	</form>
+
 	<section>
 		<article>
-
-			<form role="form">
-				<input type="hidden" name="no" value="${no}">
-				<input type="hidden" name="page" value="${cri.page}">
-				<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
-				<input type="hidden" name="searchType" value="${cri.searchType}">
-				<input type="hidden" name="keyword" value="${cri.keyword}">
-			</form>
 
 			<table class="board">
 				<c:forEach var="originalBoard" items="${boardList}">
@@ -140,7 +170,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="password"  name="password" placeholder="비밀번호">
+								<input type="password" name="password" placeholder="비밀번호">
 							</td>
 						</tr>
 						<tr>
