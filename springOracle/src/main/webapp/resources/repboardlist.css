@@ -1,26 +1,102 @@
 @charset "UTF-8";
+         
 
+/* reboard_search */
+
+.searchDiv{
+	overflow: hidden;
+    width: 60%;
+    padding:4% 0;
+    margin: 0 auto;
+}
+
+.searchDiv form{
+	width:80%;
+	background:rgba(255,255,255,0.8);
+	border-radius:100px;
+	float:left;
+	border:2px solid gray;}
+
+.searchDiv form select{
+	padding-right:0;
+	width:20%;
+	text-align:center;
+	text-align-last:center;}
+	
+.searchDiv form select option{
+	display:inline-block;
+	text-align:left;}
+.searchDiv [name=keyword]{
+	width:65%;}
+
+.searchDiv [value="검색"]{
+	margin-left:2%;
+	width:10%;}
+	
+.searchDiv [name="insert"]{
+	float: right;
+    height: 4rem;
+    line-height: 4rem;
+    margin-left: 2%;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    border-radius:20px;
+    width:12%;}
+
+
+/* reboardlist */
 table.repboardlist{
-	margin : auto;
-/* 	border-collapse : collapse;
-	border : 1px solid; */
-	width :1000px;
-}
+	margin : 0 auto;
+	width :80%;}
+	
+table.repboardlist thead{    
+	height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-weight: bold;}
+	
+table.repboardlist tbody{
+	height:30px;
+	line-height:30px;
+	text-align:center;}
+	
+/*  수정중 table.repboardlist tbody:nth-child(even){
+	background:rgba(255, 253, 224,1)} */
 
-ul.pagenavigation {
-	width: 500px;
-	margin: 0 auto;
-}
+table.repboardlist tbody .tr_line td:first-child{
+	padding-left:5%;
+	text-align:left;}
+
+/* reboardlist page */
+
+.pagenavigation-wrap{
+	width:80%;
+	margin:30px auto 0 auto;
+	overflow:hidden;}
+	
+ul.pagenavigation {    
+	overflow: hidden;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;}
 
 ul.pagenavigation li {
 	float: left;
-	margin-right: 3px;
-}
+    width: 9%;
+    line-height:27px;
+    height:27px}
+    
+ul.pagenavigation li a{
+	display:block;}
 
 li.active a {
-	text-decoration: underline;
-	color: blue;
-}
+	background: rgba(102, 140, 255,1);
+    border-radius: 100px;
+    overflow: hidden;
+    color:#fff}
 
 ul.pagenavigation li a:hover {
 	text-decoration: underline;

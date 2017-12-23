@@ -84,9 +84,9 @@
 
 			<table class="repboardlist">
 				<colgroup>
-					<col width="40%" />
-					<col width="40%" />
-					<col width="20%" />
+					<col width="35%" />
+					<col width="35%" />
+					<col width="30%" />
 				</colgroup>
 				<thead>
 					<tr class="tr_line">
@@ -122,19 +122,20 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
-			<ul class="pagenavigation">
-				<c:if test="${pageMaker.prev}">
-					<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a href="repboardlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
-				</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.endPage+1)}">&raquo;</a></li>
-				</c:if>
-			</ul>
-
+			
+			<div class="pagenavigation-wrap">
+				<ul class="pagenavigation">
+					<c:if test="${pageMaker.prev}">
+						<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+						<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>><a href="repboardlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					</c:forEach>
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<li><a href="repboardlist${pageMaker.makeQuery(pageMaker.endPage+1)}">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</div>
 		</article>
 	</section>
 </body>
