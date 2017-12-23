@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.my.dao.RepBoardDAOOracle;
 import com.my.vo.PageMaker;
@@ -70,7 +69,7 @@ public class RepBoardController {
 	}
 
 	@RequestMapping("/repboarddetail")
-	public String repboardDetail(String no, Model model,@ModelAttribute("cri") SearchCriteria cri) {
+	public String repboardDetail(String no, Model model,/*@ModelAttribute("cri")*/ SearchCriteria cri) {
 		System.out.println("/repboarddetail" + no);
 
 		String searchNo = no;
@@ -83,6 +82,7 @@ public class RepBoardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		model.addAttribute("cri",cri);
 		model.addAttribute("no",no);
 		model.addAttribute("boardList", map.get("boardList"));
 		model.addAttribute("preBoard",map.get("preBoard"));
@@ -103,21 +103,12 @@ public class RepBoardController {
 	
 	@RequestMapping(value = "/checkpassword" , method=RequestMethod.GET)
 	public String checkpassword(String type, Model model) {
+		System.out.println("you call checkpassword method " +"\t"+ "type : " + type);
 		model.addAttribute("type",type);
 		String forwardURL = "repboard/repboard_pwdcheck";
 		return forwardURL;
 	}
-/*	@RequestMapping("/isauthorization")
-	public String isauthorization(String check, String boardno, Model model) {
-		if (check != null) {
-			model.addAttribute("check", check);
-			model.addAttribute("boardno", boardno);
-		} else {
-			model.addAttribute("check", null);
-		}
-		String forwardURL = "/pwdcheck.jsp";
-		return forwardURL;
-	}*/
+
 
 	@RequestMapping("/checkpassword.do")
 	public String checkpassword(String pwd, String boardno, Model model) {

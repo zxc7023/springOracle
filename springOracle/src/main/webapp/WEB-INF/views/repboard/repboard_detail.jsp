@@ -17,13 +17,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
-
-		var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="<%=request.getContextPath()%>/resources/viewLoading.gif" /> </div>').appendTo(document.body).hide();
-
-		$(window).ajaxStart(function() {
-			loading.fadeIn(100);
+		
+		var loading;
+		if($("div#loading, img#loading_img").length !=2){
+			loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="<%=request.getContextPath()%>/resources/viewLoading.gif" />').appendTo(document.body).hide();
+		}
+		else{
+			loading =$("div#loading, img#loading_img");
+		}
+		$(document).ajaxStart(function() {
+			loading.fadeIn(200);
 		}).ajaxStop(function() {
-			loading.fadeOut(5000);
+			loading.fadeOut();
 		});
 
 		var $parentObj = $("section");
@@ -43,7 +48,6 @@
 				data : "parent_no=" + $parent_no + "&" + $("form#replyboard").serialize(),
 				success : function(responseData) {
 					var data = responseData.trim();
-					console.log(data);
 					if (data == '-1') {
 						alert('게시글 작성에 실패 하였습니다.');
 					} else {
@@ -72,17 +76,15 @@
 		});
 
 		$("input[name=modify]").click(function() {
-
 			$.ajax({
 				url : "${pageContext.request.contextPath}/repboard/checkpassword",
 				method : 'get',
 				data : {
-					type : $(this).attr(name)
+					type : $(this).attr("name")
 				},
 				success : function(responseData) {
 					$parentObj.empty();
-					var tmp = $parentObj.html(responseData).find("article");
-					$parentObj.html(tmp);
+					$parentObj.html(responseData);
 				},
 				error : function(xhr, status, error) {
 					console.log(xhr.status);
