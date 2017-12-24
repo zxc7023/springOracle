@@ -12,3 +12,15 @@
     line-height: 4rem
 }
 
+.pwd-table input{
+	text-align: center;	
+}
+
+
+.pwd-invaild{
+	display: block;
+
+	color: red;
+	margin: 0 auto;
+	text-align: center;
+}

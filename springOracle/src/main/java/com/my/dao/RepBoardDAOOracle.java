@@ -91,40 +91,24 @@ public class RepBoardDAOOracle {
 		return map;
 	}
 	
-	
-	
-
-	
-	
-	public boolean chkPassword(int no, String password) throws SQLException, Exception {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("no", no);
-		map.put("password", password);
-		if (session.selectOne("RepBoardMapper.chkpassword", map) != null) {
-			return true;
-		}
-		/*
-		 * String selectPasswordSQL =
-		 * "SELECT * FROM repboard WHERE no=? AND password=?"; Connection con = null;
-		 * PreparedStatement pstmt = null; ResultSet rs = null; try { con =
-		 * MyConnection.getConnection(); pstmt =
-		 * con.prepareStatement(selectPasswordSQL); pstmt.setInt(1, no);
-		 * pstmt.setString(2, password); rs = pstmt.executeQuery(); return rs.next(); }
-		 * catch (SQLException e) { e.printStackTrace(); return false; }finally{
-		 * MyConnection.close(con, pstmt, rs); }
-		 */
-		return false;
+	/**
+	 *  해당하는 게시글의 비밀번호를 확인한다.
+	 * @param repboard
+	 * @return 해당하는 번호의 게시물의 비밀번호를 확인 후에 일치하면 해당하는 게시글을 Repboard Type으로 반환.
+	 * @throws SQLException
+	 * @throws Exception
+	 */
+	public RepBoard chkPassword(RepBoard repboard) throws SQLException, Exception {
+		return session.selectOne("RepBoardMapper.chkpassword", repboard);
 	}
-
+	
+	 public int update(RepBoard repboard) throws SQLException, Exception { 
+		System.out.println("rb는" + repboard); 
+		return session.update("RepBoardMapper.update", repboard); 
+	 }
+	
 	public void delete(int no) throws SQLException, Exception {
 		session.delete("RepBoardMapper.delete", no);
-		/*
-		 * Connection con = null; PreparedStatement pstmt = null; String deleteSQL =
-		 * "DELETE repboard  WHERE no=?"; try { con = MyConnection.getConnection();
-		 * pstmt = con.prepareStatement(deleteSQL); pstmt.setInt(1, no);
-		 * pstmt.executeUpdate(); } catch (SQLException e) { e.printStackTrace();
-		 * }finally{ MyConnection.close(con, pstmt); }
-		 */
 	}
 
 	public RepBoard insert(RepBoard board) throws Exception {
@@ -193,12 +177,5 @@ public class RepBoardDAOOracle {
 	 * (SQLException e) { e.printStackTrace(); }finally{ MyConnection.close(con,
 	 * pstmt, rs); } return list; return null; }
 	 */
-
-	/*
-	 * public void update(int no, String subject, String content, String password)
-	 * throws SQLException, Exception { RepBoard rb = new RepBoard(no, 0, subject,
-	 * content, password); System.out.println("rb는" + rb); try {
-	 * session.update("RepBoardMapper.update", rb); } catch (Exception e) { // TODO:
-	 * handle exception } }
-	 */
+	 
 }

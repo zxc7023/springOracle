@@ -36,6 +36,31 @@
         });
         return false;
    });
+    
+    $("input[name=confirm]").click(function(){
+    	console.log( $("form#pwdForm").serialize() +"&"+ formObj.serialize() + "&type=" + "${type}");
+    	$.ajax({
+    		url : "${pageContext.request.contextPath}/repboard/checkpassword",
+    		method : 'post',
+    		data : $("form#pwdForm").serialize() +"&"+ formObj.serialize() + "&type=" + "${type}" ,
+    		success : function(responseData){
+    			var isChecked = responseData.trim();
+    			if(isChecked -1){
+    				$("form#pwdForm").next().removeAttr("style").addClass("pwd-invaild");
+    			}else{
+    				$parentObj.empty();
+					/* var tmp = $parentObj.html(isChecked).find("article") */
+					$parentObj.html(isChecked);
+    			}
+    			
+    		},
+			error : function(xhr, status, error) {
+				console.log(xhr.status);
+			}
+    		
+    	});
+    	return false;
+    });
    <%--  $("input[name=confirm]").click(function(){
        var $pwd = $('input[type=text]').val();
        console.log($pwd+" "+$boardno);
@@ -110,26 +135,28 @@
 </script>
 </head>
 <body>
-	<form>
 	<article>
-		<table class="pwd-table">
-			<tbody>
-				<tr>
-					<td colspan="2">
-						<input type="password" name="pwd" placeholder="패스워드를 입력하세요">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="submit" name="confirm" value="확인">
-					</td>
-					<td>
-						<input type="submit" name="cancel" value="취소">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<form id="pwdForm">
+			<table class="pwd-table">
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<input type="password" name="password" placeholder="패스워드를 입력하세요">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" name="confirm" value="확인">
+						</td>
+						<td>
+							<input type="submit" name="cancel" value="취소">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<span style="display: none;">비밀 번호를 확인해 주세요.</span>
 	</article>
-	</form>
+
 </body>
 </html>
