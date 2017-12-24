@@ -5,7 +5,7 @@
 <c:if test="${item == null}">
    ${item=subject}
 </c:if>
-
+<link href="<%=request.getContextPath()%>/resources/repboardlist.css" type="text/css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(function() {
@@ -49,31 +49,6 @@
 
 	});
 </script>
-<style type="text/css">
-div.searchDiv form {
-	width: 500px;
-	margin: 0 auto;
-}
-
-div.searchDiv select {
-	height: 27px;
-	vertical-align: middle;
-}
-
-div.searchDiv input[type="search"] {
-	height: 27px
-}
-
-div.searchDiv input[type="submit"] {
-	height: 27px
-}
-
-div.searchDiv input[type="button"] {
-	height: 27px
-}
-</style>
-
-
 <div class="searchDiv">
 	<form style="border-collapse: collapse; padding: 10px;">
 		<select name="searchType">
@@ -83,6 +58,7 @@ div.searchDiv input[type="button"] {
 		</select>
 		<input type="search" name="keyword" placeholder="검색어를 입력해주세요.">
 		<input type="submit" value="검색">
-		<input type="button" name="insert" value="글작성" id="insert">
 	</form>
+	
+		<input type="button" name="insert" value="글작성" id="insert">
 </div>
