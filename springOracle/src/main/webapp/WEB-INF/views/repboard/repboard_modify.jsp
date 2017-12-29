@@ -1,19 +1,74 @@
-<%@page import="com.my.vo.RepBoard"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% List<RepBoard> list = (List)request.getAttribute("selectData");
-   String contextPath = request.getContextPath();
-   RepBoard rep = list.get(0);%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="repboard" value="${requestScope.repboard}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 <script>
  $(function(){
-    var $parentObj = $("article");
+		//hidden태그 폼
+		var formObj = $("form[role=form]");
+		
+		//ajax를 통해 받은 데이터를 load할 태그
+		var $parentObj = $("section");
+		if ($parentObj.length == 0) {
+			$parentObj = $("body");
+		}
+	 
+		 $("input[name=modify]").click(function(){
+			 var updateBoardObj = $("form.updateBoard").serialize();
+			 console.log(updateBoardObj);
+		      $.ajax({
+		    	  url:'${pageContext.request.contextPath}/repboard/modify',
+		        	method: 'post',
+		        	data: formObj.serialize() + "&" + updateBoardObj ,
+		        	success: function(responseData){
+		        		var affectedRowNum = responseData.trim();
+		        		if(affectedRowNum == "1"){
+		        	        $.ajax({
+		        	        	url:'${pageContext.request.contextPath}/repboard/repboarddetail',
+		        	        	method: 'get',
+		        	        	data: formObj.serialize(),
+		        	        	success: function(responseData){
+		        	        		$parentObj.empty();
+		        					var tmp = $parentObj.html(responseData.trim()).find("article");
+		        					$parentObj.html(tmp);
+		        	            },
+		        	            error: function(xhr, status, error){
+		        	            	console.log(xhr.status);
+		        	            }
+		        	        });
+		        		}
+		        		/* $parentObj.empty();
+						var tmp = $parentObj.html(responseData.trim()).find("article");
+						$parentObj.html(tmp); */
+		            },
+		            error: function(xhr, status, error){
+		            	console.log(xhr.status);
+		            }
+		      });
+			 return false;
+		 });
+		
+		
+	    $("input[name=cancel]").click(function(){
+	        $.ajax({
+	        	url:'${pageContext.request.contextPath}/repboard/repboarddetail',
+	        	method: 'get',
+	        	data: formObj.serialize(),
+	        	success: function(responseData){
+	        		$parentObj.empty();
+					var tmp = $parentObj.html(responseData.trim()).find("article");
+					$parentObj.html(tmp);
+	            },
+	            error: function(xhr, status, error){
+	            	console.log(xhr.status);
+	            }
+	        });
+	        return false;
+	   });
+	    
+<%--     var $parentObj = $("article");
     if($parentObj.length==0){
         $parentObj=$("body");
     }
@@ -47,26 +102,42 @@
                              }
                          });
         return false; 
-    });
+    }); --%>
  }); 
 </script>
 </head>
 
 <body>
-<table style="border:1px solid">
-  <tr>
-    <td style='width:30%'>번호 : <%= rep.getNo() %></td>
-    <td style='width:70%'>제목 : <input style="width: 70%" type='text' name='subject' value='<%= rep.getSubject() %>'></td>
-  </tr>
-  <tr>
-    <td colspan='2' width='500px' height='150px'>
-    <textarea rows="5" cols="30" style="width:99%; height:100%" id="content"><%= rep.getContent() %></textarea>
-  </tr>
-  <tr>
-    <td style='width:100px'><input type='submit' name='modify' value='수정'></td>
-    <td style='width:100px'><input type='submit' name='modify' value='취소'></td>
-      </tr>
-</table>
-
+	<article>
+		<form class="updateBoard">
+			<table class="repboard">
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<input type="text" name="subject" value="${repboard.subject}" required="required">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="text" name="content" value="${repboard.content}" required="required">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="password" name="password" placeholder="비밀번호" required="required">
+						</td>
+					</tr>
+					<tr>
+						<td style='width: 100px'>
+							<input type='submit' name='modify' value='수정'>
+						</td>
+						<td style='width: 100px'>
+							<input type='submit' name='cancel' value='취소'>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</article>
 </body>
 </html>

@@ -27,6 +27,7 @@
 		}
 		$(document).ajaxStart(function() {
 			loading.fadeIn(200);
+			console.log("ajax 실행");
 		}).ajaxStop(function() {
 			loading.fadeOut();
 		});

@@ -41,15 +41,16 @@ public class RepBoardController {
 		model.addAttribute("boardList", list);
 		// model.addAttribute("searchItem", searchItem);
 		// model.addAttribute("searchValue", searchValue);
-		System.out.println("/repboardlist" + "게시글 리스트 : " + list +"\n" + "페이지 및 검색정보 : " + cri.toString() );
+		System.out.println("/repboardlist" + "게시글 리스트 : " + list + "\n" + "페이지 및 검색정보 : " + cri.toString());
 		String forwardURL = "/repboard/repboardlist";
 		return forwardURL;
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert(@RequestParam(defaultValue="0")String parent_no,Model model,@ModelAttribute("cri") SearchCriteria criteria) {
-		System.out.println("/insert" + "답글 or 게시글 작성 호출" + "\n 부모글 : " +parent_no );
-		model.addAttribute("parent_no",parent_no);
+	public String insert(@RequestParam(defaultValue = "0") String parent_no, Model model,
+			@ModelAttribute("cri") SearchCriteria criteria) {
+		System.out.println("/insert" + "답글 or 게시글 작성 호출" + "\n 부모글 : " + parent_no);
+		model.addAttribute("parent_no", parent_no);
 		return "repboard/repboard_insert";
 	}
 
@@ -58,72 +59,64 @@ public class RepBoardController {
 		String msg = "-1";
 		try {
 			RepBoard rb = dao.insert(repboard);
-			System.out.println("작성한답글은 : "+ rb);
+			System.out.println("작성한답글은 : " + rb);
 			msg = String.valueOf(rb.getNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("msg", msg);
-		String forwardURL = "result";
+		String forwardURL = "/result";
 		return forwardURL;
 	}
 
 	@RequestMapping("/repboarddetail")
-	public String repboardDetail(String no, Model model,/*@ModelAttribute("cri")*/ SearchCriteria cri) {
-		System.out.println("/repboarddetail" + no);
+	public String repboardDetail(String no, Model model, /* @ModelAttribute("cri") */ SearchCriteria cri) {
+		System.out.println("/repboarddetail" + "게시글 디테일 호출 파리미터 no : " + no + " cri : " + cri);
 
 		String searchNo = no;
 		int sNo = Integer.parseInt(searchNo);
 		HashMap<String, List<RepBoard>> map = null;
 		try {
 			map = dao.selectDetailData(sNo);
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("cri",cri);
-		model.addAttribute("no",no);
+		model.addAttribute("cri", cri);
+		model.addAttribute("no", no);
 		model.addAttribute("boardList", map.get("boardList"));
-		model.addAttribute("preBoard",map.get("preBoard"));
-		model.addAttribute("nextBoard",map.get("nextBoard"));
+		model.addAttribute("preBoard", map.get("preBoard"));
+		model.addAttribute("nextBoard", map.get("nextBoard"));
 		String forwardURL = "repboard/repboard_detail";
 		return forwardURL;
 	}
-	
-/*	@RequestMapping("/detail")
-	public String detail(RedirectAttributes rttr,SearchCriteria cri,String no) {
-		System.out.println("detail 전" + "\n" + cri);
-		rttr.addFlashAttribute("cri",cri);
-		rttr.addAttribute("no",no);
-		String forwardURL = "redirect:/repboard/repboarddetail";
-		return forwardURL;
-	}*/
 
-	
-	@RequestMapping(value = "/checkpassword" , method=RequestMethod.GET)
+	@RequestMapping(value = "/checkpassword", method = RequestMethod.GET)
 	public String checkpassword(String type, Model model) {
-		System.out.println("you call checkpassword method " +"\t"+ "type : " + type);
-		model.addAttribute("type",type);
+		System.out.println("you call checkpassword method " + "\t" + "type : " + type);
+		model.addAttribute("type", type);
 		String forwardURL = "repboard/repboard_pwdcheck";
 		return forwardURL;
 	}
 
-
-	@RequestMapping("/checkpassword.do")
-	public String checkpassword(String pwd, String boardno, Model model) {
-		String BoardNumber = boardno;
-		String msg = "-1";
-
+	@RequestMapping(value = "/checkpassword", method = RequestMethod.POST)
+	public String checkpassword(RepBoard repBoard, Model model, String type) {
+		String forwardURL = null;
+		RepBoard rep = null;
 		try {
-			if (dao.chkPassword(Integer.parseInt(BoardNumber), pwd)) {
-				msg = "1";
+			rep = dao.chkPassword(repBoard);
+			if (rep != null) {
+				if ("modify".equals(type)) {
+					forwardURL = "repboard/repboard_modify";
+					model.addAttribute("repboard", rep);
+				} else {
+
+				}
 			} else {
-				msg = "-1";
+				forwardURL = "result";
+				model.addAttribute("msg", "-1");
 			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,9 +125,25 @@ public class RepBoardController {
 			e.printStackTrace();
 		}
 
-		model.addAttribute("msg", msg);
-		String forwardURL = "/result.jsp";
+		return forwardURL;
+	}
 
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String repboardupdate(RepBoard repBoard, Model model) {
+		System.out.println("/modify method" + "파라미터 : " + repBoard);
+		int result = 0;
+		try {
+			result = dao.update(repBoard);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String msg = String.valueOf(result);
+		model.addAttribute("msg",msg);
+		String forwardURL ="result";
 		return forwardURL;
 	}
 
@@ -154,28 +163,6 @@ public class RepBoardController {
 		model.addAttribute("msg", msg);
 		String forwardURL = "/result.jsp";
 
-		return forwardURL;
-	}
-
-	@RequestMapping(value = "/modify", method=RequestMethod.GET )
-	public String selectdata(String no, Model model) {
-		List<RepBoard> list = null;
-		try {
-			list = dao.selectByNo(Integer.parseInt(no));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		model.addAttribute("selectData", list);
-		String forwardURL = "/update.jsp";
-		System.out.println(list);
 		return forwardURL;
 	}
 

@@ -95,22 +95,17 @@
 							connect by prior parent_no = no)
 	</select>
 
-
-
+	<!-- 해당하는 번호의 비밀번호와 일치하는 데이터를 가져온다 -->
+	<select id="chkpassword" resultType="RepBoard">
+		SELECT * FROM repboard WHERE
+		no=#{no} and password = #{password}
+	</select>
+	
+	<!--  No에 해당하는 게시글 한개의 데이터를 가져온다.-->
 	<select id="selectBoardByNo" resultType="RepBoard">
 		select * from repboard where no = #{no}
 	</select>
-
-
-	<delete id="delete">
-		DELETE repboard WHERE no=#{no}
-	</delete>
-
-	<select id="chkpassword" parameterType="hashmap" resultType="RepBoard">
-		SELECT * FROM repboard WHERE
-		no=#{no} AND password=#{password}
-	</select>
-
+	
 	<update id="update" parameterType="RepBoard">
 		update repboard
 		<set>
@@ -120,5 +115,13 @@
 		</set>
 		where no=#{no}
 	</update>
+	
+	
+
+
+	<delete id="delete">
+		DELETE repboard WHERE no=#{no}
+	</delete>
+	
 
 </mapper>
