@@ -1,30 +1,85 @@
 @charset "UTF-8";
 
 .board {
-	width: 500px;
-	margin: 10px auto;
-	text-align: center;
-	border-collapse: collapse;
-	height: auto;
-	border: 1px solid;
+	width: 80%;
+    margin: 150px auto 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    height: auto;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
-.tr_line {
-	border-bottom: 1px solid #c3c3c3
-}
+.board .title{
+	font-size: 20px;
+    font-weight: bold;
+    line-height: 45px;
+    background:rgba(0,0,0,0.1);}
+    
+.board .title p {
+	position:relative;}
+
+.board .title p span{
+	position:absolute;
+	top:0;
+	font-size:13px;
+	line-height:45px;}
+
+.board .title p span:first-child{left:10px}
+.board .title p span:first-child::before{
+	content:"작성일  : " ;}
+
+.board .title p span:last-child{right:10px}	
+.board .title p span:last-child::before{
+	content:"조회수  : " ;}
+    
+.tr_data{
+    line-height: 45px;
+    background:rgba(0,0,0,0.1);}
+
+.board .content{
+	line-height:35px;
+	font-size:20px;}
+
+.board .content::before{
+	content:'“';
+	padding-right:30px;
+	font-size:30px;}
+
+.board .content::after{
+	content:'”';
+	padding-left:30px;
+	font-size:30px;}
+	
+.board .button-3{height:50px;}
+	
+.board .button-3 input{
+	background: rgba(0,0,0,0.5);
+    border-radius: 100px;
+    padding: 5px 0;
+    margin: 0 10px;
+    width:70px;
+    color:#fff}
 
 span.articleActive {
-	font-weight: bold;
-}
+	font-weight: bold;}
 
 .repboard {
-	width: 500px;
-	margin: 10px auto;
+	width: 80%;
+	margin: 10px auto 0 auto;
 	border-collapse: collapse;
-	border: 1px solid;
 	height: auto;
-	text-align: center;
-}
+	line-height:35px;
+	text-align: center;}
+	
+.relate_board{
+	margin: 10px auto 0 auto;
+    line-height: 35px;}
+
+.relate_board tr{
+	border-bottom:1px solid rgba(0,0,0,0.1);}
+	
+.relate_board tr:first-child{
+	border:none}
 
 /* 로딩*/
 section {

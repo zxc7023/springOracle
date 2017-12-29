@@ -132,21 +132,21 @@
 						<thead>
 							<tr>
 								<th class="no" style="display: none;">${originalBoard.no}</th>
-								<td class="title" colspan="2">${originalBoard.subject}</td>
+								<td class="title" colspan="2">
+								<p>${originalBoard.subject}
+								
+									<span><fmt:formatDate value="${originalBoard.registerDate}" type="date" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+									<span>${originalBoard.viewCount}</span>
+								</p>
+								</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="tr_line">
-								<td>
-									<fmt:formatDate value="${originalBoard.registerDate}" type="date" pattern="yyyy-MM-dd HH:mm:ss" />
-								</td>
-								<td>${originalBoard.viewCount}</td>
-							</tr>
-							<tr class="tr_line">
-								<td colspan="2">${originalBoard.content}</td>
+								<td colspan="2" class='content'>${originalBoard.content}</td>
 							</tr>
 							<tr>
-								<td colspan="2">
+								<td colspan="2" class="button-3">
 									<input type='submit' name='modify' value='수정' />
 									<input type='submit' name='delete' value='삭제' />
 									<input type="submit" name="back" value="돌아가기" />
@@ -186,7 +186,7 @@
 				</table>
 
 			</form>
-			<table class="board">
+			<table class="board relate_board">
 				<tbody>
 					<tr class="tr_line">
 						<c:forEach var="pre" items="${preBoard}">
