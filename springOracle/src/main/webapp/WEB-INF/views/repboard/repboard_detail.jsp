@@ -163,18 +163,33 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" name="subject" placeholder="제목을 입력해주세요">
+								<div class="group">      
+							      <input type="text" name="subject" required >
+							      <span class="highlight"></span>
+							      <span class="bar"></span>
+							      <label>제목을 입력해주세요</label>
+							    </div>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="text" name="content" placeholder="내용을 입력해주세요">
+								<div class="group">      
+								      <input type="text"  name="content" required>
+								      <span class="highlight"></span>
+								      <span class="bar"></span>
+								      <label>내용을 입력해주세요</label>
+							    </div>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="password" name="password" placeholder="비밀번호">
-							</td>
+							<div class="group">      
+							      <input type="password" name="password"  required>
+							      <span class="highlight"></span>
+							      <span class="bar"></span>
+							      <label>비밀번호</label>
+							    </div>
+						</td>
 						</tr>
 						<tr>
 							<td>
