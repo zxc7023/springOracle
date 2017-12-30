@@ -144,16 +144,11 @@
 							<input type="password" name="password" placeholder="패스워드를 입력하세요">
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<input type="submit" name="confirm" value="확인">
-						</td>
-						<td>
-							<input type="submit" name="cancel" value="취소">
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<input type="submit" name="confirm" value="확인">
+			<input type="submit" name="cancel" value="취소">
+			
 		</form>
 		<span style="display: none;">비밀 번호를 확인해 주세요.</span>
 	</article>

@@ -1,21 +1,33 @@
 @charset "UTF-8";
 
+#pwdForm{   
+	width: 500px;
+    margin: 100px auto 0 auto;}
+    
 .pwd-table {
-	width: 50%;
-	margin: 5% auto 0 auto;
-	font-height: 25px;
-	text-align: center;
-	border-radius: 25px;
-	border: 1px solid;
-	border-collapse: inherit;
-	font-size: 1.5rem;
-    line-height: 4rem
-}
+	     width: 100%;
+    margin: 5% auto 0 auto;
+    text-align: center;
+    border-collapse: inherit;
+    font-size: 1.5rem;
+    line-height: 45px;}
 
-.pwd-table input{
-	text-align: center;	
-}
+.pwd-table input{    
+	width: 100%;
+    display: block;
+    text-align: center;
+    background: #eeeeee;}
+    
+#pwdForm input[name="confirm"]{float:left}
+#pwdForm input[name="cancel"]{float:right}
 
+#pwdForm input[name="confirm"],
+#pwdForm input[name="cancel"]{
+        width: 45%;
+    padding: 15px 10px;
+    margin: 20px 10px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50px;}
 
 .pwd-invaild{
 	display: block;
