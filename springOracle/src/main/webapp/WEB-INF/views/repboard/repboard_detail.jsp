@@ -93,6 +93,24 @@
 			});
 			return false;
 		});
+		
+		$("input[name=delete]").click(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/repboard/checkpassword",
+				method : 'get',
+				data : {
+					type : $(this).attr("name")
+				},
+				success : function(responseData) {
+					$parentObj.empty();
+					$parentObj.html(responseData);
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr.status);
+				}
+			});
+			return false;
+		});
 
 		$("input[name=back]").click(function() {
 			formObj.attr("method", "get");
@@ -148,9 +166,9 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input type='submit' name='modify' value='수정' />
-									<input type='submit' name='delete' value='삭제' />
-									<input type="submit" name="back" value="돌아가기" />
+									<input type='button' name='modify' value='수정' />
+									<input type='button' name='delete' value='삭제' />
+									<input type="button" name="back" value="돌아가기" />
 								</td>
 							</tr>
 						</tbody>

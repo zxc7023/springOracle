@@ -102,6 +102,7 @@ public class RepBoardController {
 
 	@RequestMapping(value = "/checkpassword", method = RequestMethod.POST)
 	public String checkpassword(RepBoard repBoard, Model model, String type) {
+		System.out.println("/checkpassword Post");
 		String forwardURL = null;
 		RepBoard rep = null;
 		try {
@@ -110,8 +111,10 @@ public class RepBoardController {
 				if ("modify".equals(type)) {
 					forwardURL = "repboard/repboard_modify";
 					model.addAttribute("repboard", rep);
-				} else {
-
+				} else if("delete".equals(type)) {
+					int affectedRowCnt = dao.disable(rep.getNo());
+					forwardURL ="result";
+					model.addAttribute("msg",String.valueOf(affectedRowCnt));
 				}
 			} else {
 				forwardURL = "result";

@@ -109,13 +109,17 @@
 	<update id="update" parameterType="RepBoard">
 		update repboard
 		<set>
-			<if test="subject != null">subject=#{subject},</if>
-			<if test="content != null">content=#{content},</if>
-			<if test="password != null">password=#{password}</if>
+			<if test="subject != null and !subject.equals('')">subject=#{subject},</if>
+			<if test="content != null and !content.equals('')" >content=#{content},</if>
+			<if test="password != null and !password.equals('')">password=#{password}</if>
 		</set>
 		where no=#{no}
 	</update>
 	
+	<update id="disable">
+		update repboard set isdeleted='1'
+		where no=#{no}
+	</update>
 	
 
 
