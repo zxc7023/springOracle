@@ -9,9 +9,10 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@192.168.0.36:1521:XE" />
-		<!-- <property name="url" value="jdbc:oracle:thin:@39.120.183.194:1521:XE" /> -->
+		<!-- <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" /> -->
+		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.6:1521:XE" /> -->
 		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.29:1521:XE" /> -->
-		 <!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.33:1521:XE" /> --> 
+		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.33:1521:XE" /> -->
 		<property name="username" value="test2" />
 		<property name="password" value="test2" />
 	</bean>

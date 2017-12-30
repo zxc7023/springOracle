@@ -93,6 +93,24 @@
 			});
 			return false;
 		});
+		
+		$("input[name=delete]").click(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/repboard/checkpassword",
+				method : 'get',
+				data : {
+					type : $(this).attr("name")
+				},
+				success : function(responseData) {
+					$parentObj.empty();
+					$parentObj.html(responseData);
+				},
+				error : function(xhr, status, error) {
+					console.log(xhr.status);
+				}
+			});
+			return false;
+		});
 
 		$("input[name=back]").click(function() {
 			formObj.attr("method", "get");

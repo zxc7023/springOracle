@@ -67,42 +67,6 @@
 	        });
 	        return false;
 	   });
-	    
-<%--     var $parentObj = $("article");
-    if($parentObj.length==0){
-        $parentObj=$("body");
-    }
-
-    
-    
-    $("input[name=modify]").click(function(){
-        var $no = <%= rep.getNo() %>;
-        var $subject = $("input[name=subject]").val();
-        var $content = $("#content").val();
-        var $password = '<%= rep.getPassword() %>';
-        
-        console.log($no+$subject+$content+$password);
-        $.ajax({url:'update.do',
-                         method: 'post',
-                         data: 'no='+$no+'&subject='+$subject
-                         +'&content='+$content+'&password='+$password,
-                         success: function(responseData){
-                          var data = responseData.trim();
-                          if(data == '1'){
-                     				alert('게시글 수정이 완료 되었습니다.');
-                      			location.href = '<%= contextPath %>';
-                     			}else if(data == '-1'){
-                      			alert('게시글 수정에 실패 하였습니다.');
-                    			}else{
-                      			alert(data);
-                    			}
-                         },
-                         error: function(xhr, status, error){
-                             console.log(xhr.status);
-                             }
-                         });
-        return false; 
-    }); --%>
  }); 
 </script>
 </head>
@@ -132,7 +96,7 @@
 							<input type='submit' name='modify' value='수정'>
 						</td>
 						<td style='width: 100px'>
-							<input type='submit' name='cancel' value='취소'>
+							<input type='button' name='cancel' value='취소'>
 						</td>
 					</tr>
 				</tbody>

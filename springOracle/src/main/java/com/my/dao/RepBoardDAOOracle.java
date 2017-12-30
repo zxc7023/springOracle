@@ -111,6 +111,10 @@ public class RepBoardDAOOracle {
 		session.delete("RepBoardMapper.delete", no);
 	}
 
+	public int disable(int no) {
+		return session.update("RepBoardMapper.disable", no);
+	}
+	
 	public RepBoard insert(RepBoard board) throws Exception {
 		session.insert("RepBoardMapper.insert", board);
 		return board;
