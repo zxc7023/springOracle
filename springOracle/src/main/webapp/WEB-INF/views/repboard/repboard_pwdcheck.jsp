@@ -68,23 +68,12 @@
 <body>
 	<article>
 		<form id="pwdForm">
-			<table class="pwd-table">
-				<tbody>
-					<tr>
-						<td colspan="2">
-							<input type="password" name="password" placeholder="패스워드를 입력하세요" required="required">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" name="confirm" value="확인">
-						</td>
-						<td>
-							<input type="button" name="cancel" value="취소">
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<input type="password" name="password" placeholder="패스워드를 입력하세요" required="required">
+      <div class="pwdForm_button">
+			<input type="submit" name="confirm" value="확인">
+			<input type="submit" name="cancel" value="취소">
+      </div>
+			
 		</form>
 		<span style="display: none;">비밀 번호를 확인해 주세요.</span>
 	</article>
