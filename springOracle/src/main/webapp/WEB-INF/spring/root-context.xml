@@ -8,7 +8,7 @@
 	<!-- Service, Dao, DB, log등 과 관련된 자원을 위한 설정파일 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.36:1521:XE" />
+		<property name="url" value="jdbc:oracle:thin:@172.30.1.39:1521:XE" />
 		<!-- <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" /> -->
 		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.6:1521:XE" /> -->
 		<!-- <property name="url" value="jdbc:oracle:thin:@172.30.1.29:1521:XE" /> -->

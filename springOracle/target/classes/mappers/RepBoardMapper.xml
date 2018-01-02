@@ -38,7 +38,7 @@
 	<!-- 부모글이 없으면 0, 있으면 해당하는 글 번호로 데이터를 넣는다. -->
 	<insert id="insert" parameterType="RepBoard">
 		insert into repboard values (repboard_seq.NEXTVAL,
-		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0)
+		#{parent_no}, #{subject}, #{content}, #{password}, sysdate, 0, '')
 		<selectKey resultType="int" order="AFTER" keyProperty="no">
 			SELECT repboard_seq.currval FROM dual
 		</selectKey>

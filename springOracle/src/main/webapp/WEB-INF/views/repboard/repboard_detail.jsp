@@ -42,8 +42,8 @@
 
 		$("input[name=reply]").click(function() {
 			var $parent_no = $("th.no").text();
-
-			$.ajax({
+			alert($parent_no);
+		 	$.ajax({
 				url : "${pageContext.request.contextPath}/repboard/insert",
 				method : 'post',
 				data : "parent_no=" + $parent_no + "&" + $("form#replyboard").serialize(),
@@ -176,13 +176,13 @@
 				</c:forEach>
 			</table>
 
-			<form id="replyboard">
+			<form id="replyboard" onsubmit="return false;">
 				<table class="repboard">
 					<tbody>
 						<tr>
 							<td>
 								<div class="group">      
-							      <input type="text" name="subject" required >
+							      <input type="text" name="subject" required="required">
 							      <span class="highlight"></span>
 							      <span class="bar"></span>
 							      <label>제목을 입력해주세요</label>
@@ -192,7 +192,7 @@
 						<tr>
 							<td>
 								<div class="group">      
-								      <input type="text"  name="content" required>
+								      <input type="text"  name="content" required="required">
 								      <span class="highlight"></span>
 								      <span class="bar"></span>
 								      <label>내용을 입력해주세요</label>
@@ -202,7 +202,7 @@
 						<tr>
 							<td>
 							<div class="group">      
-							      <input type="password" name="password"  required>
+							      <input type="password" name="password"  required="required">
 							      <span class="highlight"></span>
 							      <span class="bar"></span>
 							      <label>비밀번호</label>
@@ -211,7 +211,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input type='button' name='reply' value='답글달기' />
+								<input type="submit" name="reply" value="답글달기"/>
 							</td>
 						</tr>
 
