@@ -1,38 +1,59 @@
 @charset "UTF-8";
 
-#pwdForm{   
-	width: 500px;
-    margin: 100px auto 0 auto;}
-    
-.pwd-table {
-	     width: 100%;
-    margin: 5% auto 0 auto;
-    text-align: center;
-    border-collapse: inherit;
-    font-size: 1.5rem;
-    line-height: 45px;}
+#pwdForm{
+  width:500px;
+  margin:100px  auto 0 auto;
+  text-align:center;
+}
 
-.pwd-table input{    
-	width: 100%;
-    display: block;
-    text-align: center;
-    background: #eeeeee;}
-    
-#pwdForm input[name="confirm"]{float:left}
-#pwdForm input[name="cancel"]{float:right}
+#pwdForm input[type="password"]{
+  width:90%;
+  margin:0 auto;
+  padding-bottom:10px;
+  line-height:30px;
+  border:none;
+  text-align:center;
+  border-bottom:1px solid rgba(0,0,0,0.5);
+  font-size:15px;
+}
 
-#pwdForm input[name="confirm"],
-#pwdForm input[name="cancel"]{
-        width: 45%;
-    padding: 15px 10px;
-    margin: 20px 10px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 50px;}
+.pwdForm_button{
+  margin-top:20px;
+}
 
-.pwd-invaild{
-	display: block;
+.pwdForm_button input{
+  width:45%;
+  background:rgba(0,0,0,0.5);
+  line-height:40px;
+  margin:0 auto;
+  bordder:none;
+  border-radius:50px;
+  overflow:hidden;
+  color:#fff;
+  font-size:15px; }
 
-	color: red;
-	margin: 0 auto;
-	text-align: center;
+.pwdForm_button input:hover{
+  background:rgba(26, 26, 255,0.8);
+  border:none;
+}
+
+@media screen and (max-width: 700px){
+  
+  #pwdForm{
+  width:80%;
+  margin:20%  auto 0 auto;
+}
+
+#pwdForm input[type="password"]{
+  font-size:1.2rem;
+  line0height:2.5rem;
+}
+
+.pwdForm_button{
+  margin-top:20px;
+}
+
+.pwdForm_button input{
+  line-height:2.5rem;
+  font-size:1.2rem; }
 }
