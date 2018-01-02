@@ -37,6 +37,15 @@
   border:none;
 }
 
+.pwd-invaild{
+	    text-align: center;
+    width: 500px;
+    margin: 30px auto;
+    display: block;
+    font-size: 15px;
+    color: rgba(255,0,0,0.6);
+}
+
 @media screen and (max-width: 700px){
   
   #pwdForm{
