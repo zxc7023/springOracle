@@ -48,31 +48,31 @@
 	<section>
 		<article>
 			<form class="insertForm">
-				<table>
-					<tbody>
-						<tr>
-							<td>
-								<input type="text" name="subject" placeholder="제목을 입력하세요" required="required">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="password" name="password" placeholder="비밀번호를 입력하세요" required="required">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="text" name="content" placeholder="내용을 입력하세요" required="required">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="submit" name="insert" value="글 작성">
-								<input type="button" name="cancel" value="취소">
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="group">   
+					<input type="text" name="subject" required="required"/>
+          			<span class="highlight"></span>
+     				<span class="bar"></span>
+      				<label>제목을 입력하세요</label>
+       			 </div>
+			
+            		<div class="group">
+					<input type="text" name="content" required="required"/>
+             		<span class="highlight"></span>
+      				<span class="bar"></span>
+      				<label>내용을 입력하세요</label>
+               </div>
+        
+        			<div class="group password_group">	
+					<input type="password" name="password" required="required"/>
+            			<span class="highlight"></span>
+      				<span class="bar"></span>
+      				<label>비밀번호를 입력하세요</label>
+             	</div>
+        
+				<div class="insertForm_button">
+					<input type="submit" name="insert" value="글 작성">
+					<input type="button" name="cancel" value="취소">
+       			 </div>
 			</form>
 		</article>
 	</section>
