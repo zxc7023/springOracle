@@ -164,6 +164,20 @@ span.articleActive {
   to 	{ width:0; background:transparent; }
 }
 
+.repboard input[name="reply"]{
+  border:none;
+  background: rgba(0,0,0,0.5);
+    border-radius: 100px;
+    padding: 5px 0;
+    margin: 0 10px;
+    width:70px;
+    color:#fff
+}
+
+.repboard input[name="reply"]:hover{
+    background: #5264AE;
+}
+
 	
 .relate_board{
 	margin: 10px auto 0 auto;
@@ -203,4 +217,25 @@ section {
 	margin-top: -75px; /* 이미지크기  */
 	margin-left: -75px; /* 이미지크기  */
 	z-index: 200;
+}
+
+@media screen and (max-width: 700px){
+  .board{
+    width:95%;
+  margin:0 auto;
+  font-size:1rem;}
+  
+  .board .title p{
+    font-size:1.4rem;
+  }
+  .board .title p span{
+    display:block;
+    width:97%;
+    margin:0;
+    padding:0;
+    position:relative;
+    line-height:1rem;
+    float:left;
+    text-align:right;
+  }
 }
